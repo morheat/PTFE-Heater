@@ -1,38 +1,38 @@
 import React, { useMemo} from "react";
 import Header from "./headers";
 
-import { ReactComponent as Titlebox } from "./assets/TITLE.svg";
-import { ReactComponent as LOGO } from "./assets/LOGO.svg";
+import Titlebox from "./assets/TITLE.svg?react";
+import LOGO from "./assets/LOGO.svg?react";
 
 // Your ONE static full drawing SVG (10-inch config)
-import { ReactComponent as Layout10 } from "./assets/10in-N14.svg";
-import { ReactComponent as Layout10N7 } from "./assets/10in-N7.svg";
+import Layout10 from "./assets/10in-N14.svg?react";
+import Layout10N7 from "./assets/10in-N7.svg?react";
 
-import { ReactComponent as Layout3_N14_E3 } from "./assets/3in-N14-3E.svg";
-import { ReactComponent as Layout3_N14_E6 } from "./assets/3in-N14-6E.svg";
-import { ReactComponent as Layout3_N7_E3 } from "./assets/3in-N7-3E.svg";
-import { ReactComponent as Layout3_N7_E6 } from "./assets/3in-N7-6E.svg"; 
+import Layout3_N14_E3 from "./assets/3in-N14-3E.svg?react";
+import Layout3_N14_E6 from "./assets/3in-N14-6E.svg?react";
+import Layout3_N7_E3 from "./assets/3in-N7-3E.svg?react";
+import Layout3_N7_E6 from "./assets/3in-N7-6E.svg?react"; 
 
-import { ReactComponent as Layout4_N14_E6 } from "./assets/4in-N14-6E.svg";
-import { ReactComponent as Layout4_N14_E9 } from "./assets/4in-N14-9E.svg";
-import { ReactComponent as Layout4_N7_E6 } from "./assets/4in-N7-6E.svg";
-import { ReactComponent as Layout4_N7_E9 } from "./assets/4in-N7-9E.svg"; 
+import Layout4_N14_E6 from "./assets/4in-N14-6E.svg?react";
+import Layout4_N14_E9 from "./assets/4in-N14-9E.svg?react";
+import Layout4_N7_E6 from "./assets/4in-N7-6E.svg?react";
+import Layout4_N7_E9 from "./assets/4in-N7-9E.svg?react"; 
 
-import { ReactComponent as Layout5_N1 } from "./assets/5in-N1.svg";
-import { ReactComponent as Layout5_N4 } from "./assets/5in-N4.svg";
-import { ReactComponent as Layout5_N7 } from "./assets/5in-N7.svg";
+import Layout5_N1 from "./assets/5in-N1.svg?react";
+import Layout5_N4 from "./assets/5in-N4.svg?react";
+import Layout5_N7 from "./assets/5in-N7.svg?react";
 
-import { ReactComponent as Layout6_N1 } from "./assets/6in-N1.svg";
-import { ReactComponent as Layout6_N4 } from "./assets/6in-N4.svg";
-import { ReactComponent as Layout6_N7 } from "./assets/6in-N7.svg";
+import Layout6_N1 from "./assets/6in-N1.svg?react";
+import Layout6_N4 from "./assets/6in-N4.svg?react";
+import Layout6_N7 from "./assets/6in-N7.svg?react";
 
-import { ReactComponent as Layout8_N1 } from "./assets/8in-N1.svg";
-import { ReactComponent as Layout8_N4 } from "./assets/8in-N4.svg";
-import { ReactComponent as Layout8_N7 } from "./assets/8in-N7.svg";
+import Layout8_N1 from "./assets/8in-N1.svg?react";
+import Layout8_N4 from "./assets/8in-N4.svg?react";
+import Layout8_N7 from "./assets/8in-N7.svg?react";
 
-import { ReactComponent as Layout12_N1 } from "./assets/12in-N1.svg";
-import { ReactComponent as Layout12_N4 } from "./assets/12in-N4.svg";
-import { ReactComponent as Layout12_N7 } from "./assets/12in-N7.svg";
+import Layout12_N1 from "./assets/12in-N1.svg?react";
+import Layout12_N4 from "./assets/12in-N4.svg?react";
+import Layout12_N7 from "./assets/12in-N7.svg?react";
 
 
 interface drawingProps {
