@@ -4,5 +4,5 @@ import svgr from "vite-plugin-svgr";
 
 export default defineConfig(({ mode }) => ({
   plugins: [react(), svgr()],
-  base: mode === "production" ? "/FlangeHeater2/" : "/",
+  base: mode === "production" ? "/ScrewplugHeater/" : "/",
 }));
