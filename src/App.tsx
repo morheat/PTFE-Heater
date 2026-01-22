@@ -93,7 +93,7 @@ function App() {
       <div className="w-96 h-[50rem] bg-white p-2 border-2 border-slate-400 rounded-lg mr-6 text-gray-700">
         <div className="flex space-x-3">
           <div>
-            <h1>Serial Num</h1>
+            <h1>Serial Number</h1>
             <input
               type="text"
               id="serialNumInput"
