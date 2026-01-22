@@ -5,44 +5,45 @@ import Titlebox from "./assets/TITLE.svg?react";
 import LOGO from "./assets/LOGO.svg?react";
 
 // Your ONE static full drawing SVG (10-inch config)
-import Layout10 from "./assets/10in-N14.svg?react";
-import Layout10N7 from "./assets/10in-N7.svg?react";
+// 1 Inch
+import Layout1N1 from "./assets/1inNEMA1.svg?react";
+import Layout1N1Fold from "./assets/1inNEMA1Fold.svg?react";
 
-import Layout3_N14_E3 from "./assets/3in-N14-3E.svg?react";
-import Layout3_N14_E6 from "./assets/3in-N14-6E.svg?react";
-import Layout3_N7_E3 from "./assets/3in-N7-3E.svg?react";
-import Layout3_N7_E6 from "./assets/3in-N7-6E.svg?react"; 
+import Layout1N4 from "./assets/1inNema4.svg?react";
+import Layout1N4Fold from "./assets/1inNEMA4Fold.svg?react";
 
-import Layout4_N14_E6 from "./assets/4in-N14-6E.svg?react";
-import Layout4_N14_E9 from "./assets/4in-N14-9E.svg?react";
-import Layout4_N7_E6 from "./assets/4in-N7-6E.svg?react";
-import Layout4_N7_E9 from "./assets/4in-N7-9E.svg?react"; 
+import Layout1N7 from "./assets/1inNEMA7.svg?react";
+import Layout1N7Fold from "./assets/1inNEMA7Fold.svg?react";
 
-import Layout5_N1 from "./assets/5in-N1.svg?react";
-import Layout5_N4 from "./assets/5in-N4.svg?react";
-import Layout5_N7 from "./assets/5in-N7.svg?react";
+// 1.25 Inch
+import Layout125N1_E1 from "./assets/125inNEMA1_E1.svg?react"
+import Layout125N1_E2 from "./assets/125NEMA1-E2.svg?react"
 
-import Layout6_N1 from "./assets/6in-N1.svg?react";
-import Layout6_N4 from "./assets/6in-N4.svg?react";
-import Layout6_N7 from "./assets/6in-N7.svg?react";
+import Layout125N4_E1 from "./assets/125NEMA4_E1.svg?react"
+import Layout125N4_E2 from "./assets/125NEMA4_E2.svg?react"
 
-import Layout8_N1 from "./assets/8in-N1.svg?react";
-import Layout8_N4 from "./assets/8in-N4.svg?react";
-import Layout8_N7 from "./assets/8in-N7.svg?react";
+import Layout125N7_E1 from "./assets/125inNEMA7_E1.svg?react"
+import Layout125N7_E2 from "./assets/125inNEMA7_E2.svg?react"
 
-import Layout12_N1 from "./assets/12in-N1.svg?react";
-import Layout12_N4 from "./assets/12in-N4.svg?react";
-import Layout12_N7 from "./assets/12in-N7.svg?react";
+//2 inch
+import Layout2N1 from "./assets/2inNEMA1.svg?react"
+import Layout2N4 from "./assets/2inNEMA4.svg?react"
+import Layout2N7 from "./assets/2inNEMA7.svg?react"
+
+//2.5 inch
+import Layout25N1 from "./assets/25inNEMA1.svg?react"
+import Layout25N4 from "./assets/25inNEMA4.svg?react"
+import Layout25N7 from "./assets/25inNEMA7.svg?react"
 
 
 interface drawingProps {
   drawingRef: React.RefObject<HTMLDivElement>;
   serialNum: string;
   title: string;
-  flangeSize: number;
+  NPTSize: number;
   lengthElement: number;
   foldLength: number;
-  elementNum: number;
+  phase: string;
   processTemp: string;
   hlSensor: string;
   typeThermostat: string;
@@ -51,15 +52,18 @@ interface drawingProps {
   voltage: string;
   wattage: string;
   terminalBox: string;
+  coldLength: number;
+  elementCount: number;
 }
 
 const Drawings10: React.FC<drawingProps> = ({
   drawingRef,
   serialNum,
   title,
-  flangeSize,
+  NPTSize,
   lengthElement,
-  elementNum,
+  foldLength,
+  phase,
   material,
   voltage,
   wattage,
@@ -68,81 +72,88 @@ const Drawings10: React.FC<drawingProps> = ({
   hlSensor, // ✅ needed
   processTemp, // (optional later)
   thermoLength,
+  coldLength,
+  elementCount,
 }) => {
   const showHL = hlSensor !== "nHL";
   const showProcess = processTemp !== "nT";
-  const elementNumN = Number(elementNum);
+  const hasFold = foldLength > 0 && NPTSize !==1.25;
+  const showColdDim = coldLength > 0;
+
 
   // Only enable 10-inch for now
   // ❌ DON'T gate the UI with this anymore if you want 3-inch too
-  // const is10in = flangeSize === 10;
-
-  // N7 vs N1/N4
-  const isN7 = terminalBox === "N7";
+  // const is10in = NPTSize === 10;
 
   // pick correct drawing
   const LayoutSVG = useMemo(() => {
-    // ----- 10 inch -----
-    if (flangeSize === 10) {
-      return isN7 ? Layout10N7 : Layout10;
+    // ----- 1 inch -----
+    if (NPTSize === 1 && terminalBox == "N1" ) {
+      return hasFold? Layout1N1Fold : Layout1N1;
     }
 
-    // ----- 3 inch -----
-    if (flangeSize === 3) {
-      if (elementNumN === 3) return isN7 ? Layout3_N7_E3 : Layout3_N14_E3;
-      if (elementNumN === 6) return isN7 ? Layout3_N7_E6 : Layout3_N14_E6;
-      return null;
+    if (NPTSize === 1 && terminalBox == "N4" ) {
+      return hasFold? Layout1N4Fold : Layout1N4;
     }
 
-    // ----- 4 inch -----
-
-    if (flangeSize === 4) {
-      if (elementNumN === 6) return isN7 ? Layout4_N7_E6 : Layout4_N14_E6;
-      if (elementNumN === 9) return isN7 ? Layout4_N7_E9 : Layout4_N14_E9;
-      return null;
+    if (NPTSize === 1 && terminalBox == "N7" ) {
+      return hasFold? Layout1N7Fold : Layout1N7;
     }
 
-    // ----- 5 inch -----
-    if (flangeSize === 5) {
-      if (terminalBox === "N1") return Layout5_N1;
-      if (terminalBox === "N4") return Layout5_N4;
-      if (terminalBox === "N7") return Layout5_N7;
-      return null;
+    // ----- 1.25 inch -----
+    if (NPTSize === 1.25 && terminalBox === "N1") {
+      return elementCount === 2 ? Layout125N1_E2 : Layout125N1_E1;
     }
 
-    // ----- 6 inch -----
-    if (flangeSize === 6) {
-      if (terminalBox === "N1") return Layout6_N1;
-      if (terminalBox === "N4") return Layout6_N4;
-      if (terminalBox === "N7") return Layout6_N7;
-      return null;
+    if (NPTSize === 1.25 && terminalBox === "N4") {
+      return elementCount === 2 ? Layout125N4_E2 : Layout125N4_E1;
     }
 
-    // ----- 8 inch -----
-    if (flangeSize === 8) {
-      if (terminalBox === "N1") return Layout8_N1;
-      if (terminalBox === "N4") return Layout8_N4;
-      if (terminalBox === "N7") return Layout8_N7;
-      return null;
+    if (NPTSize === 1.25 && terminalBox === "N7") {
+      return elementCount === 2 ? Layout125N7_E2 : Layout125N7_E1;
     }
 
-    // ----- 12 inch -----
-    if (flangeSize === 12) {
-      if (terminalBox === "N1") return Layout12_N1;
-      if (terminalBox === "N4") return Layout12_N4;
-      if (terminalBox === "N7") return Layout12_N7;
-      return null;
+  // ----- 2 inch -----
+    if (NPTSize === 2 && terminalBox == "N1" ) {
+      return Layout2N1
     }
 
+    if (NPTSize === 2 && terminalBox == "N4" ) {
+      return Layout2N4
+    }
+
+    if (NPTSize === 2 && terminalBox == "N7" ) {
+      return Layout2N7
+    }
+
+  // ----- 2.5 inch -----
+    if (NPTSize === 2.5 && terminalBox == "N1" ) {
+      return Layout25N1
+    }
+
+    if (NPTSize === 2.5 && terminalBox == "N4" ) {
+      return Layout25N4
+    }
+
+    if (NPTSize === 2.5 && terminalBox == "N7" ) {
+      return Layout25N7
+    }
 
     return null;
-  }, [flangeSize, elementNumN, terminalBox, isN7]);
+  }, [NPTSize, phase, terminalBox, hasFold, elementCount]);
+
+
 
   // What you want displayed as the immersion number
   const immersionText = useMemo(() => {
     if (!lengthElement || Number.isNaN(Number(lengthElement))) return "";
     return `${lengthElement}"`;
   }, [lengthElement]);
+
+  const foldbackText = useMemo(() => {
+    if (!foldLength || Number.isNaN(Number(foldLength))) return "";
+    return `${foldLength}"`;
+  }, [foldLength]);
 
   const showThermowellDim = processTemp !== "nT" && thermoLength > 0;
 
@@ -151,384 +162,441 @@ const Drawings10: React.FC<drawingProps> = ({
   // CONFIGS 
   // =========================
 
-  //10in
-  const cfg10N14 = {
-    processBar: { left: "57%", bottom: "48%", width: "18%", height: "1.8%" },
-    hlBar: { left: "57%", bottom: "25%", width: "26%", height: "1.5%" },
-
-    hlLeader: {
-      left: "57%",
-      bottom: "-24%",
-      rotate: 10,
-      lineHeight: 70,
-      textOffsetY: 6,
-    },
+  //1in
+  //Nema 1
+  const cfg1N1 = {
+    processBar: { left: "51%", bottom: "40%", width: "18%", height: "5%" },
+    thermoDim: { left: "51%", bottom: "38%", width: "18%", dropHeight: 100 },
     
-    elemMatLeader: { left: "90%", bottom: "-20%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    hlBar: { left: "51%", bottom: "31%", width: "26%", height: "2%" },
+    hlLeader: { left: "65%", bottom: "-28%", rotate: 10, lineHeight: 78, textOffsetY: -2},
+    
+    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "78%", top: "7%" },
+    immersionText: { left: "73%", top: "15%" },
 
-    thermoDim: { left: "57%", bottom: "58%", width: "18%", dropHeight: 25 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "51%", bottom: "-11%", width: "10%", riseHeight: 70 },
   };
 
-  const cfg10N7 = {
-    // ✅ change these independently for N7 (up/down = bottom, left/right = left)
-    processBar: { left: "53.5%", bottom: "46%", width: "18%", height: "1.8%" }, //Blue Bar
-    hlBar: { left: "53.5%", bottom: "19.5%", width: "26%", height: "1.5%" }, //yello Bar
-
-    hlLeader: {
-      left: "58%",
-      bottom: "-11%",
-      rotate: 10,
-      lineHeight: 40,
-      textOffsetY: 0,
-    },
-
-    elemMatLeader: { left: "90%", bottom: "-11%", rotate: 10, lineHeight: 30, textOffsetY: 6, textWidth: 150 },
+    const cfg1N1Fold = {
+    processBar: { left: "52%", bottom: "40%", width: "18%", height: "5%" },
+    thermoDim: { left: "52%", bottom: "38%", width: "18%", dropHeight: 100 },
+    
+    hlBar: { left: "52%", bottom: "31%", width: "26%", height: "2%" },
+    hlLeader: { left: "65%", bottom: "-32%", rotate: 10, lineHeight: 78, textOffsetY: -2},
+    
+    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "78%", top: "17%" }, //Length text
+    immersionText: { left: "73%", top: "15%" },
 
-    thermoDim: { left: "53.5%", bottom: "60%", width: "18%", dropHeight: 70 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "76%", top: "30%" },
+
+    coldDim: { left: "52%", bottom: "-15%", width: "10%", riseHeight: 70 },
   };
 
-  //3in
-  const cfg3N14_E3 = {
-    processBar: { left: "53.25%", bottom: "44.5%", width: "18%", height: "1.8%" },
+  //Nema 4
+  const cfg1N4 = {
+    processBar: { left: "58%", bottom: "48.25%", width: "18%", height: "5%" },
+    thermoDim: { left: "58%", bottom: "46.5%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "53.25%", bottom: "32.5%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "56%", bottom: "-9%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58%", bottom: "42%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-17%", rotate: 10, lineHeight: 110, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-12%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "25%" },
+    immersionText: { left: "76%", top: "13%" },
 
-    thermoDim: { left: "53.25%", bottom: "46%", width: "18%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58%", bottom: "-5%", width: "10%", riseHeight: 102 },
   };
 
-  const cfg3N14_E6 = {
-    processBar: { left: "52%", bottom: "47.5%", width: "18%", height: "1.8%" },
+  const cfg1N4Fold = {
+    processBar: { left: "57.5%", bottom: "49%", width: "18%", height: "5%" },
+    thermoDim: { left: "57.5%", bottom: "46.5%", width: "18%", dropHeight: 100 },
     
-    hlBar: { left: "52%", bottom: "36%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "56%", bottom: "-2%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "57.5%", bottom: "43%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-17%", rotate: 10, lineHeight: 110, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-4%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "25%" },
+    immersionText: { left: "80%", top: "14%" },
 
-    thermoDim: { left: "52%", bottom: "46%", width: "18%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "78%", top: "27%" },
+
+    coldDim: { left: "57.5%", bottom: "-4%", width: "10%", riseHeight: 102 },
   };
 
-  const cfg3N7_E3 = {
-    processBar: { left: "52%", bottom: "47.5%", width: "18%", height: "1.8%" },
+  //Nema 7
+  const cfg1N7 = {
+    processBar: { left: "58.85%", bottom: "44.5%", width: "18%", height: "5%" },
+    thermoDim: { left: "58.85%", bottom: "42%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "52%", bottom: "35%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "56%", bottom: "-1%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58.85%", bottom: "39%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-16%", rotate: 10, lineHeight: 110, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-4%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "10%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "25%" },
+    immersionText: { left: "76%", top: "16%" },
 
-    thermoDim: { left: "52%", bottom: "46%", width: "18%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58.85%", bottom: "3%", width: "10%", riseHeight: 80 },
   };
 
-  const cfg3N7_E6 = {
-    processBar: { left: "56%", bottom: "47.5%", width: "18%", height: "1.8%" },
+  const cfg1N7Fold = {
+    processBar: { left: "58.5%", bottom: "48%", width: "18%", height: "3%" },
+    thermoDim: { left: "58.5%", bottom: "46.5%", width: "18%", dropHeight: 20 },
     
-    hlBar: { left: "56%", bottom: "36%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "1%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58.5%", bottom: "42%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-8%", rotate: 10, lineHeight: 110, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-2%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "17%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "78%", top: "32%" },
+    immersionText: { left: "77%", top: "12%" },
 
-    thermoDim: { left: "56%", bottom: "46%", width: "18%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "78%", top: "26%" },
+
+    coldDim: { left: "58.5%", bottom: "3%", width: "10%", riseHeight: 102 },
   };
 
-  //4 inches
-  const cfg4N7_E6 = {
-    processBar: { left: "60.25%", bottom: "47.5%", width: "15%", height: "1.8%" },
+  // 1.25 inch
+  // NEMA 1
+    const cfg125N1E1 = {
+    processBar: { left: "51%", bottom: "39%", width: "18%", height: "5%" },
+    thermoDim: { left: "51%", bottom: "35%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "60.25%", bottom: "36%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-10%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "51%", bottom: "28%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-32%", rotate: 10, lineHeight: 70, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-14%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "78%", top: "28%" },
+    immersionText: { left: "73%", top: "13%" },
 
-    thermoDim: { left: "60.25%", bottom: "46%", width: "15%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "51%", bottom: "-24%", width: "10%", riseHeight: 80 },
   };
 
-  const cfg4N7_E9 = {
-    processBar: { left: "60%", bottom: "46%", width: "15%", height: "1.8%" },
+  const cfg125N1E2 = {
+    processBar: { left: "50.75%", bottom: "42%", width: "18%", height: "5%" },
+    thermoDim: { left: "50.75%", bottom: "41%", width: "18%", dropHeight:90 },
     
-    hlBar: { left: "60%", bottom: "32%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-12.5%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "50.75%", bottom: "31%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-32%", rotate: 10, lineHeight: 76, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-15%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 37, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "78%", top: "30%" },
+    immersionText: { left: "73%", top: "13%" },
 
-    thermoDim: { left: "60%", bottom: "46%", width: "15%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "50.75%", bottom: "-24%", width: "10%", riseHeight: 88 },
   };
 
-  const cfg4N14_E6 = {
-    processBar: { left: "53%", bottom: "46%", width: "18%", height: "1.8%" },
+  //NEMA 4
+  const cfg125N4E1 = {
+    processBar: { left: "58.25%", bottom: "49%", width: "18%", height: "5%" },
+    thermoDim: { left: "58.25%", bottom: "46%", width: "18%", dropHeight: 60 },
     
-    hlBar: { left: "53%", bottom: "34%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-8%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58.25%", bottom: "42%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 70, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-10.5%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "12%" },
+    immersionText: { left: "77%", top: "10%" },
 
-    thermoDim: { left: "53%", bottom: "46%", width: "18%", dropHeight: 35 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58.25%", bottom: "15%", width: "10%", riseHeight: 45 },
   };
 
-  const cfg4N14_E9 = {
-    processBar: { left: "52.75%", bottom: "43%", width: "18%", height: "1.8%" },
+  const cfg125N4E2 = {
+    processBar: { left: "58.5%", bottom: "50.5%", width: "18%", height: "5%" },
+    thermoDim: { left: "58.5%", bottom: "50%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "52.75%", bottom: "30%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-7%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58.5%", bottom: "43.5%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 70, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-9%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "73.5%", top: "20%" },
+    immersionText: { left: "78%", top: "6%" },
 
-    thermoDim: { left: "52.75%", bottom: "47%", width: "18%", dropHeight: 30 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58.5%", bottom: "15%", width: "10%", riseHeight: 45 },
   };
 
-  // 5 inches
-  const cfg5N1 = {
-    processBar: { left: "53.5%", bottom: "44%", width: "18%", height: "1.8%" },
+  //NEMA 7
+    const cfg125N7E1 = {
+    processBar: { left: "58.25%", bottom: "49.75%", width: "18%", height: "5%" },
+    thermoDim: { left: "58.25%", bottom: "47%", width: "18%", dropHeight: 68 },
     
-    hlBar: { left: "53.5%", bottom: "33%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-6%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "58.25%", bottom: "44%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 92, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-8.5%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "15%" },
+    immersionText: { left: "77%", top: "13%" },
 
-    thermoDim: { left: "53.5%", bottom: "46%", width: "18%", dropHeight: 45 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58.25%", bottom: "15%", width: "10%", riseHeight: 60 },
   };
 
-  const cfg5N4 = {
-    processBar: { left: "53%", bottom: "44%", width: "18%", height: "1.8%" },
+  const cfg125N7E2 = {
+    processBar: { left: "51.5%", bottom: "40%", width: "18%", height: "5%" },
+    thermoDim: { left: "51.5%", bottom: "38%", width: "18%", dropHeight: 90 },
     
-    hlBar: { left: "53%", bottom: "34%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "1.5%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-   
-    elemMatLeader: { left: "85%", bottom: "0%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    hlBar: { left: "51.5%", bottom: "25%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-40%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    
+    elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "21.5%" },
+    immersionText: { left: "75%", top: "9%" },
 
-    thermoDim: { left: "53%", bottom: "45%", width: "18%", dropHeight: 45 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "51.5%", bottom: "-25%", width: "10%", riseHeight: 67 },
   };
 
-  const cfg5N7 = {
-    processBar: { left: "62.5%", bottom: "47.5%", width: "15%", height: "1.8%" },
+  // 2 inch
+  // NEMA 1
+  const cfg2N1 = {
+    processBar: { left: "51.25%", bottom: "42%", width: "18%", height: "5%" },
+    thermoDim: { left: "51.25%", bottom: "47%", width: "18%", dropHeight: 90 },
     
-    hlBar: { left: "62.5%", bottom: "38%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "65%", bottom: "-3%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "51.25%", bottom: "25%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-29%", rotate: 10, lineHeight: 70, textOffsetY: -2},
     
-    elemMatLeader: { left: "88%", bottom: "-4%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "-10%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "80%", top: "30%" },
+    immersionText: { left: "73%", top: "14%" },
 
-    thermoDim: { left: "62.5%", bottom: "46%", width: "15%", dropHeight: 80 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "51.25%", bottom: "-20%", width: "10%", riseHeight: 80 },
+  };
+  //NEMA 4
+  const cfg2N4 = {
+    processBar: { left: "58.5%", bottom: "50%", width: "18%", height: "5%" },
+    thermoDim: { left: "58.5%", bottom: "55%", width: "18%", dropHeight: 90 },
+    
+    hlBar: { left: "58.5%", bottom: "37%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-16%", rotate: 10, lineHeight: 90, textOffsetY: -2},
+    
+    elemMatLeader: { left: "86.5%", bottom: "8%", rotate: -10, lineHeight: 47, textOffsetY: 6, textWidth: 215 },
+
+    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
+    immersionText: { left: "80%", top: "9%" },
+
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "58.5%", bottom: "-3%", width: "10%", riseHeight: 83 },
+  };
+  //NEMA 7
+  const cfg2N7 = {
+    processBar: { left: "59%", bottom: "41%", width: "18%", height: "5%" },
+    thermoDim: { left: "59%", bottom: "46%", width: "18%", dropHeight: 40 },
+    
+    hlBar: { left: "59%", bottom: "28%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-31%", rotate: 10, lineHeight: 90, textOffsetY: -2},
+    
+    elemMatLeader: { left: "86.5%", bottom: "-6%", rotate: -10, lineHeight:48, textOffsetY: 6, textWidth: 215 },
+
+    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
+    immersionText: { left: "77%", top: "8%" },
+
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "59%", bottom: "-15%", width: "10%", riseHeight: 78 },
   };
 
-
-  // 6 inches
-  const cfg6N1 = {
-    processBar: { left: "54.25%", bottom: "44%", width: "18%", height: "1.8%" },
+  // 2.5 inch
+  // NEMA 1
+  const cfg25N1 = {
+    processBar: { left: "52.5%", bottom: "42%", width: "18%", height: "5%" },
+    thermoDim: { left: "52.5%", bottom: "53%", width: "18%", dropHeight: 80 },
     
-    hlBar: { left: "54.25%", bottom: "20%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-24%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
+    hlBar: { left: "52.5%", bottom: "19%", width: "26%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-38%", rotate: 10, lineHeight: 70, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-27%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
+    elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "15%" },
+    immersionText: { left: "75%", top: "9%" },
 
-    thermoDim: { left: "54.25%", bottom: "46%", width: "18%", dropHeight: 45 },
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "52.5%", bottom: "-20%", width: "10%", riseHeight: 58 },
+  };
+  //NEMA 4
+  const cfg25N4 = {
+    processBar: { left: "59.5%", bottom: "50%", width: "18%", height: "5%" },
+    thermoDim: { left: "59.5%", bottom: "56%", width: "18%", dropHeight: 80 },
+    
+    hlBar: { left: "59.5%", bottom: "33%", width: "26%", height: "2%" },
+    hlLeader: { left: "73%", bottom: "-16%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    
+    elemMatLeader: { left: "86%", bottom: "-0%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
+
+    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
+    immersionText: { left: "82%", top: "8%" },
+
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "59.5%", bottom: "-1%", width: "10%", riseHeight: 58 },
+  };
+  //NEMA 7
+  const cfg25N7 = {
+    processBar: { left: "59.25%", bottom: "41%", width: "18%", height: "5%" },
+    thermoDim: { left: "59.25%", bottom: "46%", width: "18%", dropHeight: 40 },
+    
+    hlBar: { left: "59.25%", bottom: "23%", width: "26%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-34%", rotate: 10, lineHeight: 77, textOffsetY: -2},
+    
+    elemMatLeader: { left: "86.5%", bottom: "-12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
+
+    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
+    immersionText: { left: "77%", top: "8%" },
+
+    foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
+    foldbackText: { left: "75%", top: "30%" },
+
+    coldDim: { left: "59.25%", bottom: "-15%", width: "10%", riseHeight: 62 },
   };
 
-  const cfg6N4 = {
-    processBar: { left: "53.75%", bottom: "46%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "53.75%", bottom: "24%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-21%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-24%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "13%" },
-
-    thermoDim: { left: "53.75%", bottom: "55%", width: "18%", dropHeight: 25 },
-  };
-
-  const cfg6N7 = {
-    processBar: { left: "58.75%", bottom: "49%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "58.75%", bottom: "27%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-8%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-10%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "77%", top: "1%" },
-
-    thermoDim: { left: "58.75%", bottom: "59%", width: "18%", dropHeight: 40 },
-  };
-
-
-  // 8 inches
-  const cfg8N1 = {
-    processBar: { left: "54%", bottom: "47%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "54%", bottom: "26%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-15%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-18%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "74%", top: "12%" },
-
-    thermoDim: { left: "54%", bottom: "56%", width: "18%", dropHeight: 30 },
-  };
-
-  const cfg8N4 = {
-    processBar: { left: "52.25%", bottom: "44%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "52.25%", bottom: "24%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-15%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-17%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "73%", top: "18%" },
-
-    thermoDim: { left: "52.25%", bottom: "52%", width: "18%", dropHeight: 25 },
-  };
-
-  const cfg8N7 = {
-    processBar: { left: "49.75%", bottom: "42%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "49.75%", bottom: "19%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "55%", bottom: "-18%", rotate: 10, lineHeight: 50, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-18%", rotate: 10, lineHeight: 40, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "73%", top: "17%" },
-
-    thermoDim: { left: "49.75%", bottom: "51%", width: "18%", dropHeight: 35 },
-  };
-
-
-  // 12 inches
-  const cfg12N1 = {
-    processBar: { left: "55.25%", bottom: "50%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "55.25%", bottom: "30%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-12%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-14%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "8%" },
-
-    thermoDim: { left: "55.25%", bottom: "57%", width: "18%", dropHeight: 30 },
-  };
-
-  const cfg12N4 = {
-    processBar: { left: "55.5%", bottom: "50%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "55.5%", bottom: "30%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-15%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-17%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "6%" },
-
-    thermoDim: { left: "55.5%", bottom: "57%", width: "18%", dropHeight: 30 },
-  };
-
-  const cfg12N7 = {
-    processBar: { left: "52.25%", bottom: "49%", width: "18%", height: "1.8%" },
-    
-    hlBar: { left: "52.25%", bottom: "22%", width: "20%", height: "1.5%" },
-    hlLeader: { left: "60%", bottom: "-21%", rotate: 10, lineHeight: 60, textOffsetY: 0,},
-    
-    elemMatLeader: { left: "85%", bottom: "-23%", rotate: 10, lineHeight: 55, textOffsetY: 6, textWidth: 150 },
-
-    immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
-    immersionText: { left: "75%", top: "9.5%" },
-
-    thermoDim: { left: "52.25%", bottom: "64%", width: "18%", dropHeight: 70 },
-  };    
 
 
   const overlayCfg = useMemo(() => {
-    // 10 inch
-    if (flangeSize === 10) return isN7 ? cfg10N7 : cfg10N14;
-
-    // 3 inch
-    if (flangeSize === 3) {
-      if (elementNumN === 3) return isN7 ? cfg3N7_E3 : cfg3N14_E3;
-      if (elementNumN === 6) return isN7 ? cfg3N7_E6 : cfg3N14_E6;
+    // 1 inch
+    if (NPTSize === 1 && terminalBox == "N1" ) {
+      return hasFold? cfg1N1Fold : cfg1N1;
     }
+
+    if (NPTSize === 1 && terminalBox == "N4" ) {
+      return hasFold? cfg1N4Fold : cfg1N4;
+    }
+
+    if (NPTSize === 1 && terminalBox == "N7" ) {
+      return hasFold? cfg1N7Fold : cfg1N7;
+    }
+
+    // 1.25 inch
+    if (NPTSize === 1.25 && terminalBox == "N1" ) {
+      if(elementCount === 1) return cfg125N1E1;
+      if(elementCount === 2) return cfg125N1E2;
+    }
+
+    if (NPTSize === 1.25 && terminalBox == "N4" ) {
+      if(elementCount === 1) return cfg125N4E1;
+      if(elementCount === 2) return cfg125N4E2;
+    }
+
+    if (NPTSize === 1.25 && terminalBox == "N7" ) {
+      if(elementCount === 1) return cfg125N7E1;
+      if(elementCount === 2) return cfg125N7E2;
+    }
+  
+    // 2 inch
+    if (NPTSize === 2 && terminalBox == "N1" ) {
+      return cfg2N1
+    }
+
+    if (NPTSize === 2 && terminalBox == "N4" ) {
+      return cfg2N4
+    }
+
+    if (NPTSize === 2 && terminalBox == "N7" ) {
+      return cfg2N7
+    }
+
+    // 2.5 inch
+    if (NPTSize === 2.5 && terminalBox == "N1" ) {
+      return cfg25N1
+    }
+
+    if (NPTSize === 2.5 && terminalBox == "N4" ) {
+      return cfg25N4
+    }
+
+    if (NPTSize === 2.5 && terminalBox == "N7" ) {
+      return cfg25N7
+    }
+    // // 3 inch
+    // if (NPTSize === 3) {
+    //   if (elementNumN === 3) return isN7 ? cfg3N7_E3 : cfg3N14_E3;
+    //   if (elementNumN === 6) return isN7 ? cfg3N7_E6 : cfg3N14_E6;
+    // }
     
-    //4 inch
-    if (flangeSize === 4) {
-      if (elementNumN === 6) return isN7 ? cfg4N7_E6 : cfg4N14_E6;
-      if (elementNumN === 9) return isN7 ? cfg4N7_E9 : cfg4N14_E9;
-    }
+    // //4 inch
+    // if (NPTSize === 4) {
+    //   if (elementNumN === 6) return isN7 ? cfg4N7_E6 : cfg4N14_E6;
+    //   if (elementNumN === 9) return isN7 ? cfg4N7_E9 : cfg4N14_E9;
+    // }
 
-    //5 inch
-    if (flangeSize === 5) {
-      if (terminalBox === "N1") return cfg5N1;
-      if (terminalBox === "N4") return cfg5N4;
-      if (terminalBox === "N7") return cfg5N7;
-    }
+    // //5 inch
+    // if (NPTSize === 5) {
+    //   if (terminalBox === "N1") return cfg5N1;
+    //   if (terminalBox === "N4") return cfg5N4;
+    //   if (terminalBox === "N7") return cfg5N7;
+    // }
 
-    //6 inch
-    if (flangeSize === 6) {
-      if (terminalBox === "N1") return cfg6N1;
-      if (terminalBox === "N4") return cfg6N4;
-      if (terminalBox === "N7") return cfg6N7;
-    }
+    // //6 inch
+    // if (NPTSize === 6) {
+    //   if (terminalBox === "N1") return cfg6N1;
+    //   if (terminalBox === "N4") return cfg6N4;
+    //   if (terminalBox === "N7") return cfg6N7;
+    // }
 
-    //8 inch
-    if (flangeSize === 8) {
-      if (terminalBox === "N1") return cfg8N1;
-      if (terminalBox === "N4") return cfg8N4;
-      if (terminalBox === "N7") return cfg8N7;
-    }
+    // //8 inch
+    // if (NPTSize === 8) {
+    //   if (terminalBox === "N1") return cfg8N1;
+    //   if (terminalBox === "N4") return cfg8N4;
+    //   if (terminalBox === "N7") return cfg8N7;
+    // }
 
-    //12 inch
-    if (flangeSize === 12) {
-      if (terminalBox === "N1") return cfg12N1;
-      if (terminalBox === "N4") return cfg12N4;
-      if (terminalBox === "N7") return cfg12N7;
-    }
+    // //12 inch
+    // if (NPTSize === 12) {
+    //   if (terminalBox === "N1") return cfg12N1;
+    //   if (terminalBox === "N4") return cfg12N4;
+    //   if (terminalBox === "N7") return cfg12N7;
+    // }
 
     return null;
-  }, [flangeSize, elementNumN, terminalBox, isN7]);
+  }, [NPTSize, phase, terminalBox, hasFold, elementCount]);
 
   return (
     <div ref={drawingRef} className=" relative w-[1000px] h-[772.73px] flex items-center justify-center bg-white border-2 border-slate-400 rounded-lg">
@@ -540,6 +608,7 @@ const Drawings10: React.FC<drawingProps> = ({
         wattage={wattage}
         terminalBox={terminalBox}
         thermostat={typeThermostat}
+        phase={phase}
       />
 
       <div className="absolute w-[950px] flex items-center justify-center">
@@ -554,9 +623,11 @@ const Drawings10: React.FC<drawingProps> = ({
             No drawing available for this configuration.
           </div>
         ) : (
-          <div className="relative w-[950px]">
+          <div className="relative w-[950px] flex items-center justify-center">
             {/* Static drawing */}
-            <LayoutSVG className="block w-full h-auto" />
+             <LayoutSVG
+                style={{ width: "95%", height: "100%", objectFit: "contain" }}
+              />
 
             {/* ✅ Only render overlays when we actually have overlayCfg */}
             {overlayCfg && (
@@ -700,6 +771,121 @@ const Drawings10: React.FC<drawingProps> = ({
                   </div>
                 )}
 
+
+                {//ColdLength
+                }
+                {showColdDim && overlayCfg.coldDim && (
+                <div
+                  className="absolute pointer-events-none"
+                  style={{
+                    left: overlayCfg.coldDim.left,
+                    bottom: overlayCfg.coldDim.bottom,
+                    width: overlayCfg.coldDim.width,
+                    height: `${overlayCfg.coldDim.riseHeight + 60}px`,
+                    zIndex: 80,
+                  }}
+                >
+                  {/* 1) Vertical rise line (LEFT) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      bottom: 26,
+                      height: overlayCfg.coldDim.riseHeight,
+                      borderLeft: "1px solid black",
+                    }}
+                  />
+
+                  {/* 2) Vertical rise line (RIGHT) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      bottom: 26,
+                      height: overlayCfg.coldDim.riseHeight,
+                      borderLeft: "1px solid black",
+                    }}
+                  />
+
+                  {/* 3) Dimension line (BOTTOM) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      right: 0,
+                      bottom: 26,
+                      borderBottom: "1px solid black",
+                    }}
+                  />
+
+                  {/* 4) Left arrow (pointing inward) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      bottom: 22,
+                      width: 0,
+                      height: 0,
+                      borderTop: "4px solid transparent",
+                      borderBottom: "4px solid transparent",
+                      borderRight: "14px solid black",
+                      transform: "translateX(-2px)",
+                    }}
+                  />
+
+                  {/* 5) Right arrow (pointing inward) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      bottom: 22,
+                      width: 0,
+                      height: 0,
+                      borderTop: "4px solid transparent",
+                      borderBottom: "4px solid transparent",
+                      borderLeft: "14px solid black",
+                      transform: "translateX(2px)",
+                    }}
+                  />
+
+                  {/* 6) Number (ABOVE the bottom line) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      bottom: 15,
+                      transform: "translateX(-50%)",
+                      fontSize: "15px",
+                      background: "white",
+                      padding: "1px 6px",
+                    }}
+                  >
+                    {coldLength}&quot;
+                  </div>
+
+                  {/* 7) Label (optional) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      textAlign: "center",
+                      width: 100,
+                      left: "50%",
+                      bottom: 0,
+                      transform: "translateX(-50%)",
+                      fontSize: "12px",
+                      background: "white",
+                      padding: "1px 6px",
+                    }}
+                  >
+                    Cold Length
+                  </div>
+                </div>
+              )}
+
+
+
+
+
                 {/* ============================================
                    IMMERSION DIMENSION: remove arrows/line
                    We "erase" that area by covering it white,
@@ -734,6 +920,39 @@ const Drawings10: React.FC<drawingProps> = ({
                 >
                   {immersionText}
                 </div>
+
+                {hasFold && (
+                  <>
+                    {/* cover old foldback dim area if needed */}
+                    <div
+                      className="absolute bg-white"
+                      style={{
+                        left: overlayCfg.foldbackCover.left,
+                        top: overlayCfg.foldbackCover.top,
+                        width: overlayCfg.foldbackCover.width,
+                        height: overlayCfg.foldbackCover.height,
+                        zIndex: 90,
+                      }}
+                    />
+
+                    {/* foldback dimension text */}
+                    <div
+                      className="absolute text-black"
+                      style={{
+                        left: overlayCfg.foldbackText.left,
+                        top: overlayCfg.foldbackText.top,
+                        transform: "translate(-50%, -50%)",
+                        fontSize: "16px",
+                        background: "white",
+                        padding: "2px 5px",
+                        zIndex: 95,
+                      }}
+                    >
+                      {foldbackText}
+                    </div>
+                  </>
+                )}
+
 
                 {/* ==============================
                         TEMP SENSOR OPTION (HL)
@@ -783,7 +1002,7 @@ const Drawings10: React.FC<drawingProps> = ({
                     {/* ==============================
                         ✅ NEW LEADER: Elements + Material
                         ALWAYS SHOW
-                    ============================== */}
+                        ============================== */}
                     {overlayCfg?.elemMatLeader && (
                       <div
                         className="absolute pointer-events-none"
@@ -808,13 +1027,13 @@ const Drawings10: React.FC<drawingProps> = ({
 
                         {/* label */}
                         <div
-                          key={`${elementNumN}-${material}`}
+                          key={`${elementCount}-${material}`}
                           className="text-black"
                           style={{
-                            marginLeft: "-60px",
+                            marginLeft: "-95px",
                             marginTop: overlayCfg.elemMatLeader.textOffsetY,
                             width: `${overlayCfg.elemMatLeader.textWidth}px`,
-                            transform: "rotate(-10deg)",
+                            transform: "rotate(10deg)",
                             fontSize: "16px",
                             background: "white",
                             padding: "2px 6px",
@@ -822,13 +1041,12 @@ const Drawings10: React.FC<drawingProps> = ({
                           }}
                         >
                           <div style={{ lineHeight: "18px", width: "100%" }}>
-                            <div>{`${elementNumN} Elements`}</div>
-                            <div>{material}</div>
+                            {NPTSize === 1.25 &&(<div>{elementCount} Elements</div>)}
+                            <div>Material: {material}</div>
                           </div>
                         </div>
                       </div>
                     )}
-
               </>
             )}
           </div>
@@ -839,3 +1057,4 @@ const Drawings10: React.FC<drawingProps> = ({
 };
 
 export default Drawings10;
+

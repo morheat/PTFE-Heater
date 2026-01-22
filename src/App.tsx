@@ -13,11 +13,14 @@ function App() {
   const [terminalBoxVar, setTerminalBox] = useState<string>("N1");
   const [materialVar, setMaterial] = useState<string>("304SS");
 
-  const [flangeSizeOp, setFlangeSize] = useState<number>(3);
+  const [NPTSizeOp, setNPTSize] = useState<number>(1);
   const [immersionLengthVar, setImmersionLength] = useState<number>(10);
-  const [foldLengthVar, setFoldLength] = useState<number>(5);
+  const [foldLengthVar, setFoldLength] = useState<number>(0);
   const [thermoLength, setThermoLength] = useState<number>(8);
-  const [elementNumVar, setElementNum] = useState<number>(1);
+  const [phaseVar, setPhase] = useState<string>("Single Phase");
+  const [coldLength, setColdLength] = useState<number>(2.5);
+  const [elementCount, setElementCount] = useState<number>(1);
+;
 
   const drawingRef = useRef<HTMLDivElement>(null);
 
@@ -76,11 +79,14 @@ function App() {
 
 
   useEffect(() => {
-    const el = document.getElementById("elementNumOptions") as HTMLSelectElement | null;
-    if (!el) return; // ✅ prevent crash
-    setElementNum(Number(el.value));
-  }, [flangeSizeOp]);
+    setPhase("Single Phase");
 
+    // 1.25" has NO fold option
+    if (NPTSizeOp === 1.25) {
+      setFoldLength(0);      // force fold off
+      setElementCount(1);    // default to 1 element (or 2 if you prefer)
+    }
+  }, [NPTSizeOp]);
 
   return (
     <div className="flex justify-center mt-5 w-screen">
@@ -128,101 +134,82 @@ function App() {
         </div>
 
         <div>
-          <h1>Flange Size</h1>
+          <h1>NPT Size</h1>
           <select
             className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
+            value={NPTSizeOp}
             onChange={(e) => {
-              setFlangeSize(Number(e.target.value));
+              setNPTSize(Number(e.target.value));
             }}
           >
-            <option value={3}>3&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={4}>4&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={5}>5&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={6}>6&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={8}>8&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={10}>10&quot;-150 LB ANSI Flanged Heaters</option>
-            <option value={12}>12&quot;-150 LB ANSI Flanged Heaters</option>
+            <option value={1}>1&quot; NPT Heater Constructions</option>
+            <option value={1.25}>1.25&quot; NPT Heater Constructions</option>
+            <option value={2}>2&quot; NPT Heater Constructions</option>
+            <option value={2.5}>2.5&quot; NPT Heater Constructions</option>
           </select>
         </div>
 
         <div>
-          <h1>Immersion Length</h1>
+          <h1>Phases</h1>
+          <select
+            className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
+            value={phaseVar}
+            onChange={(e) => setPhase(e.target.value)}
+          >
+            <option value="Single Phase">Single Phase</option>
+            <option value="3 Phase">3 Phase</option>
+          </select>
+        </div>
+
+        <div>
+          <h1>immersion Length</h1>
           <input
             type="text"
-            id="immersLength"
+            id="immersionLengthInput"
             defaultValue={10}
             onChange={(e) => setImmersionLength(Number(e.target.value) || 0)}
             className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
           />
         </div>
 
-        <div>
-          <h1>Number of Elements</h1>
-          <select
-            className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
-            onChange={(e) => {
-              setElementNum(Number(e.target.value));
-            }}
-            id="elementNumOptions"
-          >
-            {flangeSizeOp === 3 && (
-              <>
-                <option value={3}>3 Element</option>
-                <option value={6}>6 Element</option>
-              </>
-            )}
-            {(flangeSizeOp === 4 || flangeSizeOp === 5) && (
-              <>
-                <option value={6}>6 Elements</option>
-                <option value={9}>9 Elements</option>
-              </>
-            )}
+        {NPTSizeOp === 1.25 && (
+          <div>
+            <h1>Number of Elements</h1>
+            <select
+              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
+              value={elementCount}
+              onChange={(e) => setElementCount(Number(e.target.value))}
+            >
+              <option value={1}>1 Element</option>
+              <option value={2}>2 Elements</option>
+            </select>
+          </div>
+        )}
 
-            {flangeSizeOp === 6 && (
-              <>
-                <option value={12}>12 Elements</option>
-                <option value={15}>15 Elements</option>
-              </>
-            )}
 
-            {flangeSizeOp === 8 && (
-              <>
-                <option value={21}>21 Elements</option>
-                <option value={21}>24 Elements</option>
-                <option value={21}>27 Elements</option>
-              </>
-            )}
-                        
-            {flangeSizeOp === 10 && (
-              <>
-                <option value={36}>36 Elements</option>
-                <option value={42}>42 Elements</option>
-                <option value={48}>48 Elements</option>
-              </>
-            )}
-
-            {flangeSizeOp === 12 && (
-              <>
-                <option value={48}>48 Elements</option>
-                <option value={48}>54 Elements</option>
-                <option value={48}>60 Elements</option>
-              </>
-            )}
-          </select>
-        </div>
-
-        {elementNumVar === 1.5 && (
+        {NPTSizeOp === 1 &&(
           <div>
             <h1>Foldback Length</h1>
             <input
               type="text"
               id="foldbackLengthInput"
-              defaultValue={5}
               onChange={(e) => setFoldLength(Number(e.target.value) || 0)}
               className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
             />
           </div>
         )}
+        
+        <div>
+          <h1>Cold Length</h1>
+          <input
+            type="text"
+            id="coldLengthInput"
+            value={coldLength}
+            onChange={(e) => setColdLength(Number(e.target.value) || 0)}
+            className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
+          />
+        </div>
+
 
         <div>
           <h1>Element Sheath Material</h1>
@@ -233,11 +220,12 @@ function App() {
             }}
           >
             <option>304SS</option>
-            <option>310SS</option>
             <option>Incoloy 800/840</option>
-            <option>Inconel 600</option>
             <option>Titanium</option>
-            <option>PTFE Teflon</option>
+            <option>316SS</option>
+            <option>Copper</option>
+            <option>Hasteloy</option>
+            <option>PTFE coated 304SS</option>
           </select>
         </div>
 
@@ -307,56 +295,34 @@ function App() {
             onChange={(e) => setTerminalBox(e.target.value)}
           >
 
-            {flangeSizeOp === 3 && (
+            {NPTSizeOp === 1 && (
               <>
                 <option value="N1">NEMA 1</option>
                 <option value="N4">NEMA 4</option>
                 <option value="N7">NEMA 7</option>
               </>
             )}
-            {flangeSizeOp === 4 && (
+            {NPTSizeOp === 1.25 && (
               <>
                 <option value="N1">NEMA 1</option>
                 <option value="N4">NEMA 4</option>
                 <option value="N7">NEMA 7</option>
               </>
             )}
-            {flangeSizeOp === 5 && (
+            {NPTSizeOp === 2 && (
               <>
                 <option value="N1">NEMA 1</option>
                 <option value="N4">NEMA 4</option>
                 <option value="N7">NEMA 7</option>
               </>
             )}
-            {flangeSizeOp === 6 && (
+            {NPTSizeOp === 2.5 && (
               <>
                 <option value="N1">NEMA 1</option>
                 <option value="N4">NEMA 4</option>
                 <option value="N7">NEMA 7</option>
               </>
             )}
-            {flangeSizeOp === 8 && (
-              <>
-                <option value="N1">NEMA 1</option>
-                <option value="N4">NEMA 4</option>
-                <option value="N7">NEMA 7</option>
-              </>
-            )}
-            {flangeSizeOp === 10 && (
-              <>
-                <option value="N1">NEMA 1</option>
-                <option value="N4">NEMA 4</option>
-                <option value="N7">NEMA 7</option>
-              </>
-            )}
-            {flangeSizeOp === 12 && (
-              <>
-                <option value="N1">NEMA 1</option>
-                <option value="N4">NEMA 4</option>
-                <option value="N7">NEMA 7</option>
-              </>
-            )}
-            
           </select>
         </div>
         <div className="mt-4 space-y-2">
@@ -383,10 +349,10 @@ function App() {
         drawingRef={drawingRef}
         serialNum={serialNum}
         title={titleVar}
-        flangeSize={flangeSizeOp}
+        NPTSize={NPTSizeOp}
         lengthElement={immersionLengthVar}
         foldLength={foldLengthVar}
-        elementNum={elementNumVar}
+        phase={phaseVar}
         processTemp={processSensor}
         hlSensor={HLSensor}
         typeThermostat={processTStat}
@@ -395,6 +361,8 @@ function App() {
         voltage={voltsVar}
         wattage={wattsVar}
         terminalBox={terminalBoxVar}
+        coldLength={coldLength}
+        elementCount={elementCount}
       />
     </div>
   );

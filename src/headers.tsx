@@ -8,6 +8,7 @@ interface headerProps {
   wattage: string;
   terminalBox: string;
   thermostat: string;
+  phase: string;
 }
 
 const Header: React.FC<headerProps> = ({
@@ -18,6 +19,7 @@ const Header: React.FC<headerProps> = ({
   wattage,
   terminalBox,
   thermostat,
+  phase,
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -52,6 +54,7 @@ const Header: React.FC<headerProps> = ({
           {" W"}
         </div>
         <div>Terminal Box: {terminalBox}</div>
+        <div>Phase: {phase}</div>
       </div>
     </div>
   );
