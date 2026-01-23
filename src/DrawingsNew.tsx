@@ -555,45 +555,6 @@ const Drawings10: React.FC<drawingProps> = ({
     if (NPTSize === 2.5 && terminalBox == "N7" ) {
       return cfg25N7
     }
-    // // 3 inch
-    // if (NPTSize === 3) {
-    //   if (elementNumN === 3) return isN7 ? cfg3N7_E3 : cfg3N14_E3;
-    //   if (elementNumN === 6) return isN7 ? cfg3N7_E6 : cfg3N14_E6;
-    // }
-    
-    // //4 inch
-    // if (NPTSize === 4) {
-    //   if (elementNumN === 6) return isN7 ? cfg4N7_E6 : cfg4N14_E6;
-    //   if (elementNumN === 9) return isN7 ? cfg4N7_E9 : cfg4N14_E9;
-    // }
-
-    // //5 inch
-    // if (NPTSize === 5) {
-    //   if (terminalBox === "N1") return cfg5N1;
-    //   if (terminalBox === "N4") return cfg5N4;
-    //   if (terminalBox === "N7") return cfg5N7;
-    // }
-
-    // //6 inch
-    // if (NPTSize === 6) {
-    //   if (terminalBox === "N1") return cfg6N1;
-    //   if (terminalBox === "N4") return cfg6N4;
-    //   if (terminalBox === "N7") return cfg6N7;
-    // }
-
-    // //8 inch
-    // if (NPTSize === 8) {
-    //   if (terminalBox === "N1") return cfg8N1;
-    //   if (terminalBox === "N4") return cfg8N4;
-    //   if (terminalBox === "N7") return cfg8N7;
-    // }
-
-    // //12 inch
-    // if (NPTSize === 12) {
-    //   if (terminalBox === "N1") return cfg12N1;
-    //   if (terminalBox === "N4") return cfg12N4;
-    //   if (terminalBox === "N7") return cfg12N7;
-    // }
 
     return null;
   }, [NPTSize, phase, terminalBox, hasFold, elementCount]);
