@@ -5,10 +5,13 @@ interface headerProps {
   title: string;
   material: string;
   voltage: string;
+  phase: number;              // 1 or 3
   wattage: string;
+  elementNum: number;
+  immersionLength: number;
+  coldLength: number;
   terminalBox: string;
   thermostat: string;
-  phase: string;
 }
 
 const Header: React.FC<headerProps> = ({
@@ -16,10 +19,13 @@ const Header: React.FC<headerProps> = ({
   title,
   material,
   voltage,
-  wattage,
-  terminalBox,
-  thermostat,
   phase,
+  wattage,
+  elementNum,
+  immersionLength,
+  coldLength,
+  terminalBox,
+  thermostat
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -27,34 +33,62 @@ const Header: React.FC<headerProps> = ({
     day: "numeric",
     year: "numeric",
   }).format(today);
+
+  const wattsNum = Number(String(wattage).replace(/[^\d.]/g, ""));
+  const voltsNum = Number(String(voltage).replace(/[^\d.]/g, ""));
+
+  // Amps: single vs 3PH
+  const amps =
+    wattsNum > 0 && voltsNum > 0
+      ? phase === 3
+        ? wattsNum / voltsNum / 1.73
+        : wattsNum / voltsNum
+      : null;
+
+  // Wattage formatting: 5000 W vs 10 kW
+  const wattageDisplay =
+    wattsNum > 0
+      ? wattsNum >= 10000
+        ? `${(wattsNum / 1000).toFixed(wattsNum % 1000 === 0 ? 0 : 1)} kW`
+        : `${wattsNum.toFixed(0)} W`
+      : "";
+
+  // Watt density (W/in^2): Wattage / {0.475 * pi * elements * (heated length) * 2}
+  const heatedLength = immersionLength - coldLength;
+  const wattDensity =
+    wattsNum > 0 && elementNum > 0 && heatedLength > 0
+      ? wattsNum / (0.475 * Math.PI * elementNum * heatedLength * 2)
+      : null;
+
   return (
-    <div className="absolute text-black flex">
+    <div className="absolute text-black font-bold">
+      {/* these positions are from your working layout; tweak if needed */}
       <div className="absolute w-[9.5rem] mt-[210px] ml-[112px] flex justify-center items-center translate-x-[-50%] text-center">
         {serialNum}
       </div>
-      <div className="absolute h-16 w-[18rem] mt-[270px] ml-[331.5px] flex justify-center translate-x-[-50%] text-center text-xl font-bold">
+
+      <div className="absolute h-16 w-[18rem] mt-[270px] ml-[331.5px] flex justify-center translate-x-[-50%] text-center text-xl">
         {title}
       </div>
-      <div className="absolute h-16 w-[18rem] mt-[295px] ml-[112px] flex justify-center translate-x-[-50%] text-center text-xl ">
+
+      <div className="absolute h-16 w-[18rem] mt-[295px] ml-[112px] flex justify-center translate-x-[-50%] text-center text-xl">
         {material}
       </div>
+
       <div className="absolute h-16 w-[18rem] mt-[265px] ml-[112px] flex justify-center translate-x-[-50%] text-center">
         {formattedDate}
       </div>
-      <div className="absolute w-[18rem] mt-[254px] ml-[-420px] ">
-        {thermostat !== "" && (
-          <div className="">Using {" " + thermostat + " "} thermostat</div>
-        )}
+
+      {/* Bottom-left electrical specs */}
+      <div className="absolute w-[18rem] mt-[230px] ml-[-420px]">
+        <div>Voltage: {voltage}{" V"}</div>
+        <div>Phase: {phase}{" PH"}</div>
+        <div>Amps: {amps === null ? "" : amps.toFixed(1)}{" A"}</div>
+        <div>Wattage: {wattageDisplay}</div>
         <div>
-          Voltage: {voltage}
-          {" V"}
+          Watt Density: {wattDensity === null ? "" : wattDensity.toFixed(1)}{" "}
+          {" W/in\u00B2"}
         </div>
-        <div>
-          Wattage: {wattage}
-          {" W"}
-        </div>
-        <div>Terminal Box: {terminalBox}</div>
-        <div>Phase: {phase}</div>
       </div>
     </div>
   );
