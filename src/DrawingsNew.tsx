@@ -241,12 +241,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //Nema 1
   const cfg1N1 = {
     processBar: { left: "51%", bottom: "40%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "145%", rotate: 40, lineHeight: 270, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "51%", bottom: "38%", width: "18%", dropHeight: 100 },
     
-    hlBar: { left: "51%", bottom: "31%", width: "26%", height: "2%" },
-    hlLeader: { left: "65%", bottom: "-28%", rotate: 10, lineHeight: 78, textOffsetY: -2},
+    hlBar: { left: "51%", bottom: "31%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-45%", rotate: -52, lineHeight: 200, textOffsetY: -2},
     
     elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
@@ -261,12 +261,12 @@ const Drawings10: React.FC<drawingProps> = ({
 
     const cfg1N1Fold = {
     processBar: { left: "52%", bottom: "40%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "150%", rotate: 37, lineHeight: 265, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "52%", bottom: "38%", width: "18%", dropHeight: 100 },
     
-    hlBar: { left: "52%", bottom: "31%", width: "26%", height: "2%" },
-    hlLeader: { left: "65%", bottom: "-32%", rotate: 10, lineHeight: 78, textOffsetY: -2},
+    hlBar: { left: "52%", bottom: "31%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-50%", rotate: -50, lineHeight: 200, textOffsetY: -2},
     
     elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
@@ -282,12 +282,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //Nema 4
   const cfg1N4 = {
     processBar: { left: "58%", bottom: "48.25%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "125%", rotate: 30, lineHeight: 210, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58%", bottom: "46.5%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "58%", bottom: "42%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-17%", rotate: 10, lineHeight: 110, textOffsetY: -2},
+    hlBar: { left: "58%", bottom: "42%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-25%", rotate: -45, lineHeight: 195, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
 
@@ -302,14 +302,14 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfg1N4Fold = {
     processBar: { left: "57.5%", bottom: "49%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "125%", rotate: 30, lineHeight: 210, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "57.5%", bottom: "46.5%", width: "18%", dropHeight: 100 },
     
-    hlBar: { left: "57.5%", bottom: "43%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-17%", rotate: 10, lineHeight: 110, textOffsetY: -2},
+    hlBar: { left: "57.5%", bottom: "43%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-25%", rotate: -45, lineHeight: 195, textOffsetY: -2},
     
-    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 35, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "80%", top: "14%" },
@@ -323,14 +323,14 @@ const Drawings10: React.FC<drawingProps> = ({
   //Nema 7
   const cfg1N7 = {
     processBar: { left: "58.85%", bottom: "44.5%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "120%", rotate: 30, lineHeight: 225, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.85%", bottom: "42%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "58.85%", bottom: "39%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-16%", rotate: 10, lineHeight: 110, textOffsetY: -2},
+    hlBar: { left: "58.85%", bottom: "39%", width: "18%", height: "2%" },
+    hlLeader: { left: "73%", bottom: "-20%", rotate: -45, lineHeight: 185, textOffsetY: -2},
     
-    elemMatLeader: { left: "86%", bottom: "10%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "76%", top: "16%" },
@@ -343,14 +343,14 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfg1N7Fold = {
     processBar: { left: "58.5%", bottom: "48%", width: "18%", height: "3%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "110%", rotate: 30, lineHeight: 210, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.5%", bottom: "46.5%", width: "18%", dropHeight: 20 },
     
-    hlBar: { left: "58.5%", bottom: "42%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-8%", rotate: 10, lineHeight: 110, textOffsetY: -2},
+    hlBar: { left: "58.5%", bottom: "42%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-8%", rotate: -45, lineHeight: 170, textOffsetY: -2},
     
-    elemMatLeader: { left: "86%", bottom: "17%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "86%", bottom: "17%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "77%", top: "12%" },
@@ -365,12 +365,12 @@ const Drawings10: React.FC<drawingProps> = ({
   // NEMA 1
     const cfg125N1E1 = {
     processBar: { left: "51%", bottom: "39%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "150%", rotate: 40, lineHeight: 270, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "51%", bottom: "35%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "51%", bottom: "28%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-32%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "51%", bottom: "28%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-50%", rotate: -55, lineHeight: 200, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -385,12 +385,12 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfg125N1E2 = {
     processBar: { left: "50.75%", bottom: "42%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "150%", rotate: 40, lineHeight: 260, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "50.75%", bottom: "41%", width: "18%", dropHeight:90 },
     
-    hlBar: { left: "50.75%", bottom: "31%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-32%", rotate: 10, lineHeight: 76, textOffsetY: -2},
+    hlBar: { left: "50.75%", bottom: "31%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-50%", rotate: -52, lineHeight: 205, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 37, textOffsetY: 6, textWidth: 215 },
 
@@ -406,12 +406,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 4
   const cfg125N4E1 = {
     processBar: { left: "58.25%", bottom: "49%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "125%", rotate: 30, lineHeight: 200, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.25%", bottom: "46%", width: "18%", dropHeight: 60 },
     
-    hlBar: { left: "58.25%", bottom: "42%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "58.25%", bottom: "42%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-25%", rotate: -40, lineHeight: 175, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -426,12 +426,12 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfg125N4E2 = {
     processBar: { left: "58.5%", bottom: "50.5%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "125%", rotate: 30, lineHeight: 190, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.5%", bottom: "50%", width: "18%", dropHeight: 50 },
     
-    hlBar: { left: "58.5%", bottom: "43.5%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "58.5%", bottom: "43.5%", width: "18%", height: "2%" },
+    hlLeader: { left: "75%", bottom: "-25%", rotate: -42, lineHeight: 175, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -447,12 +447,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 7
     const cfg125N7E1 = {
     processBar: { left: "58.25%", bottom: "49.75%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "120%", rotate: 30, lineHeight: 215, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.25%", bottom: "47%", width: "18%", dropHeight: 68 },
     
-    hlBar: { left: "58.25%", bottom: "44%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-4%", rotate: 10, lineHeight: 92, textOffsetY: -2},
+    hlBar: { left: "58.25%", bottom: "44%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-20%", rotate: -25, lineHeight: 160, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -467,12 +467,12 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfg125N7E2 = {
     processBar: { left: "51.5%", bottom: "40%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "160%", rotate: 40, lineHeight: 265, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "51.5%", bottom: "38%", width: "18%", dropHeight: 90 },
     
-    hlBar: { left: "51.5%", bottom: "25%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-40%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "51.5%", bottom: "25%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-50%", rotate: -50, lineHeight: 155, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -489,14 +489,14 @@ const Drawings10: React.FC<drawingProps> = ({
   // NEMA 1
   const cfg2N1 = {
     processBar: { left: "51.25%", bottom: "42%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "135%", rotate: 40, lineHeight: 250, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "51.25%", bottom: "47%", width: "18%", dropHeight: 90 },
     
-    hlBar: { left: "51.25%", bottom: "25%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-29%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "51.25%", bottom: "25%", width: "18%", height: "2%" },
+    hlLeader: { left: "72%", bottom: "-40%", rotate: -50, lineHeight: 165, textOffsetY: -2},
     
-    elemMatLeader: { left: "86%", bottom: "-10%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "86%", bottom: "-10%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "73%", top: "14%" },
@@ -509,12 +509,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 4
   const cfg2N4 = {
     processBar: { left: "58.5%", bottom: "50%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "125%", rotate: 30, lineHeight: 205, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "58.5%", bottom: "55%", width: "18%", dropHeight: 90 },
     
-    hlBar: { left: "58.5%", bottom: "37%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-16%", rotate: 10, lineHeight: 90, textOffsetY: -2},
+    hlBar: { left: "58.5%", bottom: "37%", width: "18%", height: "2%" },
+    hlLeader: { left: "72%", bottom: "-25%", rotate: -30, lineHeight: 140, textOffsetY: -2},
     
     elemMatLeader: { left: "86.5%", bottom: "8%", rotate: -10, lineHeight: 47, textOffsetY: 6, textWidth: 215 },
 
@@ -529,12 +529,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 7
   const cfg2N7 = {
     processBar: { left: "59%", bottom: "41%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "135%", rotate: 25, lineHeight: 220, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "59%", bottom: "46%", width: "18%", dropHeight: 40 },
     
-    hlBar: { left: "59%", bottom: "28%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-31%", rotate: 10, lineHeight: 90, textOffsetY: -2},
+    hlBar: { left: "59%", bottom: "28%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-31%", rotate: -30, lineHeight: 110, textOffsetY: -2},
     
     elemMatLeader: { left: "86.5%", bottom: "-6%", rotate: -10, lineHeight:48, textOffsetY: 6, textWidth: 215 },
 
@@ -551,12 +551,12 @@ const Drawings10: React.FC<drawingProps> = ({
   // NEMA 1
   const cfg25N1 = {
     processBar: { left: "52.5%", bottom: "42%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "145%", rotate: 36, lineHeight: 255, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "52.5%", bottom: "53%", width: "18%", dropHeight: 80 },
     
-    hlBar: { left: "52.5%", bottom: "19%", width: "26%", height: "2%" },
-    hlLeader: { left: "70%", bottom: "-38%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "52.5%", bottom: "19%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-45%", rotate: -45, lineHeight: 140, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -571,12 +571,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 4
   const cfg25N4 = {
     processBar: { left: "59.5%", bottom: "50%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "135%", rotate: 25, lineHeight: 205, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "59.5%", bottom: "56%", width: "18%", dropHeight: 80 },
     
-    hlBar: { left: "59.5%", bottom: "33%", width: "26%", height: "2%" },
-    hlLeader: { left: "73%", bottom: "-16%", rotate: 10, lineHeight: 70, textOffsetY: -2},
+    hlBar: { left: "59.5%", bottom: "33%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-30%", rotate: -30, lineHeight: 126, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "-0%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -591,12 +591,12 @@ const Drawings10: React.FC<drawingProps> = ({
   //NEMA 7
   const cfg25N7 = {
     processBar: { left: "59.25%", bottom: "41%", width: "18%", height: "5%" },
-    processLeader: { left: "62%", bottom: "-10%", rotate: -10, lineHeight: 80, textOffsetY: 6, textWidth: 230 },
+    processLeader: { left: "75%", bottom: "140%", rotate: 30, lineHeight: 235, textOffsetY: 6, textWidth: 230 },
 
     thermoDim: { left: "59.25%", bottom: "46%", width: "18%", dropHeight: 40 },
     
-    hlBar: { left: "59.25%", bottom: "23%", width: "26%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-34%", rotate: 10, lineHeight: 77, textOffsetY: -2},
+    hlBar: { left: "59.25%", bottom: "23%", width: "18%", height: "2%" },
+    hlLeader: { left: "70%", bottom: "-40%", rotate: -25, lineHeight: 110, textOffsetY: -2},
     
     elemMatLeader: { left: "86.5%", bottom: "-12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -1042,8 +1042,10 @@ const Drawings10: React.FC<drawingProps> = ({
                     color="#1d4ed8"
                     triangleColor="#1d4ed8"
                     zIndex={206}
+                    stem="bottom"   // ✅ THIS is the key
                   />
                 )}
+
 
 
                 {/* ==============================
@@ -1059,9 +1061,10 @@ const Drawings10: React.FC<drawingProps> = ({
                         color="#dc2626"
                         triangleColor="#dc2626"
                         zIndex={207}
-                        fromTop={true}
+                        stem="top"      // ✅ keep current HL behavior
                       />
                     )}
+
 
 
                     {/* ==============================
@@ -1121,6 +1124,7 @@ const Drawings10: React.FC<drawingProps> = ({
     </div>
   );
 };
+
 type LeaderCfg = {
   left: string;
   bottom: string;
@@ -1128,6 +1132,8 @@ type LeaderCfg = {
   lineHeight: number;
   textOffsetY: number;
   textWidth?: number;
+  textRotate?: number;
+  baseBoxHeight?: number; // optional: helps keep arrow from drifting if label grows
 };
 
 function LeaderOverlay({
@@ -1136,15 +1142,38 @@ function LeaderOverlay({
   color,
   triangleColor,
   zIndex,
-  fromTop = false,
+  stem = "top", // "top" => arrow comes out of TOP of box (HL), "bottom" => out of BOTTOM (Process)
 }: {
   cfg: LeaderCfg;
   label: string;
   color: string;
   triangleColor: string;
   zIndex: number;
-  fromTop?: boolean;
+  stem?: "top" | "bottom";
 }) {
+  const fromTop = stem === "top";
+  const lineLen = cfg.lineHeight;
+
+  // measure box height so arrow stays pinned even when label grows (multi-line)
+  const boxRef = React.useRef<HTMLDivElement | null>(null);
+  const [boxH, setBoxH] = React.useState(0);
+
+  React.useLayoutEffect(() => {
+    if (!boxRef.current) return;
+
+    const el = boxRef.current;
+    const update = () => setBoxH(el.getBoundingClientRect().height);
+    update();
+
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+
+    return () => ro.disconnect();
+  }, [label, cfg.textWidth]);
+
+  const baseH = cfg.baseBoxHeight ?? 34; // tweak if needed
+  const growDelta = fromTop ? Math.max(0, boxH - baseH) : 0;
+
   return (
     <div
       className="absolute pointer-events-none"
@@ -1152,64 +1181,76 @@ function LeaderOverlay({
         left: cfg.left,
         bottom: cfg.bottom,
         zIndex,
+        // cancels “box grows upward” so the arrow stays connected
+        transform: fromTop ? `translateY(${growDelta}px)` : undefined,
       }}
     >
-      {/* Only the arrow+line rotates */}
+      {/* LABEL BOX (NOT rotated unless you set textRotate) */}
       <div
-        style={{
-          transform: `rotate(${cfg.rotate}deg)`,
-          transformOrigin: fromTop ? "center 9px" : "top center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {/* triangle */}
-        <div
-          style={{
-            width: 0,
-            height: 0,
-            borderLeft: "10px solid transparent",
-            borderRight: "10px solid transparent",
-            ...(fromTop
-              ? { borderBottom: `18px solid ${triangleColor}` }
-              : { borderTop: `18px solid ${triangleColor}` }),
-          }}
-        />
-
-        {/* leader line */}
-        <div
-          style={{
-            height: cfg.lineHeight,
-            borderLeft: "2px solid black",
-            marginLeft: "0px",
-          }}
-        />
-      </div>
-
-      {/* Label box does NOT rotate */}
-      <div
+        ref={boxRef}
         className="text-black font-bold"
         style={{
-          position: "absolute",
-          left: "50%",
-          top: 18 + cfg.lineHeight,
-          transform: "translateX(-50%)",
-          marginTop: cfg.textOffsetY,
-          width: cfg.textWidth ?? 230,
+          width: `${cfg.textWidth ?? 230}px`,
+          fontSize: "14px",
           background: "white",
-          border: `2px solid ${color}`,
           padding: "4px 6px",
           textAlign: "center",
           whiteSpace: "pre-line",
-          fontSize: "14px",
+          border: `2px solid ${color}`,
+          position: "relative",
+          transform: `rotate(${cfg.textRotate ?? 0}deg)`,
+          transformOrigin: "center",
         }}
       >
         {label}
+
+        {/* ARROW GROUP (THIS is what guarantees connection) */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: fromTop ? undefined : "100%",
+            bottom: fromTop ? "100%" : undefined,
+
+            // rotate arrow/line, and flip vertically when coming from top
+            transform: `translateX(-50%) rotate(${cfg.rotate}deg)${
+              fromTop ? " scaleY(-1)" : ""
+            }`,
+            transformOrigin: fromTop ? "bottom center" : "top center",
+            width: 0,
+            height: 0,
+          }}
+        >
+          {/* line (starts EXACTLY at box edge) */}
+          <div
+            style={{
+              height: `${lineLen}px`,
+              borderLeft: `2px solid black`,
+              marginLeft: "-1px",
+            }}
+          />
+
+          {/* triangle (touches the line) */}
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 0,
+              height: 0,
+              borderLeft: "10px solid transparent",
+              borderRight: "10px solid transparent",
+              top: `${lineLen}px`,
+              borderTop: `18px solid ${triangleColor}`,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
 }
+
+
 
 export default Drawings10;
 
