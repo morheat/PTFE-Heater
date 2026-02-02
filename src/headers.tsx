@@ -11,7 +11,7 @@ interface headerProps {
   immersionLength: number;
   coldLength: number;
   terminalBox: string;
-  thermostat: string;
+  //thermostat: string;
 }
 
 const Header: React.FC<headerProps> = ({
@@ -24,8 +24,8 @@ const Header: React.FC<headerProps> = ({
   elementNum,
   immersionLength,
   coldLength,
-  terminalBox,
-  thermostat
+  //terminalBox,
+  //thermostat
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {

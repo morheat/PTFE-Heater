@@ -34,7 +34,7 @@ function App() {
   const [hlType, setHLType] = useState<string>("nHL"); // nHL | J | K | RTD | SPST | DPST
   const [hlRange, setHLRange] = useState<string>("");
   const [hlLength, setHLLength] = useState<number>(8);
-  const [typeThermostat, setTypeThermostat] = useState<string>("");
+  //const [typeThermostat, setTypeThermostat] = useState<string>("");
 
 
   const drawingRef = useRef<HTMLDivElement>(null);
@@ -485,7 +485,7 @@ function formatRangeLabel(range: string) {
         processRange={processRange}
         thermoLength={processLength}
         hlSensor={hlType}
-        typeThermostat={typeThermostat}
+        //typeThermostat={typeThermostat}
         hlRange={hlRange}
         hlLength={hlLength}
       />
