@@ -15,7 +15,7 @@ function App() {
   const [materialVar, setMaterial] = useState<string>("304SS");
 
   const [NPTSizeOp, setNPTSize] = useState<number>(1);
-  const [immersionLengthVar, setImmersionLength] = useState<number>(10);
+  const [immersionLengthVar, setImmersionLength] = useState<number>(25);
   const [foldLengthVar, setFoldLength] = useState<number>(0);
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
 
@@ -201,7 +201,7 @@ function formatRangeLabel(range: string) {
           <h1>Immersion Length</h1>
           <input
             type="text"
-            defaultValue={10}
+            defaultValue={25}
             onChange={(e) => setImmersionLength(Number(e.target.value) || 0)}
             className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
           />

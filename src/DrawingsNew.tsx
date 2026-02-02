@@ -123,6 +123,28 @@ const Drawings10: React.FC<drawingProps> = ({
     return "Process Thermowell";
     }, [processTemp, processRange]);
 
+    // ✅ Terminal box label (for Terminal Box leader)
+    const terminalBoxLabel = useMemo(() => {
+      if (terminalBox === "N1") return "Terminal Box\nNEMA 1";
+      if (terminalBox === "N4") return "Terminal Box\nNEMA 4";
+      if (terminalBox === "N7") return "Terminal Box\nNEMA 7";
+      return "Terminal Box";
+    }, [terminalBox]);
+
+    // ✅ NPT size label (this will replace "flangeLabel")
+    function formatNptSize(n: number) {
+      // handles 1.25 nicely
+      if (n === 1.25) return '1-1/4"';
+      // for 2.5 etc
+      return `${n}"`;
+    }
+
+    const nptSizeLabel = useMemo(() => {
+      return `${formatNptSize(NPTSize)} NPT`;
+    }, [NPTSize]);
+
+
+
     // ✅ High limit label builder (same style as working)
     const highLimitLabel = useMemo(() => {
     if (hlSensor === "nHL") return "";
@@ -246,7 +268,8 @@ const Drawings10: React.FC<drawingProps> = ({
     thermoDim: { left: "51%", bottom: "38%", width: "18%", dropHeight: 100 },
     
     hlBar: { left: "51%", bottom: "31%", width: "18%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-45%", rotate: -52, lineHeight: 200, textOffsetY: -2},
+    hlLeader: { left: "72%", bottom: "-45%", rotate: -52, lineHeight: 200, textOffsetY: -2},
+    HLDim: { left: "51%", bottom: "-25%", width: "18%", dropHeight: 98 },
     
     elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -256,7 +279,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "51%", bottom: "-11%", width: "10%", riseHeight: 70 },
+    coldDim: { left: "51%", bottom: "-1%", width: "5%", riseHeight: 45 },
+    
+    terminalBoxLeader: { left: "30%", bottom: "-70%", rotate: 20, lineHeight: 95, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-60%", rotate: 0, lineHeight: 150, textOffsetY: 6, textWidth: 220, textRotate: 0 }, //NPT size
   };
 
     const cfg1N1Fold = {
@@ -266,7 +292,8 @@ const Drawings10: React.FC<drawingProps> = ({
     thermoDim: { left: "52%", bottom: "38%", width: "18%", dropHeight: 100 },
     
     hlBar: { left: "52%", bottom: "31%", width: "18%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-50%", rotate: -50, lineHeight: 200, textOffsetY: -2},
+    hlLeader: { left: "72%", bottom: "-50%", rotate: -50, lineHeight: 200, textOffsetY: -2},
+    HLDim: { left: "52%", bottom: "-29%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -276,7 +303,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "76%", top: "30%" },
 
-    coldDim: { left: "52%", bottom: "-15%", width: "10%", riseHeight: 70 },
+    coldDim: { left: "52%", bottom: "-5%", width: "5%", riseHeight: 50 },
+
+    terminalBoxLeader: { left: "30%", bottom: "-75%", rotate: 20, lineHeight: 95, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-65%", rotate: 0, lineHeight: 150, textOffsetY: 6, textWidth: 220, textRotate: 0 }, //NPT size
   };
 
   //Nema 4
@@ -288,6 +318,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58%", bottom: "42%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-25%", rotate: -45, lineHeight: 195, textOffsetY: -2},
+    HLDim: { left: "58%", bottom: "-5%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -297,7 +328,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58%", bottom: "-5%", width: "10%", riseHeight: 102 },
+    coldDim: { left: "58%", bottom: "20%", width: "5%", riseHeight: 35 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-45%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-40%", rotate: 0, lineHeight: 175, textOffsetY: 6, textWidth: 220, textRotate: 0 }, //NPT size
   };
 
   const cfg1N4Fold = {
@@ -308,6 +342,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "57.5%", bottom: "43%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-25%", rotate: -45, lineHeight: 195, textOffsetY: -2},
+    HLDim: { left: "57.5%", bottom: "-4%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 35, textOffsetY: 6, textWidth: 215 },
 
@@ -317,7 +352,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "78%", top: "27%" },
 
-    coldDim: { left: "57.5%", bottom: "-4%", width: "10%", riseHeight: 102 },
+    coldDim: { left: "57.5%", bottom: "20%", width: "5%", riseHeight: 35 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-45%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-40%", rotate: 0, lineHeight: 175, textOffsetY: 6, textWidth: 220, textRotate: 0 }, //NPT size
   };
 
   //Nema 7
@@ -329,6 +367,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.85%", bottom: "39%", width: "18%", height: "2%" },
     hlLeader: { left: "73%", bottom: "-20%", rotate: -45, lineHeight: 185, textOffsetY: -2},
+    HLDim: { left: "58.85%", bottom: "-4%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -338,7 +377,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58.85%", bottom: "3%", width: "10%", riseHeight: 80 },
+    coldDim: { left: "58.85%", bottom: "15%", width: "5%", riseHeight: 43 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-38%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "56%", bottom: "-35%", rotate: 0, lineHeight: 175, textOffsetY: 6, textWidth: 220, textRotate: 0 }, //NPT size
   };
 
   const cfg1N7Fold = {
@@ -349,6 +391,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.5%", bottom: "42%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-8%", rotate: -30, lineHeight: 135, textOffsetY: -2},
+    HLDim: { left: "58.5%", bottom: "4%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "17%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -358,7 +401,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "78%", top: "26%" },
 
-    coldDim: { left: "58.5%", bottom: "3%", width: "10%", riseHeight: 102 },
+    coldDim: { left: "58.5%", bottom: "20%", width: "5%", riseHeight: 45 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-28%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "56%", bottom: "-25%", rotate: 0, lineHeight: 175, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   // 1.25 inch
@@ -371,6 +417,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "51%", bottom: "28%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-50%", rotate: -55, lineHeight: 200, textOffsetY: -2},
+    HLDim: { left: "51%", bottom: "-25%", width: "18%", dropHeight: 80 },
     
     elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -380,7 +427,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "51%", bottom: "-24%", width: "10%", riseHeight: 80 },
+    coldDim: { left: "51%", bottom: "-5%", width: "5%", riseHeight: 40 },
+
+    terminalBoxLeader: { left: "28%", bottom: "-84%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-75%", rotate: 0, lineHeight: 150, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   const cfg125N1E2 = {
@@ -391,6 +441,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "50.75%", bottom: "31%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-50%", rotate: -52, lineHeight: 205, textOffsetY: -2},
+    HLDim: { left: "50.75%", bottom: "-25%", width: "18%", dropHeight: 90 },
     
     elemMatLeader: { left: "86%", bottom: "-12%", rotate: -10, lineHeight: 37, textOffsetY: 6, textWidth: 215 },
 
@@ -400,7 +451,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "50.75%", bottom: "-24%", width: "10%", riseHeight: 88 },
+    coldDim: { left: "50.75%", bottom: "-5%", width: "5%", riseHeight: 48 },
+
+    terminalBoxLeader: { left: "28%", bottom: "-80%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-70%", rotate: 0, lineHeight: 150, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   //NEMA 4
@@ -412,6 +466,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.25%", bottom: "42%", width: "18%", height: "2%" },
     hlLeader: { left: "72%", bottom: "-25%", rotate: -40, lineHeight: 175, textOffsetY: -2},
+    HLDim: { left: "58.25%", bottom: "-0%", width: "18%", dropHeight: 90 },
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -421,7 +476,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58.25%", bottom: "15%", width: "10%", riseHeight: 45 },
+    coldDim: { left: "58.25%", bottom: "15%", width: "5%", riseHeight: 45 },
+    
+    terminalBoxLeader: { left: "38%", bottom: "-50%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-40%", rotate: 0, lineHeight: 165, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   const cfg125N4E2 = {
@@ -432,6 +490,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.5%", bottom: "43.5%", width: "18%", height: "2%" },
     hlLeader: { left: "72%", bottom: "-25%", rotate: -42, lineHeight: 175, textOffsetY: -2},
+    HLDim: { left: "58.5%", bottom: "0-2%", width: "18%", dropHeight: 85 },
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -441,7 +500,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58.5%", bottom: "15%", width: "10%", riseHeight: 45 },
+    coldDim: { left: "58.5%", bottom: "15%", width: "5%", riseHeight: 45 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-50%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-40%", rotate: 0, lineHeight: 165, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   //NEMA 7
@@ -453,6 +515,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.25%", bottom: "44%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-20%", rotate: -25, lineHeight: 160, textOffsetY: -2},
+    HLDim: { left: "58.25%", bottom: "0%", width: "18%", dropHeight: 110 },
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -462,7 +525,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58.25%", bottom: "15%", width: "10%", riseHeight: 60 },
+    coldDim: { left: "58.25%", bottom: "15%", width: "5%", riseHeight: 60 },
+    
+    terminalBoxLeader: { left: "38%", bottom: "-36%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-28%", rotate: 0, lineHeight: 165, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   const cfg125N7E2 = {
@@ -473,6 +539,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "51.5%", bottom: "25%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-50%", rotate: -50, lineHeight: 155, textOffsetY: -2},
+    HLDim: { left: "51.5%", bottom: "-45%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -482,7 +549,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "51.5%", bottom: "-25%", width: "10%", riseHeight: 67 },
+    coldDim: { left: "51.5%", bottom: "-25%", width: "5%", riseHeight: 67 },
+
+    terminalBoxLeader: { left: "30%", bottom: "-103%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-80%", rotate: 0, lineHeight: 145, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   // 2 inch
@@ -495,6 +565,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "51.25%", bottom: "25%", width: "18%", height: "2%" },
     hlLeader: { left: "72%", bottom: "-40%", rotate: -50, lineHeight: 165, textOffsetY: -2},
+    HLDim: { left: "51.25%", bottom: "-25%", width: "18%", dropHeight: 90 },
     
     elemMatLeader: { left: "86%", bottom: "-10%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -504,7 +575,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "51.25%", bottom: "-20%", width: "10%", riseHeight: 80 },
+    coldDim: { left: "51.25%", bottom: "-0%", width: "5%", riseHeight: 30 },
+
+    terminalBoxLeader: { left: "26%", bottom: "-75%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-60%", rotate: 0, lineHeight: 135, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
   //NEMA 4
   const cfg2N4 = {
@@ -515,6 +589,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "58.5%", bottom: "37%", width: "18%", height: "2%" },
     hlLeader: { left: "72%", bottom: "-25%", rotate: -30, lineHeight: 140, textOffsetY: -2},
+    HLDim: { left: "58.5%", bottom: "-5%", width: "18%", dropHeight: 90 },
     
     elemMatLeader: { left: "86.5%", bottom: "8%", rotate: -10, lineHeight: 47, textOffsetY: 6, textWidth: 215 },
 
@@ -524,7 +599,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "58.5%", bottom: "-3%", width: "10%", riseHeight: 83 },
+    coldDim: { left: "58.5%", bottom: "15%", width: "5%", riseHeight: 38 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-48%", rotate: 25, lineHeight: 115, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-35%", rotate: 0, lineHeight: 145, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
   //NEMA 7
   const cfg2N7 = {
@@ -535,6 +613,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "59%", bottom: "28%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-31%", rotate: -30, lineHeight: 110, textOffsetY: -2},
+    HLDim: { left: "59%", bottom: "-15%", width: "18%", dropHeight: 75 },
     
     elemMatLeader: { left: "86.5%", bottom: "-6%", rotate: -10, lineHeight:48, textOffsetY: 6, textWidth: 215 },
 
@@ -544,7 +623,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "59%", bottom: "-15%", width: "10%", riseHeight: 78 },
+    coldDim: { left: "59%", bottom: "5%", width: "5%", riseHeight: 30 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-62%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "56%", bottom: "-55%", rotate: 0, lineHeight: 145, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
   // 2.5 inch
@@ -557,6 +639,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "52.5%", bottom: "19%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-45%", rotate: -45, lineHeight: 140, textOffsetY: -2},
+    HLDim: { left: "52.5%", bottom: "-40%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "-18%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -566,7 +649,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "52.5%", bottom: "-20%", width: "10%", riseHeight: 58 },
+    coldDim: { left: "52.5%", bottom: "-20%", width: "5%", riseHeight: 58 },
+
+    terminalBoxLeader: { left: "28%", bottom: "-73%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "48%", bottom: "-55%", rotate: 0, lineHeight: 110, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
   //NEMA 4
   const cfg25N4 = {
@@ -577,6 +663,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "59.5%", bottom: "33%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-30%", rotate: -30, lineHeight: 126, textOffsetY: -2},
+    HLDim: { left: "59.5%", bottom: "-20%", width: "18%", dropHeight: 100 },
     
     elemMatLeader: { left: "86%", bottom: "-0%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -586,7 +673,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "59.5%", bottom: "-1%", width: "10%", riseHeight: 58 },
+    coldDim: { left: "59.5%", bottom: "12%", width: "5%", riseHeight: 25 },
+
+    terminalBoxLeader: { left: "36%", bottom: "-50%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-40%", rotate: 0, lineHeight: 130, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
   //NEMA 7
   const cfg25N7 = {
@@ -597,6 +687,7 @@ const Drawings10: React.FC<drawingProps> = ({
     
     hlBar: { left: "59.25%", bottom: "23%", width: "18%", height: "2%" },
     hlLeader: { left: "70%", bottom: "-40%", rotate: -25, lineHeight: 110, textOffsetY: -2},
+    HLDim: { left: "59.25%", bottom: "-20%", width: "18%", dropHeight: 75 },
     
     elemMatLeader: { left: "86.5%", bottom: "-12%", rotate: -10, lineHeight: 48, textOffsetY: 6, textWidth: 215 },
 
@@ -606,7 +697,10 @@ const Drawings10: React.FC<drawingProps> = ({
     foldbackCover: { left: "60%", top: "40%", width: "0%", height: "5%" },
     foldbackText: { left: "75%", top: "30%" },
 
-    coldDim: { left: "59.25%", bottom: "-15%", width: "10%", riseHeight: 62 },
+    coldDim: { left: "59.25%", bottom: "-5%", width: "5%", riseHeight: 40 },
+
+    terminalBoxLeader: { left: "38%", bottom: "-68%", rotate: 25, lineHeight: 100, textOffsetY: 6, textWidth: 220, textRotate: 0 },
+    flangeLeader: { left: "55%", bottom: "-55%", rotate: 0, lineHeight: 130, textOffsetY: 6, textWidth: 200, textRotate: 0 }, //NPT size
   };
 
 
@@ -853,6 +947,118 @@ const Drawings10: React.FC<drawingProps> = ({
                 )}
 
 
+
+                {/* HL DIM (BOTTOM, lines go UP) */}
+                {showHL && overlayCfg?.HLDim && (
+                  <div
+                    className="absolute pointer-events-none"
+                    style={{
+                      left: overlayCfg.HLDim.left,
+                      bottom: overlayCfg.HLDim.bottom,
+                      width: overlayCfg.HLDim.width,
+                      height: `${overlayCfg.HLDim.dropHeight + 60}px`,
+                      zIndex: 80,
+                    }}
+                  >
+                    {/* 1) Vertical rise line (LEFT) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        bottom: 26,
+                        height: overlayCfg.HLDim.dropHeight,
+                        borderLeft: "1px solid black",
+                      }}
+                    />
+
+                    {/* 2) Vertical rise line (RIGHT) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        bottom: 26,
+                        height: overlayCfg.HLDim.dropHeight,
+                        borderLeft: "1px solid black",
+                      }}
+                    />
+
+                    {/* 3) Dimension line (BOTTOM) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        right: 0,
+                        bottom: 26,
+                        borderBottom: "1px solid black",
+                      }}
+                    />
+
+                    {/* 4) Left arrow */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        bottom: 22,
+                        width: 0,
+                        height: 0,
+                        borderTop: "4px solid transparent",
+                        borderBottom: "4px solid transparent",
+                        borderRight: "14px solid black",
+                        transform: "translateX(-2px)",
+                      }}
+                    />
+
+                    {/* 5) Right arrow */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        bottom: 22,
+                        width: 0,
+                        height: 0,
+                        borderTop: "4px solid transparent",
+                        borderBottom: "4px solid transparent",
+                        borderLeft: "14px solid black",
+                        transform: "translateX(2px)",
+                      }}
+                    />
+
+                    {/* 6) Number (ABOVE the bottom line) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: "50%",
+                        bottom: 15,
+                        transform: "translateX(-50%)",
+                        fontSize: "15px",
+                        background: "white",
+                        padding: "1px 6px",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      {/** ✅ use hlLength here if you have it; otherwise thermoLength is wrong */}
+                      {thermoLength}&quot;
+                    </div>
+
+                    {/* 7) Label (below line) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: "50%",
+                        bottom: 0,
+                        transform: "translateX(-50%)",
+                        fontSize: "12px",
+                        background: "white",
+                        padding: "1px 6px",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      High-Limit
+                    </div>
+                  </div>
+                )}
+
+
                 {//ColdLength
                 }
                 {showColdDim && overlayCfg.coldDim && (
@@ -948,9 +1154,9 @@ const Drawings10: React.FC<drawingProps> = ({
                   <div
                     style={{
                       position: "absolute",
-                      textAlign: "center",
-                      width: 100,
-                      left: "50%",
+                      textAlign: "right",
+                      width: 78,
+                      left: "90%",
                       bottom: 0,
                       transform: "translateX(-50%)",
                       fontSize: "12px",
@@ -1115,7 +1321,105 @@ const Drawings10: React.FC<drawingProps> = ({
                         </div>
                       </div>
                     )}
-                    
+                    {/* ==============================
+                            ✅ NEW LEADER: Terminal Box
+                        ============================== */}
+                        {overlayCfg?.terminalBoxLeader && (
+                          <div
+                            className="absolute pointer-events-none"
+                            style={{
+                              left: overlayCfg.terminalBoxLeader.left,
+                              bottom: overlayCfg.terminalBoxLeader.bottom,
+                              transform: `rotate(${overlayCfg.terminalBoxLeader.rotate}deg)`,
+                              zIndex: 210,
+                            }}
+                          >
+                            {/* triangle */}
+                            <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[18px] border-l-transparent border-r-transparent border-b-black" />
+
+                            {/* leader line */}
+                            <div
+                              style={{
+                                height: overlayCfg.terminalBoxLeader.lineHeight,
+                                borderLeft: "2px solid black",
+                                marginLeft: "9px",
+                              }}
+                            />
+
+                            {/* label */}
+                            {(() => {
+                              const parentRot = overlayCfg.terminalBoxLeader.rotate;
+
+                              return(
+                                <div
+                                  className="text-black"
+                                  style={{
+                                    marginLeft: "-85px",
+                                    marginTop: overlayCfg.terminalBoxLeader.textOffsetY,
+                                    width: `${overlayCfg.terminalBoxLeader.textWidth ?? 220}px`,
+                                    transform: `rotate(${(overlayCfg.terminalBoxLeader.textRotate ?? -10) - parentRot}deg)`,
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                    background: "white",
+                                    padding: "2px 6px",
+                                    textAlign: "center",
+                                    whiteSpace: "pre-line",
+                                  }}
+                                >
+                              {terminalBoxLabel}
+                            </div>
+                              );
+                            })()}
+                          </div>
+                        )}
+
+                        {/* ✅ NEW LEADER: Flange Size -> now becomes NPT Size */}
+                        {overlayCfg?.flangeLeader && (
+                          <div
+                            className="absolute pointer-events-none"
+                            style={{
+                              left: overlayCfg.flangeLeader.left,
+                              bottom: overlayCfg.flangeLeader.bottom,
+                              transform: `rotate(${overlayCfg.flangeLeader.rotate}deg)`,
+                              zIndex: 220,
+                            }}
+                          >
+                            <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[18px] border-l-transparent border-r-transparent border-b-black" />
+
+                            <div
+                              style={{
+                                height: overlayCfg.flangeLeader.lineHeight,
+                                borderLeft: "2px solid black",
+                                marginLeft: "9px",
+                              }}
+                            />
+
+                            {(() => {
+                              const parentRot = overlayCfg.flangeLeader.rotate;
+
+                              return (
+                                <div
+                                  className="text-black"
+                                  style={{
+                                    marginLeft: "-85px",
+                                    marginTop: overlayCfg.flangeLeader.textOffsetY,
+                                    width: `${overlayCfg.flangeLeader.textWidth ?? 220}px`,
+                                    transform: `rotate(${(overlayCfg.flangeLeader.textRotate ?? -10) - parentRot}deg)`,
+                                    transformOrigin: "center",
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                    background: "white",
+                                    padding: "2px 6px",
+                                    textAlign: "center",
+                                    whiteSpace: "pre-line", // ✅ IMPORTANT so \n works
+                                  }}
+                                >
+                                  {nptSizeLabel}
+                                </div>
+                              );
+                            })()}
+                          </div>
+                        )}
               </>
             )}
           </div>
