@@ -17,7 +17,12 @@ function App() {
   const [NPTSizeOp, setNPTSize] = useState<number>(1);
   const [immersionLengthVar, setImmersionLength] = useState<number>(10);
   const [foldLengthVar, setFoldLength] = useState<number>(0);
-  const [coldLength, setColdLength] = useState<number>(2.5);
+  const [coldLengthText, setColdLengthText] = useState<string>("2.5");
+
+  // numeric value you pass to Drawing
+  const coldLength = Number.parseFloat(coldLengthText);
+  const coldLengthNum = Number.isFinite(coldLength) ? coldLength : 0;
+
   const [elementCount, setElementCount] = useState<number>(1);
 
   // ✅ Process thermowell (expanded)
@@ -231,11 +236,18 @@ function formatRangeLabel(range: string) {
           <h1>Cold Length</h1>
           <input
             type="text"
-            value={coldLength}
-            onChange={(e) => setColdLength(Number(e.target.value) || 0)}
+            inputMode="decimal"
+            value={coldLengthText}
+            onChange={(e) => {
+              const v = e.target.value;
+
+              // allow typing: "", "2", "2.", "2.5"
+              if (/^\d*\.?\d*$/.test(v)) setColdLengthText(v);
+            }}
             className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
           />
         </div>
+
 
         <div>
           <h1>Element Sheath Material</h1>
@@ -467,7 +479,7 @@ function formatRangeLabel(range: string) {
         voltage={voltsVar}
         wattage={wattsVar}
         terminalBox={terminalBoxVar}
-        coldLength={coldLength}
+        coldLength={coldLengthNum}
         elementCount={elementCount}
         processTemp={processType}
         processRange={processRange}

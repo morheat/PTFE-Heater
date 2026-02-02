@@ -248,7 +248,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hlBar: { left: "51%", bottom: "31%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-45%", rotate: -52, lineHeight: 200, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "73%", top: "15%" },
@@ -268,7 +268,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hlBar: { left: "52%", bottom: "31%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-50%", rotate: -50, lineHeight: 200, textOffsetY: -2},
     
-    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-9%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "73%", top: "15%" },
@@ -289,7 +289,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hlBar: { left: "58%", bottom: "42%", width: "18%", height: "2%" },
     hlLeader: { left: "75%", bottom: "-25%", rotate: -45, lineHeight: 195, textOffsetY: -2},
     
-    elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 55, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "86%", bottom: "11%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
     immersionCover: { left: "70%", top: "0%", width: "0%", height: "11%" },
     immersionText: { left: "76%", top: "13%" },
@@ -348,7 +348,7 @@ const Drawings10: React.FC<drawingProps> = ({
     thermoDim: { left: "58.5%", bottom: "46.5%", width: "18%", dropHeight: 20 },
     
     hlBar: { left: "58.5%", bottom: "42%", width: "18%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-8%", rotate: -45, lineHeight: 170, textOffsetY: -2},
+    hlLeader: { left: "70%", bottom: "-8%", rotate: -30, lineHeight: 135, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "17%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
 
@@ -411,7 +411,7 @@ const Drawings10: React.FC<drawingProps> = ({
     thermoDim: { left: "58.25%", bottom: "46%", width: "18%", dropHeight: 60 },
     
     hlBar: { left: "58.25%", bottom: "42%", width: "18%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-25%", rotate: -40, lineHeight: 175, textOffsetY: -2},
+    hlLeader: { left: "72%", bottom: "-25%", rotate: -40, lineHeight: 175, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
@@ -431,7 +431,7 @@ const Drawings10: React.FC<drawingProps> = ({
     thermoDim: { left: "58.5%", bottom: "50%", width: "18%", dropHeight: 50 },
     
     hlBar: { left: "58.5%", bottom: "43.5%", width: "18%", height: "2%" },
-    hlLeader: { left: "75%", bottom: "-25%", rotate: -42, lineHeight: 175, textOffsetY: -2},
+    hlLeader: { left: "72%", bottom: "-25%", rotate: -42, lineHeight: 175, textOffsetY: -2},
     
     elemMatLeader: { left: "86%", bottom: "12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
 
