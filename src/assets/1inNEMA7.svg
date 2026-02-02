@@ -230,8 +230,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.439951"
-     inkscape:cx="620.50723"
-     inkscape:cy="87.850213"
+     inkscape:cx="594.81191"
+     inkscape:cy="168.40851"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -340,5 +340,12 @@
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        d="m 569.66666,417.95274 340.82848,-0.10742"
        id="path164" />
+    <rect
+       style="fill:#ffffff"
+       id="rect1"
+       width="114.90876"
+       height="51.316093"
+       x="538.0238"
+       y="556.6167" />
   </g>
 </svg>

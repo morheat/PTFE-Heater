@@ -35,15 +35,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.438994"
-     inkscape:cx="495.8325"
-     inkscape:cy="11.466344"
+     inkscape:zoom="1.0175224"
+     inkscape:cx="188.20224"
+     inkscape:cy="-43.73368"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g1">
+     inkscape:current-layer="g1"
+     showgrid="false">
     <inkscape:page
        x="0"
        y="0"
@@ -80,5 +81,12 @@
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
        d="m 553.91079,427.63293 420.10931,0.0123"
        id="path83" />
+    <rect
+       style="fill:#ffffff;stroke:none"
+       id="rect1"
+       width="125.26105"
+       height="51.424885"
+       x="514.36737"
+       y="557.4234" />
   </g>
 </svg>

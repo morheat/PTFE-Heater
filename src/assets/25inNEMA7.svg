@@ -220,9 +220,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.0363982"
-     inkscape:cx="498.18351"
-     inkscape:cy="32.655696"
+     inkscape:zoom="4.0727964"
+     inkscape:cx="574.42105"
+     inkscape:cy="137.3749"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -418,5 +418,12 @@
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        d="m 93.514417,572.05837 -0.122766,53.77141"
        id="path167" />
+    <rect
+       style="fill:#ffffff"
+       id="rect1"
+       width="112.45345"
+       height="27.990597"
+       x="594.15326"
+       y="670.14819" />
   </g>
 </svg>

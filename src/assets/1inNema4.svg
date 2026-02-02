@@ -35,9 +35,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.438994"
-     inkscape:cx="504.86659"
-     inkscape:cy="151.84219"
+     inkscape:zoom="5.755976"
+     inkscape:cx="628.47726"
+     inkscape:cy="194.31978"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -79,5 +79,12 @@
        style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
        d="m 624.5555,229.10992 351.5694,0.0326"
        id="path75" />
+    <rect
+       style="fill:#ffffff"
+       id="rect1"
+       width="120.22288"
+       height="43.085655"
+       x="591.26398"
+       y="359.05096" />
   </g>
 </svg>
