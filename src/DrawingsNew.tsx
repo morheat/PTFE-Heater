@@ -97,7 +97,7 @@ const Drawings10: React.FC<drawingProps> = ({
   elementCount,
   processRange,
   hlRange,
-  //hlLength,
+  hlLength,
 }) => {
   const showHL = hlSensor !== "nHL";
   const showProcess = processTemp !== "nT";
@@ -1310,7 +1310,7 @@ const Drawings10: React.FC<drawingProps> = ({
                       }}
                     >
                       {/** ✅ use hlLength here if you have it; otherwise thermoLength is wrong */}
-                      {thermoLength}&quot;
+                      {hlLength}&quot;
                     </div>
 
                     {/* 7) Label (below line) */}

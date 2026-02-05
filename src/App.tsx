@@ -84,11 +84,24 @@ function App() {
   }
 
   useEffect(() => {
-    // 1.25" has NO fold option, and has element count selection
+    // 2" and 2.5" are always 3 elements
+    if (NPTSizeOp === 2 || NPTSizeOp === 2.5) {
+      setElementCount(3);
+      return;
+    }
+
+    // 1.25" can be 1 or 2 (keep whatever user chose, but clamp if needed)
     if (NPTSizeOp === 1.25) {
-      setFoldLength(0);
+      setElementCount((prev) => (prev === 2 ? 2 : 1));
+      return;
+    }
+
+    // 1" defaults to 1 element
+    if (NPTSizeOp === 1) {
+      setElementCount(1);
     }
   }, [NPTSizeOp]);
+
 
   // thermostat ranges (same set you listed)
   const spstRanges = [
