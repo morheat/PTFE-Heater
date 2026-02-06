@@ -15,6 +15,8 @@ import Layout1N4 from "./assets/1inNema4.svg?react";
 import Layout1N4Fold from "./assets/1inNEMA4Fold.svg?react";
 import Layout1N4T from "./assets/1inch NEMA 4 Built In Thermostat SPST NEMA 4.svg?react";
 import Layout1N4FoldT from "./assets/1inch NEMA 4 Built In Thermostat SPST with fold back design.svg?react";
+import Layout1N4FoldDPST from "./assets/1 inch NEMA 4 built in Thermostat DPST with Foldback.svg?react";
+import Layout1N4DPST from "./assets/1 inch NEMA 4 Built in Thermostat DPST.svg?react";
 
 import Layout1N7 from "./assets/1inNEMA7.svg?react";
 import Layout1N7Fold from "./assets/1inNEMA7Fold.svg?react";
@@ -31,6 +33,8 @@ import Layout125N4_E1 from "./assets/125NEMA4_E1.svg?react"
 import Layout125N4_E2 from "./assets/125NEMA4_E2.svg?react"
 import Layout125N4_E1T from "./assets/1.25inch NEMA 4 Built In Thermostat SPST one Element.svg?react"
 import Layout125N4_E2T from "./assets/1.25inch NEMA 4 Built In Thermostat SPST two element.svg?react"
+import Layout125N4_E1DPST from "./assets/1.25 inch NEMA 4 built in Thermostat DPST with one element.svg?react"
+import Layout125N4_E2DPST from "./assets/1.25 inch NEMA 4 built in Thermostat DPST with two element.svg?react"
 
 import Layout125N7_E1 from "./assets/125inNEMA7_E1.svg?react"
 import Layout125N7_E2 from "./assets/125inNEMA7_E2.svg?react"
@@ -44,6 +48,7 @@ import Layout2N7 from "./assets/2inNEMA7.svg?react"
 import Layout2N1T from "./assets/2inch NEMA 1 Built In Thermostat SPST & TPST.svg?react"
 import Layout2N4T from "./assets/2inch NEMA 4 Built In Thermostat SPST.svg?react"
 import Layout2N7T from "./assets/2inch NEMA 7 Built In Thermostat SPST.svg?react"
+import Layout2N4DPST from "./assets/2 inch NEMA 4 DPST.svg?react"
 
 //2.5 inch
 import Layout25N1 from "./assets/25inNEMA1.svg?react"
@@ -52,6 +57,7 @@ import Layout25N7 from "./assets/25inNEMA7.svg?react"
 import Layout25N1T from "./assets/2.5inch NEMA 1 Built In Thermostat SPST & TPST.svg?react"
 import Layout25N4T from "./assets/2.5inch NEMA 4 Built In Thermostat SPST.svg?react"
 import Layout25N7T from "./assets/2.5inch NEMA 7 Built In Thermostat SPST.svg?react"
+import Layout25N4DPST from "./assets/2.5 inch NEMA 4 DPST.svg?react"
 
 
 interface drawingProps {
