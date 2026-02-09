@@ -38,6 +38,7 @@ function App() {
 
 
   const drawingRef = useRef<HTMLDivElement>(null);
+  const dpstActive = processType === "DPST" || hlType === "DPST";
 
   async function getDrawingBlob(): Promise<Blob> {
     if (!drawingRef.current) throw new Error("Drawing ref not found");
@@ -82,6 +83,13 @@ function App() {
       alert("Download failed.");
     }
   }
+
+  useEffect(() => {
+    if (dpstActive && terminalBoxVar !== "N4") {
+      setTerminalBox("N4");
+    }
+  }, [dpstActive, terminalBoxVar]);
+
 
   useEffect(() => {
     // 2" and 2.5" are always 3 elements
@@ -382,8 +390,15 @@ function formatRangeLabel(range: string) {
                         <h1>Length</h1>
                         <input
                           type="text"
-                          defaultValue={8}
-                          onChange={(e) => setProcessLength(Number(e.target.value) || 0)}
+                          inputMode="decimal"
+                          value={String(processLength)}
+                          onChange={(e) => {
+                            const v = e.target.value;
+                            // allow "", "8", "8.", "8.5"
+                            if (/^\d*\.?\d*$/.test(v)) {
+                              setProcessLength(v === "" ? 0 : Number.parseFloat(v));
+                            }
+                          }}
                           className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
                         />
                       </div>
@@ -433,8 +448,14 @@ function formatRangeLabel(range: string) {
                         <h1>Length</h1>
                         <input
                           type="text"
-                          defaultValue={8}
-                          onChange={(e) => setHLLength(Number(e.target.value) || 0)}
+                          inputMode="decimal"
+                          value={String(hlLength)}
+                          onChange={(e) => {
+                            const v = e.target.value;
+                            if (/^\d*\.?\d*$/.test(v)) {
+                              setHLLength(v === "" ? 0 : Number.parseFloat(v));
+                            }
+                          }}
                           className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
                         />
                       </div>
@@ -453,6 +474,7 @@ function formatRangeLabel(range: string) {
           <select
             className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
             value={terminalBoxVar}
+            disabled={dpstActive}
             onChange={(e) => setTerminalBox(e.target.value)}
           >
             <option value="N1">NEMA 1</option>

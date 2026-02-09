@@ -22,14 +22,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.9199346"
-     inkscape:cx="396.10723"
-     inkscape:cy="306"
+     inkscape:cx="370.06469"
+     inkscape:cy="263.29022"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1160" />
+     inkscape:current-layer="g1159" />
   <defs
      id="defs13">
     <clipPath
@@ -1950,7 +1950,8 @@
            fill="none"
            stroke="#000000"
            d="M13506 8293V10375"
-           id="path236" />
+           id="path236"
+           style="stroke-width:31;stroke-dasharray:none" />
         <path
            transform="matrix(.03,0,0,-.03,14,564)"
            stroke-linecap="butt"
@@ -1968,7 +1969,8 @@
            fill="none"
            stroke="#000000"
            d="M13676 10205H13845"
-           id="path238" />
+           id="path238"
+           style="stroke-width:31;stroke-dasharray:none" />
         <path
            transform="matrix(.03,0,0,-.03,14,564)"
            d="M12394 10233V10177L12564 10205Z"
@@ -1994,7 +1996,8 @@
            fill="none"
            stroke="#000000"
            d="M13676 10233V10177L13506 10205Z"
-           id="path242" />
+           id="path242"
+           style="stroke-width:31;stroke-dasharray:none" />
       </g>
     </g>
     <g
@@ -2026,7 +2029,8 @@
          fill="none"
          stroke="#000000"
          d="M15108 8206V10375"
-         id="path245" />
+         id="path245"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2044,7 +2048,8 @@
          fill="none"
          stroke="#000000"
          d="M15278 10205H24363"
-         id="path247" />
+         id="path247"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M15278 10233V10177L15108 10205Z"
@@ -2070,7 +2075,8 @@
          fill="none"
          stroke="#000000"
          d="M24363 10233V10177L24533 10205Z"
-         id="path251" />
+         id="path251"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2079,7 +2085,8 @@
          fill="none"
          stroke="#000000"
          d="M16319 7672V9665"
-         id="path252" />
+         id="path252"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2088,7 +2095,8 @@
          fill="none"
          stroke="#000000"
          d="M24533 7958V9665"
-         id="path253" />
+         id="path253"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2097,7 +2105,8 @@
          fill="none"
          stroke="#000000"
          d="M16489 9495H24364"
-         id="path254" />
+         id="path254"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M16489 9523V9467L16319 9495Z"
@@ -2110,7 +2119,8 @@
          fill="none"
          stroke="#000000"
          d="M16489 9523V9467L16319 9495Z"
-         id="path256" />
+         id="path256"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M24364 9523V9467L24533 9495Z"
@@ -2123,7 +2133,8 @@
          fill="none"
          stroke="#000000"
          d="M24364 9523V9467L24533 9495Z"
-         id="path258" />
+         id="path258"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2132,7 +2143,8 @@
          fill="none"
          stroke="#000000"
          d="M21706 7674V8865"
-         id="path259" />
+         id="path259"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2141,7 +2153,8 @@
          fill="none"
          stroke="#000000"
          d="M15061 7674V8865"
-         id="path260" />
+         id="path260"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2150,7 +2163,8 @@
          fill="none"
          stroke="#000000"
          d="M21536 8695H15231"
-         id="path261" />
+         id="path261"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M21536 8724V8667L21706 8695Z"
@@ -2163,7 +2177,8 @@
          fill="none"
          stroke="#000000"
          d="M21536 8724V8667L21706 8695Z"
-         id="path263" />
+         id="path263"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M15231 8724V8667L15061 8695Z"
@@ -2176,7 +2191,8 @@
          fill="none"
          stroke="#000000"
          d="M15231 8724V8667L15061 8695Z"
-         id="path265" />
+         id="path265"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2203,7 +2219,8 @@
          fill="none"
          stroke="#000000"
          d="M15421 7549V7718"
-         id="path268" />
+         id="path268"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2221,7 +2238,8 @@
          fill="none"
          stroke="#000000"
          d="M15591 6564H15421V6742"
-         id="path270" />
+         id="path270"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
@@ -2243,7 +2261,8 @@
          fill="none"
          stroke="#000000"
          d="M15393 7549H15449L15421 7379Z"
-         id="path272" />
+         id="path272"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M15393 6912H15449L15421 7081Z"
@@ -2256,7 +2275,8 @@
          fill="none"
          stroke="#000000"
          d="M15393 6912H15449L15421 7081Z"
-         id="path274" />
+         id="path274"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M12564 10560H8794L12564 4670ZM8794 10560 12564 4670H8794Z"
@@ -2287,7 +2307,8 @@
          fill="none"
          stroke="#000000"
          d="M12564 10619V11437"
-         id="path278" />
+         id="path278"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2305,7 +2326,8 @@
          fill="none"
          stroke="#000000"
          d="M12394 11267H11077"
-         id="path280" />
+         id="path280"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2314,7 +2336,8 @@
          fill="none"
          stroke="#000000"
          d="M8963 11267H10281"
-         id="path281" />
+         id="path281"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M12394 11295V11239L12564 11267Z"
@@ -2327,7 +2350,8 @@
          fill="none"
          stroke="#000000"
          d="M12394 11295V11239L12564 11267Z"
-         id="path283" />
+         id="path283"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M8963 11295V11239L8794 11267Z"
@@ -2340,7 +2364,8 @@
          fill="none"
          stroke="#000000"
          d="M8963 11295V11239L8794 11267Z"
-         id="path285" />
+         id="path285"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
@@ -2358,7 +2383,8 @@
          fill="none"
          stroke="#000000"
          d="M8735 10560H8086"
-         id="path286" />
+         id="path286"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2367,7 +2393,8 @@
          fill="none"
          stroke="#000000"
          d="M8735 4670H8086"
-         id="path287" />
+         id="path287"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2376,7 +2403,8 @@
          fill="none"
          stroke="#000000"
          d="M8256 10390V7786"
-         id="path288" />
+         id="path288"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2385,7 +2413,8 @@
          fill="none"
          stroke="#000000"
          d="M8256 4839V7443"
-         id="path289" />
+         id="path289"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M8227 10390H8284L8256 10560Z"
@@ -2398,7 +2427,8 @@
          fill="none"
          stroke="#000000"
          d="M8227 10390H8284L8256 10560Z"
-         id="path291" />
+         id="path291"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M8227 4839H8284L8256 4670Z"
@@ -2411,7 +2441,8 @@
          fill="none"
          stroke="#000000"
          d="M8227 4839H8284L8256 4670Z"
-         id="path293" />
+         id="path293"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
@@ -2447,7 +2478,8 @@
          fill="none"
          stroke="#000000"
          d="M8794 10619V11058"
-         id="path296" />
+         id="path296"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2456,7 +2488,8 @@
          fill="none"
          stroke="#000000"
          d="M9548 10619V11058"
-         id="path297" />
+         id="path297"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2465,7 +2498,8 @@
          fill="none"
          stroke="#000000"
          d="M8963 10888H9378"
-         id="path298" />
+         id="path298"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -2474,7 +2508,8 @@
          fill="none"
          stroke="#000000"
          d="M9548 10888H9717"
-         id="path299" />
+         id="path299"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M8963 10916V10860L8794 10888Z"
@@ -2487,7 +2522,8 @@
          fill="none"
          stroke="#000000"
          d="M8963 10916V10860L8794 10888Z"
-         id="path301" />
+         id="path301"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M9378 10916V10860L9548 10888Z"
@@ -2500,7 +2536,8 @@
          fill="none"
          stroke="#000000"
          d="M9378 10916V10860L9548 10888Z"
-         id="path303" />
+         id="path303"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
@@ -8031,7 +8068,8 @@
          fill="none"
          stroke="#000000"
          d="M1068 10619V11251"
-         id="path1144" />
+         id="path1144"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8040,7 +8078,8 @@
          fill="none"
          stroke="#000000"
          d="M6959 10619V11251"
-         id="path1145" />
+         id="path1145"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8049,7 +8088,8 @@
          fill="none"
          stroke="#000000"
          d="M1238 11082H3618"
-         id="path1146" />
+         id="path1146"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8058,7 +8098,8 @@
          fill="none"
          stroke="#000000"
          d="M6789 11082H4409"
-         id="path1147" />
+         id="path1147"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M1238 11110V11053L1068 11082Z"
@@ -8071,7 +8112,8 @@
          fill="none"
          stroke="#000000"
          d="M1238 11110V11053L1068 11082Z"
-         id="path1149" />
+         id="path1149"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M6789 11110V11053L6959 11082Z"
@@ -8084,7 +8126,8 @@
          fill="none"
          stroke="#000000"
          d="M6789 11110V11053L6959 11082Z"
-         id="path1151" />
+         id="path1151"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
@@ -8102,7 +8145,8 @@
          fill="none"
          stroke="#000000"
          d="M1009 4670H511"
-         id="path1152" />
+         id="path1152"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8111,7 +8155,8 @@
          fill="none"
          stroke="#000000"
          d="M1009 10560H511"
-         id="path1153" />
+         id="path1153"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8120,7 +8165,8 @@
          fill="none"
          stroke="#000000"
          d="M680 4839V7443"
-         id="path1154" />
+         id="path1154"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8129,7 +8175,8 @@
          fill="none"
          stroke="#000000"
          d="M680 10390V7786"
-         id="path1155" />
+         id="path1155"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M652 4839H709L680 4670Z"
@@ -8142,7 +8189,8 @@
          fill="none"
          stroke="#000000"
          d="M652 4839H709L680 4670Z"
-         id="path1157" />
+         id="path1157"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M652 10390H709L680 10560Z"
@@ -8155,7 +8203,8 @@
          fill="none"
          stroke="#000000"
          d="M652 10390H709L680 10560Z"
-         id="path1159" />
+         id="path1159"
+         style="stroke-width:31;stroke-dasharray:none" />
       <text
          xml:space="preserve"
          transform="matrix(.03 0 -0 .03 14 564)"
