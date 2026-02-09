@@ -21,9 +21,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.9199346"
-     inkscape:cx="484.65191"
-     inkscape:cy="275.26979"
+     inkscape:zoom="5.4303951"
+     inkscape:cx="271.8955"
+     inkscape:cy="239.66949"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -8077,6 +8077,57 @@
              y="-8100"
              x="107 242.61899 310.42848 446.04747 581.66647 635.81649"
              id="tspan1144">6.25in</tspan></text>
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect1"
+           width="154.67276"
+           height="13.550716"
+           x="55.244598"
+           y="231.65901"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none;stroke-width:1.08489"
+           id="rect2"
+           width="7.4221258"
+           height="12.988717"
+           x="215.30682"
+           y="231.29044" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect3"
+           width="6.2502127"
+           height="11.979575"
+           x="42.254044"
+           y="233.01575"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect4"
+           width="155.88185"
+           height="11.094962"
+           x="53.771408"
+           y="393.94003"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect5"
+           width="6.2610545"
+           height="13.719075"
+           x="215.73016"
+           y="392.69702"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect6"
+           width="4.8799396"
+           height="12.752295"
+           x="42.492306"
+           y="393.57175"
+           ry="0.032553192" />
+        <path
+           style="fill:#000000;stroke:#ffffff;stroke-opacity:1"
+           d="M 302.78644,227.10134 V 419.80597"
+           id="path25" />
       </g>
     </g>
   </g>

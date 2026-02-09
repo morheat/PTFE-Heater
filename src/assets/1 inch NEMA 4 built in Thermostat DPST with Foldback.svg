@@ -22,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.9199346"
-     inkscape:cx="370.06469"
-     inkscape:cy="263.29022"
+     inkscape:cx="462.77618"
+     inkscape:cy="322.66724"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -2469,7 +2469,8 @@
          fill="none"
          stroke="#000000"
          d="M9548 10560V4670"
-         id="path295" />
+         id="path295"
+         style="stroke:#ffffff;stroke-opacity:1;stroke-width:33.33333333;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -8214,6 +8215,76 @@
            y="-7531"
            x="361 492.75923 558.63888 690.3981 822.1573 874.7662"
            id="tspan1159">6.25in</tspan></text>
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect1"
+         width="150.2653"
+         height="13.258704"
+         x="59.203796"
+         y="251.17877" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect2"
+         width="6.6753893"
+         height="14.77793"
+         x="215.45393"
+         y="251.0867" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect3"
+         width="6.7674632"
+         height="13.258704"
+         x="46.589611"
+         y="250.7184" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect4"
+         width="150.52596"
+         height="11.458724"
+         x="59.637447"
+         y="408.60767" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect5"
+         width="6.5106392"
+         height="12.109777"
+         x="215.89278"
+         y="409.12854" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect6"
+         width="6.1200004"
+         height="12.630638"
+         x="46.876598"
+         y="408.47745" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect7"
+         width="9.635745"
+         height="4.6876597"
+         x="51.694469"
+         y="406.65448" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect8"
+         width="14.323404"
+         height="4.6876597"
+         x="50.131916"
+         y="417.0715" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect9"
+         width="11.328511"
+         height="3.2553191"
+         x="207.0383"
+         y="417.72256" />
+      <rect
+         style="fill:#000000;stroke:none"
+         id="rect10"
+         width="10.937873"
+         height="5.0782981"
+         x="206.25702"
+         y="406.00342" />
     </g>
   </g>
   <rect

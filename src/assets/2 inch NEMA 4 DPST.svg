@@ -22,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.9199346"
-     inkscape:cx="452.88"
-     inkscape:cy="302.87489"
+     inkscape:cx="215.37192"
+     inkscape:cy="338.29277"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -8207,6 +8207,58 @@
            stroke="#000000"
            d="M12735 6898V9149"
            id="path1162" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect1"
+           width="152.1068"
+           height="11.417217"
+           x="62.794693"
+           y="238.47252"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect2"
+           width="6.6753893"
+           height="12.982481"
+           x="50.364658"
+           y="238.84082"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect3"
+           width="7.020668"
+           height="9.2074327"
+           x="219.9886"
+           y="239.64647"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect4"
+           width="151.56766"
+           height="11.849362"
+           x="63.02298"
+           y="395.5864"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect5"
+           width="6.5431876"
+           height="14.616391"
+           x="220.12469"
+           y="395.48874"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect6"
+           width="6.8361702"
+           height="11.588937"
+           x="50.652767"
+           y="397.93024"
+           ry="0.032553192" />
+        <path
+           style="fill:#000000;stroke:#ffffff;stroke-opacity:1"
+           d="M 305.22641,234.00691 V 425.53533"
+           id="path27" />
       </g>
     </g>
   </g>

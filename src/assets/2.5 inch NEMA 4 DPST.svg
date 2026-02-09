@@ -21,9 +21,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.3575988"
-     inkscape:cx="433.48594"
-     inkscape:cy="300.89891"
+     inkscape:zoom="1.9199346"
+     inkscape:cx="344.02213"
+     inkscape:cy="280.99915"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -9048,6 +9048,90 @@
            stroke="#000000"
            d="M12350 9459V6874"
            id="path1262" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect1"
+           width="148.57277"
+           height="11.719149"
+           x="59.116596"
+           y="236.5966"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect2"
+           width="6.4452014"
+           height="9.7368622"
+           x="212.73773"
+           y="237.22951"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect3"
+           width="6.951612"
+           height="4.2584376"
+           x="206.13141"
+           y="235.43407"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect4"
+           width="7.4350023"
+           height="2.7852485"
+           x="206.59178"
+           y="244.68753"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect5"
+           width="6.6293516"
+           height="10.450437"
+           x="47.165077"
+           y="236.19368"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect6"
+           width="6.4221845"
+           height="4.3965492"
+           x="52.505386"
+           y="235.2269"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect7"
+           width="7.8953738"
+           height="2.3248768"
+           x="52.114071"
+           y="244.68753"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect8"
+           width="147.87137"
+           height="12.982481"
+           x="59.57209"
+           y="389.93478"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect9"
+           width="6.5372839"
+           height="15.100186"
+           x="212.87585"
+           y="389.19818"
+           ry="0.032553192" />
+        <rect
+           style="fill:#000000;stroke:none"
+           id="rect10"
+           width="6.5372772"
+           height="13.534926"
+           x="47.326206"
+           y="389.47443"
+           ry="0.032553192" />
+        <path
+           style="fill:#000000;stroke:#ffffff;stroke-opacity:1"
+           d="M 295.83482,231.98128 V 426.05617"
+           id="path27" />
       </g>
     </g>
   </g>

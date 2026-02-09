@@ -21,9 +21,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.9199346"
-     inkscape:cx="418.50383"
-     inkscape:cy="361.73106"
+     inkscape:zoom="2.7151975"
+     inkscape:cx="315.81496"
+     inkscape:cy="347.85683"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
      inkscape:window-x="1912"
@@ -2207,14 +2207,16 @@
          d="M7794 11271H2056L7794 11099ZM2056 11271 7794 11099H2056Z"
          id="path264" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7794 11271H2056L7794 11099ZM2056 11271 7794 11099H2056Z"
-         id="path265" />
+         d="m 7794,11271 c -8260.66667,7529 -8260.66667,7529 0,0 z m -5738,0 5738,-172 H 2056 Z"
+         id="path265"
+         sodipodi:nodetypes="cccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M7794 11099H7473L7794 11097ZM7473 11099 7794 11097H7492Z"
@@ -2272,14 +2274,16 @@
          d="M7453 11097H2397L7434 11094ZM2397 11097 7434 11094H2416Z"
          id="path274" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7453 11097H2397L7434 11094ZM2397 11097 7434 11094H2416Z"
-         id="path275" />
+         d="M 7453,11097 H 2397 l 5037,-3 z m -5056,0 5037,-3 H 2416 Z"
+         id="path275"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none"
+         sodipodi:nodetypes="cccccccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2358 11097H2056L2339 11094ZM2056 11097 2339 11094H2056Z"
@@ -2311,14 +2315,16 @@
          d="M7434 11094H2416L7416 11087ZM2416 11094 7416 11087H2434Z"
          id="path280" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7434 11094H2416L7416 11087ZM2416 11094 7416 11087H2434Z"
-         id="path281" />
+         d="M 7434,11094 H 2416 l 5000,-7 z m -5018,0 5000,-7 H 2434 Z"
+         id="path281"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none"
+         sodipodi:nodetypes="cccccccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2339 11094H2056L2320 11087ZM2056 11094 2320 11087H2056Z"
@@ -2350,14 +2356,16 @@
          d="M7416 11087H2434L7398 11079ZM2434 11087 7398 11079H2452Z"
          id="path286" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7416 11087H2434L7398 11079ZM2434 11087 7398 11079H2452Z"
-         id="path287" />
+         d="M 7416,11087 H 2434 l 4964,-8 z m -4982,0 4964,-8 H 2452 Z"
+         id="path287"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2320 11087H2056L2303 11079ZM2056 11087 2303 11079H2056Z"
@@ -2389,14 +2397,15 @@
          d="M7398 11079H2452L7382 11068ZM2452 11079 7382 11068H2468Z"
          id="path292" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7398 11079H2452L7382 11068ZM2452 11079 7382 11068H2468Z"
-         id="path293" />
+         d="M 7398,11079 H 2452 l 4930,-11 z m -4946,0 4930,-11 H 2468 Z"
+         id="path293"
+         sodipodi:nodetypes="cccccccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2303 11079H2056L2286 11068ZM2056 11079 2286 11068H2056Z"
@@ -2428,14 +2437,16 @@
          d="M7382 11068H2468L7367 11055ZM2468 11068 7367 11055H2483Z"
          id="path298" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7382 11068H2468L7367 11055ZM2468 11068 7367 11055H2483Z"
-         id="path299" />
+         d="M 7382,11068 H 2468 l 4899,-13 z m -4914,0 4899,-13 H 2483 Z"
+         id="path299"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2286 11068H2056L2272 11055ZM2056 11068 2272 11055H2056Z"
@@ -2467,14 +2478,16 @@
          d="M7367 11055H2483L7354 11040ZM2483 11055 7354 11040H2496Z"
          id="path304" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7367 11055H2483L7354 11040ZM2483 11055 7354 11040H2496Z"
-         id="path305" />
+         d="M 7367,11055 H 2483 l 4871,-15 z m -4884,0 4871,-15 H 2496 Z"
+         id="path305"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2272 11055H2056L2259 11040ZM2056 11055 2259 11040H2056Z"
@@ -2506,14 +2519,16 @@
          d="M7354 11040H2496L7344 11024ZM2496 11040 7344 11024H2506Z"
          id="path310" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7354 11040H2496L7344 11024ZM2496 11040 7344 11024H2506Z"
-         id="path311" />
+         d="M 7354,11040 H 2496 l 4848,-16 z m -4858,0 4848,-16 H 2506 Z"
+         id="path311"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2259 11040H2056L2248 11024ZM2056 11040 2248 11024H2056Z"
@@ -2545,14 +2560,15 @@
          d="M7344 11024H2506L7335 11007ZM2506 11024 7335 11007H2515Z"
          id="path316" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7344 11024H2506L7335 11007ZM2506 11024 7335 11007H2515Z"
-         id="path317" />
+         d="M 7344,11024 H 2506 l 4829,-17 z"
+         id="path317"
+         sodipodi:nodetypes="cccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2248 11024H2056L2239 11007ZM2056 11024 2239 11007H2056Z"
@@ -2584,14 +2600,16 @@
          d="M7335 11007H2515L7329 10988ZM2515 11007 7329 10988H2521Z"
          id="path322" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7335 11007H2515L7329 10988ZM2515 11007 7329 10988H2521Z"
-         id="path323" />
+         d="M 7335,11007 H 2515 l 4814,-19 z m -4820,0 4814,-19 H 2521 Z"
+         id="path323"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2239 11007H2056L2233 10988ZM2056 11007 2233 10988H2056Z"
@@ -2623,14 +2641,16 @@
          d="M7329 10988H2521L7325 10969ZM2521 10988 7325 10969H2525Z"
          id="path328" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7329 10988H2521L7325 10969ZM2521 10988 7325 10969H2525Z"
-         id="path329" />
+         d="M 7329,10988 H 2521 l 4804,-19 z m -4808,0 4804,-19 H 2525 Z"
+         id="path329"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2233 10988H2056L2229 10969ZM2056 10988 2229 10969H2056Z"
@@ -2662,14 +2682,16 @@
          d="M7325 10969H2525L7324 10949ZM2525 10969 7324 10949H2526Z"
          id="path334" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7325 10969H2525L7324 10949ZM2525 10969 7324 10949H2526Z"
-         id="path335" />
+         d="M 7325,10969 H 2525 l 4799,-20 z m -4800,0 4799,-20 H 2526 Z"
+         id="path335"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2229 10969H2056L2228 10949ZM2056 10969 2228 10949H2056Z"
@@ -2701,14 +2723,16 @@
          d="M7324 10949H2526L7325 10930ZM2526 10949 7325 10930H2525Z"
          id="path340" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7324 10949H2526L7325 10930ZM2526 10949 7325 10930H2525Z"
-         id="path341" />
+         d="M 7324,10949 H 2526 l 4799,-19 z m -4798,0 4799,-19 H 2525 Z"
+         id="path341"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2228 10949H2056L2229 10930ZM2056 10949 2229 10930H2056Z"
@@ -2740,14 +2764,16 @@
          d="M7325 10930H2525L7329 10911ZM2525 10930 7329 10911H2521Z"
          id="path346" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7325 10930H2525L7329 10911ZM2525 10930 7329 10911H2521Z"
-         id="path347" />
+         d="M 7325,10930 H 2525 l 4804,-19 z m -4800,0 4804,-19 H 2521 Z"
+         id="path347"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2229 10930H2056L2233 10911ZM2056 10930 2233 10911H2056Z"
@@ -2779,14 +2805,16 @@
          d="M7329 10911H2521L7335 10892ZM2521 10911 7335 10892H2515Z"
          id="path352" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7329 10911H2521L7335 10892ZM2521 10911 7335 10892H2515Z"
-         id="path353" />
+         d="M 7329,10911 H 2521 l 4814,-19 z m -4808,0 4814,-19 H 2515 Z"
+         id="path353"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2233 10911H2056L2239 10892ZM2056 10911 2239 10892H2056Z"
@@ -2818,14 +2846,16 @@
          d="M7335 10892H2515L7344 10875ZM2515 10892 7344 10875H2506Z"
          id="path358" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7335 10892H2515L7344 10875ZM2515 10892 7344 10875H2506Z"
-         id="path359" />
+         d="M 7335,10892 H 2515 l 4829,-17 z m -4820,0 4829,-17 H 2506 Z"
+         id="path359"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2239 10892H2056L2248 10875ZM2056 10892 2248 10875H2056Z"
@@ -2857,14 +2887,16 @@
          d="M7344 10875H2506L7354 10859ZM2506 10875 7354 10859H2496Z"
          id="path364" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7344 10875H2506L7354 10859ZM2506 10875 7354 10859H2496Z"
-         id="path365" />
+         d="M 7344,10875 H 2506 l 4848,-16 z m -4838,0 4848,-16 H 2496 Z"
+         id="path365"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2248 10875H2056L2259 10859ZM2056 10875 2259 10859H2056Z"
@@ -2896,14 +2928,16 @@
          d="M7354 10859H2496L7367 10844ZM2496 10859 7367 10844H2483Z"
          id="path370" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7354 10859H2496L7367 10844ZM2496 10859 7367 10844H2483Z"
-         id="path371" />
+         d="M 7354,10859 H 2496 l 4871,-15 z m -4858,0 4871,-15 H 2483 Z"
+         id="path371"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2259 10859H2056L2272 10844ZM2056 10859 2272 10844H2056Z"
@@ -2931,18 +2965,11 @@
          d="M7794 10844H7578L7794 10831ZM7578 10844 7794 10831H7564Z"
          id="path375" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
-         d="M7367 10844H2483L7382 10831ZM2483 10844 7382 10831H2468Z"
-         id="path376" />
-      <path
-         transform="matrix(.03,0,0,-.03,14,564)"
-         stroke-linecap="butt"
-         stroke-miterlimit="10"
-         stroke-linejoin="miter"
-         fill="none"
-         stroke="#000000"
-         d="M7367 10844H2483L7382 10831ZM2483 10844 7382 10831H2468Z"
-         id="path377" />
+         transform="matrix(0.03,0,0,-0.03,14,564)"
+         d="M 7367,10844 H 2483 l 4899,-13 z m -4884,0 4899,-13 H 2468 Z"
+         id="path376"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2272 10844H2056L2286 10831ZM2056 10844 2286 10831H2056Z"
@@ -2974,14 +3001,16 @@
          d="M7382 10831H2468L7398 10820ZM2468 10831 7398 10820H2452Z"
          id="path382" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7382 10831H2468L7398 10820ZM2468 10831 7398 10820H2452Z"
-         id="path383" />
+         d="M 7382,10831 H 2468 l 4930,-11 z m -4914,0 4930,-11 H 2452 Z"
+         id="path383"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2286 10831H2056L2303 10820ZM2056 10831 2303 10820H2056Z"
@@ -3013,14 +3042,15 @@
          d="M7398 10820H2452L7416 10812ZM2452 10820 7416 10812H2434Z"
          id="path388" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7398 10820H2452L7416 10812ZM2452 10820 7416 10812H2434Z"
-         id="path389" />
+         d="M 7398,10820 H 2452 l 4964,-8 z m -4946,0 4964,-8 H 2434 Z"
+         id="path389"
+         sodipodi:nodetypes="cccccccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2303 10820H2056L2320 10812ZM2056 10820 2320 10812H2056Z"
@@ -3052,14 +3082,16 @@
          d="M7416 10812H2434L7434 10805ZM2434 10812 7434 10805H2416Z"
          id="path394" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7416 10812H2434L7434 10805ZM2434 10812 7434 10805H2416Z"
-         id="path395" />
+         d="M 7416,10812 H 2434 l 5000,-7 z m -4982,0 5000,-7 H 2416 Z"
+         id="path395"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2320 10812H2056L2339 10805ZM2056 10812 2339 10805H2056Z"
@@ -3130,14 +3162,15 @@
          d="M7453 10802H2397L7473 10800ZM2397 10802 7473 10800H2377Z"
          id="path406" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7453 10802H2397L7473 10800ZM2397 10802 7473 10800H2377Z"
-         id="path407" />
+         d="M 7453,10802 H 2397 l 5076,-2 z m -5056,0 5076,-2 H 2377 Z"
+         id="path407"
+         sodipodi:nodetypes="cccccccc" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M2358 10802H2056L2377 10800ZM2056 10802 2377 10800H2056Z"
@@ -3152,18 +3185,21 @@
          d="M2358 10802H2056L2377 10800ZM2056 10802 2377 10800H2056Z"
          id="path409" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
-         d="M7794 10800H2056L7794 6003ZM2056 10800 7794 6003H2056Z"
-         id="path410" />
+         transform="matrix(0.03,0,0,-0.03,14,564)"
+         d="M 7794,10800 H 2056 L 7794,6003 Z m -5738,0 5738,-4797 H 2056 Z"
+         id="path410"
+         sodipodi:nodetypes="cccccccc" />
       <path
-         transform="matrix(.03,0,0,-.03,14,564)"
+         transform="matrix(0.03,0,0,-0.03,14,564)"
          stroke-linecap="butt"
          stroke-miterlimit="10"
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M7794 10800H2056L7794 6003ZM2056 10800 7794 6003H2056Z"
-         id="path411" />
+         d="M 7794,10800 H 2056 L 7794,6003 Z m -5738,0 5738,-4797 H 2056 Z"
+         id="path411"
+         sodipodi:nodetypes="cccccccc"
+         style="stroke:none;stroke-width:0;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          d="M7794 6003H7473L7794 6002ZM7473 6003 7794 6002H7492Z"
@@ -4138,8 +4174,9 @@
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M10316 11271V5533"
-         id="path560" />
+         d="M9581 11328V11756"
+         id="path561"
+         style="stroke-width:31;stroke-dasharray:none" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -4147,9 +4184,9 @@
          stroke-linejoin="miter"
          fill="none"
          stroke="#000000"
-         d="M9581 11328V11756"
-         id="path561"
-         style="stroke-width:31;stroke-dasharray:none" />
+         d="M10316 11271V5533"
+         id="path560"
+         style="stroke-width:33.33333333;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1" />
       <path
          transform="matrix(.03,0,0,-.03,14,564)"
          stroke-linecap="butt"
@@ -26943,6 +26980,97 @@
            y="-8321"
            x="813 941.3565 1005.5348 1133.8914 1262.2478 1313.498"
            id="tspan4052">6.25in</tspan></text>
+      <rect
+         style="fill:#000000;stroke:none;stroke-width:0;stroke-dasharray:none;fill-opacity:1"
+         id="rect1"
+         width="145.47745"
+         height="17.494123"
+         x="89.127953"
+         y="229.08093" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect2"
+         width="5.8595748"
+         height="12.95617"
+         x="241.28426"
+         y="229.5" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect3"
+         width="9.2451067"
+         height="3.1251063"
+         x="232.88554"
+         y="229.23958" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect4"
+         width="11.914469"
+         height="3.2553191"
+         x="230.34639"
+         y="239.78682" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect5"
+         width="16.537022"
+         height="4.4272342"
+         x="77.281281"
+         y="228.4583" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect6"
+         width="5.9246845"
+         height="11.198305"
+         x="76.5"
+         y="230.73703" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect7"
+         width="14.518723"
+         height="3.3855319"
+         x="80.080856"
+         y="238.35448" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect8"
+         width="0.42319149"
+         height="0.39063832"
+         x="234.5132"
+         y="237.21512" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect9"
+         width="1.3997873"
+         height="3.1251066"
+         x="234.6434"
+         y="237.34532" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect10"
+         width="1.8880926"
+         height="1.4974533"
+         x="239.68915"
+         y="237.89873" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect11"
+         width="146.48936"
+         height="12.240001"
+         x="89.065536"
+         y="382.43491" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+         id="rect12"
+         width="6.2502127"
+         height="12.891064"
+         x="241.54469"
+         y="382.69531" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+         id="rect13"
+         width="5.0782981"
+         height="12.370214"
+         x="76.69532"
+         y="382.17447" />
     </g>
   </g>
 </svg>
