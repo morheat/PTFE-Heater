@@ -64,13 +64,11 @@ interface drawingProps {
   drawingRef: React.RefObject<HTMLDivElement>;
   serialNum: string;
   title: string;
-  NPTSize: number;
   lengthElement: number;
   foldLength: number;
   phase: number;
   processTemp: string;
   hlSensor: string;
-  //typeThermostat: string;
   thermoLength: number;
   material: string;
   voltage: number;
@@ -82,13 +80,14 @@ interface drawingProps {
   processRange: string;
   hlRange: string;
   hlLength: number;
+  series:string;
+  protector: string;
 }
 
 const Drawings10: React.FC<drawingProps> = ({
   drawingRef,
   serialNum,
   title,
-  NPTSize,
   lengthElement,
   foldLength,
   phase,
@@ -96,9 +95,8 @@ const Drawings10: React.FC<drawingProps> = ({
   voltage,
   wattage,
   terminalBox,
-  //typeThermostat,
-  hlSensor, // ✅ needed
-  processTemp, // (optional later)
+  hlSensor,
+  processTemp,
   thermoLength,
   coldLength,
   elementCount,
@@ -106,10 +104,13 @@ const Drawings10: React.FC<drawingProps> = ({
   hlRange,
   hlLength,
   OAL,
+  series,
+  protector,
 }) => {
   const showHL = hlSensor !== "nHL";
   const showProcess = processTemp !== "nT";
-  const hasFold = foldLength > 0 && NPTSize !==1.25;
+  const NPTSize = 1;
+  const hasFold = foldLength > 0;
   const showColdDim = coldLength > 0;
   const isDPST = processTemp === "DPST" || hlSensor === "DPST";
   const terminalBoxEffective = isDPST ? "N4" : terminalBox;
@@ -237,12 +238,12 @@ const Drawings10: React.FC<drawingProps> = ({
     }
 
     // ----- 1.25 inch -----
-    if (NPTSize === 1.25 && tb === "N1") {
+    if (tb === "N1") {
       if (useT) return elementCount === 2 ? Layout125N1_E2T : Layout125N1_E1T;
       return elementCount === 2 ? Layout125N1_E2 : Layout125N1_E1;
     }
 
-    if (NPTSize === 1.25 && tb === "N4") {
+    if (tb === "N4") {
       // ✅ DPST special layouts (no foldback for 1.25 in your code, so just element count)
       if (isDPST) return elementCount === 2 ? Layout125N4_E2DPST : Layout125N4_E1DPST;
 
@@ -250,34 +251,34 @@ const Drawings10: React.FC<drawingProps> = ({
       return elementCount === 2 ? Layout125N4_E2 : Layout125N4_E1;
     }
 
-    if (NPTSize === 1.25 && tb === "N7") {
+    if (tb === "N7") {
       if (useT) return elementCount === 2 ? Layout125N7_E2T : Layout125N7_E1T;
       return elementCount === 2 ? Layout125N7_E2 : Layout125N7_E1;
     }
 
     // ----- 2 inch -----
-    if (NPTSize === 2 && tb === "N1") return useT ? Layout2N1T : Layout2N1;
+    if (tb === "N1") return useT ? Layout2N1T : Layout2N1;
 
-    if (NPTSize === 2 && tb === "N4") {
+    if (tb === "N4") {
       // ✅ DPST special layout
       if (isDPST) return Layout2N4DPST;
 
       return useT ? Layout2N4T : Layout2N4;
     }
 
-    if (NPTSize === 2 && tb === "N7") return useT ? Layout2N7T : Layout2N7;
+    if (tb === "N7") return useT ? Layout2N7T : Layout2N7;
 
     // ----- 2.5 inch -----
-    if (NPTSize === 2.5 && tb === "N1") return useT ? Layout25N1T : Layout25N1;
+    if (tb === "N1") return useT ? Layout25N1T : Layout25N1;
 
-    if (NPTSize === 2.5 && tb === "N4") {
+    if (tb === "N4") {
       // ✅ DPST special layout
       if (isDPST) return Layout25N4DPST;
 
       return useT ? Layout25N4T : Layout25N4;
     }
 
-    if (NPTSize === 2.5 && tb === "N7") return useT ? Layout25N7T : Layout25N7;
+    if (tb === "N7") return useT ? Layout25N7T : Layout25N7;
 
     return null;
   }, [NPTSize, terminalBoxEffective, isDPST, hasFold, elementCount, showProcess]);
@@ -1265,13 +1266,13 @@ const Drawings10: React.FC<drawingProps> = ({
     }
 
     // 1.25 inch
-    if (NPTSize === 1.25 && tb === "N1" ) {
+    if (tb === "N1" ) {
       if (useT) return elementCount === 2 ? cfg125N1E2_T : cfg125N1E1_T;
       if(elementCount === 1) return cfg125N1E1;
       if(elementCount === 2) return cfg125N1E2;
     }
 
-    if (NPTSize === 1.25 && tb === "N4" ) {
+    if (tb === "N4" ) {
       if (isDPST) return elementCount === 2 ? cfg125N4E2DPST : cfg125N4E1DPST;
 
       if (useT) return elementCount === 2 ? cfg125N4E2_T : cfg125N4E1_T;
@@ -1279,37 +1280,37 @@ const Drawings10: React.FC<drawingProps> = ({
       if(elementCount === 2) return cfg125N4E2;
     }
 
-    if (NPTSize === 1.25 && tb === "N7" ) {
+    if (tb === "N7" ) {
       if (useT) return elementCount === 2 ? cfg125N7E2_T : cfg125N7E1_T;
       if(elementCount === 1) return cfg125N7E1;
       if(elementCount === 2) return cfg125N7E2;
     }
   
     // 2 inch
-    if (NPTSize === 2 && tb === "N1" ) {
+    if (tb === "N1" ) {
       return useT ? cfg2N1_T : cfg2N1
     }
 
-    if (NPTSize === 2 && tb === "N4" ) {
+    if (tb === "N4" ) {
       if (isDPST) return cfg2N4DPST;
       return useT ? cfg2N4_T : cfg2N4
     }
 
-    if (NPTSize === 2 && tb === "N7" ) {
+    if (tb === "N7" ) {
       return useT ? cfg2N7_T : cfg2N7
     }
 
     // 2.5 inch
-    if (NPTSize === 2.5 && tb === "N1" ) {
+    if ( tb === "N1" ) {
       return useT ? cfg25N1_T : cfg25N1
     }
 
-    if (NPTSize === 2.5 && tb === "N4" ) {
+    if (tb === "N4" ) {
       if (isDPST) return cfg25N4DPST;
       return useT ? cfg25N4_T : cfg25N4
     }
 
-    if (NPTSize === 2.5 && tb === "N7" ) {
+    if (tb === "N7" ) {
       return useT ? cfg25N7_T : cfg25N7
     }
 
@@ -1328,7 +1329,8 @@ const Drawings10: React.FC<drawingProps> = ({
         terminalBox={terminalBox}
         //thermostat={typeThermostat}
         elementNum={elementCount}
-        immersionLength={lengthElement}
+        series = {series}
+        protector = {protector}
         coldLength={coldLength}
         OAL = {OAL}
       />

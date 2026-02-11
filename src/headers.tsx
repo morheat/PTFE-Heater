@@ -8,11 +8,12 @@ interface headerProps {
   phase: number;              // 1 or 3
   wattage: number;
   elementNum: number;
-  immersionLength: number;
   coldLength: number;
   terminalBox: string;
   OAL: number;
-  //thermostat: string;
+  series: string;        // "9HX"
+  protector: string;     // "P1"...
+  wireLen?: string;      // "X60" optional
 }
 
 const Header: React.FC<headerProps> = ({
@@ -23,9 +24,11 @@ const Header: React.FC<headerProps> = ({
   phase,
   wattage,
   elementNum,
-  immersionLength,
   coldLength,
   OAL,
+  series,
+  protector,
+  wireLen,
   //terminalBox,
   //thermostat
 }) => {
@@ -56,7 +59,7 @@ const Header: React.FC<headerProps> = ({
       : "";
 
   // Watt density (W/in^2): Wattage / {0.475 * pi * elements * (heated length) * 2}
-  const heatedLength = immersionLength - coldLength;
+  const heatedLength = OAL - coldLength;
   const wattDensity =
     wattsNum > 0 && elementNum > 0 && heatedLength > 0
       ? wattsNum / (0.475 * Math.PI * elementNum * heatedLength * 2)
@@ -65,7 +68,7 @@ const Header: React.FC<headerProps> = ({
     // PART NUMBER FORMAT:
     // IM-HX.<first digit of watts><first digit of volts><first two digits of OAL>
 
-    const oalInt = Math.round(OAL);
+    const oalInt = OAL;
 
     const wattsFirstDigit =
       wattsNum > 0 ? String(wattsNum)[0] : "";
@@ -78,8 +81,8 @@ const Header: React.FC<headerProps> = ({
 
     const partNumber =
       wattsFirstDigit && voltsFirstDigit && oalTwoDigits
-        ? `IM-HX.${wattsFirstDigit}${voltsFirstDigit}${oalTwoDigits}${"-**"}`
-        : " ";
+        ? `IM-9HX.${wattsFirstDigit}${voltsFirstDigit}${oalTwoDigits}${"-**"}`
+        : "";
 
 
   return (

@@ -7,7 +7,6 @@ function App() {
   const [titleVar, setTitle] = useState<string>("");
   const [voltsVar, setVoltage] = useState<number>(120);
   const [wattsVar, setWattage] = useState<number>(500);
-  const [OALVar, setOAL] = useState<number>(11);
 
   // ✅ phase is 1 or 3 (to match amps math + display)
   const [phaseVar, setPhase] = useState<number>(1);
@@ -15,8 +14,6 @@ function App() {
   const [terminalBoxVar, setTerminalBox] = useState<string>("N1");
   const [materialVar, setMaterial] = useState<string>("304SS");
 
-  const [NPTSizeOp, setNPTSize] = useState<number>(1);
-  const [immersionLengthVar, setImmersionLength] = useState<number>(25);
   const [foldLengthVar, setFoldLength] = useState<number>(0);
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
 
@@ -37,9 +34,24 @@ function App() {
   const [hlLength, setHLLength] = useState<number>(8);
   //const [typeThermostat, setTypeThermostat] = useState<string>("");
 
+  const [seriesVar, setSeries] = useState<string>("9HX");
+
+  // Use text so user can type decimals cleanly, same style as your coldLength
+  const [hotLengthText, setHotLengthText] = useState<string>("9");
+
+  const hotLength = Number.parseFloat(hotLengthText);
+  const hotLengthNum = Number.isFinite(hotLength) ? hotLength : 0;
+
+  // computed OAL
+  const OALVar = hotLengthNum + coldLengthNum;
+
 
   const drawingRef = useRef<HTMLDivElement>(null);
   const dpstActive = processType === "DPST" || hlType === "DPST";
+
+  const [protectorVar, setProtector] = useState<string>("P1"); // P1/P2/P3/P8
+  const [wireLenVar, setWireLen] = useState<string>(""); // like "X60" optional
+
 
   async function getDrawingBlob(): Promise<Blob> {
     if (!drawingRef.current) throw new Error("Drawing ref not found");
@@ -91,25 +103,15 @@ function App() {
     }
   }, [dpstActive, terminalBoxVar]);
 
-
   useEffect(() => {
-    // 2" and 2.5" are always 3 elements
-    if (NPTSizeOp === 2 || NPTSizeOp === 2.5) {
-      setElementCount(3);
-      return;
-    }
+    const minHot = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
 
-    // 1.25" can be 1 or 2 (keep whatever user chose, but clamp if needed)
-    if (NPTSizeOp === 1.25) {
-      setElementCount((prev) => (prev === 2 ? 2 : 1));
-      return;
+    // if current hot length is below min, bump it up
+    if (hotLengthNum < minHot) {
+      setHotLengthText(String(minHot));
     }
-
-    // 1" defaults to 1 element
-    if (NPTSizeOp === 1) {
-      setElementCount(1);
-    }
-  }, [NPTSizeOp]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wattsVar]);
 
 
   // thermostat ranges (same set you listed)
@@ -150,6 +152,40 @@ function formatRangeLabel(range: string) {
     return `${a}–${b}°F (${c1}–${c2}°C)`;
   }
 }
+
+// --- PTFE standard mins (from your table) ---
+const MIN_HOT_BY_WATTS: Record<number, number> = {
+  3000: 9,
+  4500: 15,
+  6000: 21,
+  9000: 28,
+  12000: 38,
+  15000: 47,
+  18000: 55,
+};
+
+// wattage “code” shown in the order code example (3, 4.5, 6, 9, 12, 15, 18)
+function wattCode(w: number) {
+  if (w === 4500) return "4.5";
+  return String(w / 1000); // 3000->"3", 6000->"6", 12000->"12", etc.
+}
+
+// voltage code table from your sheet
+const VOLT_CODE: Record<number, string> = {
+  120: "1",
+  240: "2",
+  380: "3",
+  480: "4",
+  415: "5",
+  600: "6",
+  400: "7",
+  208: "8",
+  220: "9",
+  200: "0",
+};
+
+
+
 
 
   return (
@@ -212,38 +248,44 @@ function formatRangeLabel(range: string) {
           </div>
           
           <div className="flex-1">
-            <h1>Overall length</h1>
-            <select
-              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
-              value={OALVar}
-              onChange={(e) => setOAL(Number(e.target.value))}
-            >
-              <option value={11}>11 "279 mm</option>
-              <option value={17}>17 "432 mm</option>
-              <option value={23}>23 "584 mm</option>
-              <option value={29}>29 "737 mm</option>
-              <option value={35}>35 "889 mm</option>
-              <option value={40}>40 "1016 mm</option>
-              <option value={47}>47 "1194 mm</option>
-              <option value={54}>54 "1372 mm</option>
-            </select>
+            <h1>Overall Length (Hot + Cold)</h1>
+            <div className="input input-bordered border-cyan-500 border-2 input-xs w-full bg-slate-50 text-gray-700">
+              {Number.isFinite(OALVar) ? `${OALVar.toFixed(1)}"` : `0.0"`}
+            </div>
           </div>
         </div>
 
-
-        <div>
-          <h1>NPT Size</h1>
+        <div className="flex gap-3">
+        <div className="flex-1">
+          <h1>Series</h1>
           <select
-            className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
-            value={NPTSizeOp}
-            onChange={(e) => setNPTSize(Number(e.target.value))}
+            className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
+            value={seriesVar}
+            onChange={(e) => setSeries(e.target.value)}
           >
-            <option value={1}>1&quot; NPT Heater Constructions</option>
-            <option value={1.25}>1.25&quot; NPT Heater Constructions</option>
-            <option value={2}>2&quot; NPT Heater Constructions</option>
-            <option value={2.5}>2.5&quot; NPT Heater Constructions</option>
+            <option value="9HX">IM-9HX (9 element PTFE)</option>
+            {/* add more series later if needed */}
           </select>
         </div>
+
+        <div className="flex-1">
+          <h1>Hot Zone Length (min depends on wattage)</h1>
+          <input
+            type="text"
+            inputMode="decimal"
+            value={hotLengthText}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (/^\d*\.?\d*$/.test(v)) setHotLengthText(v);
+            }}
+            className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
+          />
+          <div className="text-xs text-slate-500 mt-1">
+            Min hot length for {wattsVar}W is {MIN_HOT_BY_WATTS[wattsVar] ?? 0}&quot;
+          </div>
+        </div>
+      </div>
+
 
         <div>
           <h1>Phase</h1>
@@ -257,40 +299,37 @@ function formatRangeLabel(range: string) {
           </select>
         </div>
 
-        <div>
-          <h1>Immersion Length</h1>
-          <input
-            type="text"
-            defaultValue={25}
-            onChange={(e) => setImmersionLength(Number(e.target.value) || 0)}
-            className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
-          />
-        </div>
-
-        {NPTSizeOp === 1.25 && (
-          <div>
-            <h1>Number of Elements</h1>
+        <div className="flex gap-3 mt-2">
+          <div className="flex-1">
+            <h1>Type of Protector</h1>
             <select
-              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300"
-              value={elementCount}
-              onChange={(e) => setElementCount(Number(e.target.value))}
+              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
+              value={protectorVar}
+              onChange={(e) => setProtector(e.target.value)}
             >
-              <option value={1}>1 Element</option>
-              <option value={2}>2 Elements</option>
+              <option value="P1">P1 - Solutlons up to 190°F</option>
+              <option value="P2">P2 - Solutlons up to 190°F</option>
+              <option value="P8">P8 - Solutions 190°F to 210°F</option>
+              <option value="P3">P3 - Solutions 210°F to 250°F</option>
             </select>
           </div>
-        )}
 
-        {NPTSizeOp === 1 && (
-          <div>
-            <h1>Foldback Length</h1>
+          <div className="flex-1">
+            <h1>Wire/Conduit Length (optional)</h1>
             <input
               type="text"
-              onChange={(e) => setFoldLength(Number(e.target.value) || 0)}
-              className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
+              value={wireLenVar}
+              onChange={(e) => {
+                // allow "", "X60", "X84" etc
+                const v = e.target.value.toUpperCase();
+                if (/^$|^X\d{0,3}$/.test(v)) setWireLen(v);
+              }}
+              placeholder='e.g. X60'
+              className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
             />
           </div>
-        )}
+        </div>
+
 
         <div>
           <h1>Cold Length</h1>
@@ -545,14 +584,13 @@ function formatRangeLabel(range: string) {
         drawingRef={drawingRef}
         serialNum={serialNum}
         title={titleVar}
-        NPTSize={NPTSizeOp}
-        lengthElement={immersionLengthVar}
+        lengthElement={OALVar}
         foldLength={foldLengthVar}
         phase={phaseVar}
         material={materialVar}
         voltage={voltsVar}
         wattage={wattsVar}
-        OAL = {OALVar}
+        OAL={OALVar}
         terminalBox={terminalBoxVar}
         coldLength={coldLengthNum}
         elementCount={elementCount}
@@ -560,10 +598,12 @@ function formatRangeLabel(range: string) {
         processRange={processRange}
         thermoLength={processLength}
         hlSensor={hlType}
-        //typeThermostat={typeThermostat}
         hlRange={hlRange}
         hlLength={hlLength}
+        series ={serialNum}
+        protector = {protectorVar}
       />
+
     </div>
   );
 }
