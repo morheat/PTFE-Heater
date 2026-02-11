@@ -5,8 +5,9 @@ import Drawing from "./DrawingsNew";
 function App() {
   const [serialNum, setSerialNum] = useState<string>("");
   const [titleVar, setTitle] = useState<string>("");
-  const [voltsVar, setVoltage] = useState<string>("");
-  const [wattsVar, setWattage] = useState<string>("");
+  const [voltsVar, setVoltage] = useState<number>(120);
+  const [wattsVar, setWattage] = useState<number>(500);
+  const [OALVar, setOAL] = useState<number>(11);
 
   // ✅ phase is 1 or 3 (to match amps math + display)
   const [phaseVar, setPhase] = useState<number>(1);
@@ -154,43 +155,81 @@ function formatRangeLabel(range: string) {
   return (
     <div className="flex justify-center mt-5 w-screen">
       <div className="w-96 h-[50rem] bg-white p-2 border-2 border-slate-400 rounded-lg mr-6 text-gray-700">
-        <div className="flex space-x-3">
-          <div>
+        <div className="flex gap-3">
+          <div className="flex-1">
             <h1>Serial Number</h1>
             <input
               type="text"
+              value={serialNum}
               onChange={(e) => setSerialNum(e.target.value)}
-              className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
+              className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
             />
           </div>
-          <div>
+
+          <div className="flex-1">
             <h1>Title</h1>
             <input
               type="text"
+              value={titleVar}
               onChange={(e) => setTitle(e.target.value)}
-              className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
+              className="input input-bordered border-cyan-500 border-2 input-xs w-full text-gray-700 dark:text-gray-300"
             />
           </div>
         </div>
 
-        <div className="flex space-x-3">
-          <div>
+
+        <div className="flex gap-3">
+          <div className="flex-1">
             <h1>Voltage</h1>
-            <input
-              onChange={(e) => setVoltage(e.target.value)}
-              type="text"
-              className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
-            />
+            <select
+              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
+              value={voltsVar}
+              onChange={(e) => setVoltage(Number(e.target.value))}
+            >
+              <option value={120}>120 V</option>
+              <option value={240}>240 V</option>
+              <option value={480}>480 V</option>
+            </select>
           </div>
-          <div>
+
+          <div className="flex-1">
             <h1>Wattage</h1>
-            <input
-              onChange={(e) => setWattage(e.target.value)}
-              type="text"
-              className="input input-bordered border-cyan-500 border-2 input-xs max-w-xs text-gray-700 dark:text-gray-300"
-            />
+            <select
+              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
+              value={wattsVar}
+              onChange={(e) => setWattage(Number(e.target.value))}
+            >
+              <option value={500}>500 W</option>
+              <option value={1000}>1000 W</option>
+              <option value={2000}>2000 W</option>
+              <option value={3000}>3000 W</option>
+              <option value={4000}>4000 W</option>
+              <option value={5000}>5000 W</option>
+              <option value={6000}>6000 W</option>
+              <option value={8000}>8000 W</option>
+              <option value={9000}>9000 W</option>
+            </select>
+          </div>
+          
+          <div className="flex-1">
+            <h1>Overall length</h1>
+            <select
+              className="select select-xs border-cyan-500 border-2 text-gray-700 dark:text-gray-300 w-full"
+              value={OALVar}
+              onChange={(e) => setOAL(Number(e.target.value))}
+            >
+              <option value={11}>11 "279 mm</option>
+              <option value={17}>17 "432 mm</option>
+              <option value={23}>23 "584 mm</option>
+              <option value={29}>29 "737 mm</option>
+              <option value={35}>35 "889 mm</option>
+              <option value={40}>40 "1016 mm</option>
+              <option value={47}>47 "1194 mm</option>
+              <option value={54}>54 "1372 mm</option>
+            </select>
           </div>
         </div>
+
 
         <div>
           <h1>NPT Size</h1>
@@ -513,6 +552,7 @@ function formatRangeLabel(range: string) {
         material={materialVar}
         voltage={voltsVar}
         wattage={wattsVar}
+        OAL = {OALVar}
         terminalBox={terminalBoxVar}
         coldLength={coldLengthNum}
         elementCount={elementCount}

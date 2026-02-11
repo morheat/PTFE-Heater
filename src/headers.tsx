@@ -4,13 +4,14 @@ interface headerProps {
   serialNum: string;
   title: string;
   material: string;
-  voltage: string;
+  voltage: number;
   phase: number;              // 1 or 3
-  wattage: string;
+  wattage: number;
   elementNum: number;
   immersionLength: number;
   coldLength: number;
   terminalBox: string;
+  OAL: number;
   //thermostat: string;
 }
 
@@ -24,6 +25,7 @@ const Header: React.FC<headerProps> = ({
   elementNum,
   immersionLength,
   coldLength,
+  OAL,
   //terminalBox,
   //thermostat
 }) => {
@@ -60,6 +62,26 @@ const Header: React.FC<headerProps> = ({
       ? wattsNum / (0.475 * Math.PI * elementNum * heatedLength * 2)
       : null;
 
+    // PART NUMBER FORMAT:
+    // IM-HX.<first digit of watts><first digit of volts><first two digits of OAL>
+
+    const oalInt = Math.round(OAL);
+
+    const wattsFirstDigit =
+      wattsNum > 0 ? String(wattsNum)[0] : "";
+
+    const voltsFirstDigit =
+      voltsNum > 0 ? String(voltsNum)[0] : "";
+
+    const oalTwoDigits =
+      oalInt > 0 ? String(oalInt).padStart(2, "0").slice(0, 2) : "";
+
+    const partNumber =
+      wattsFirstDigit && voltsFirstDigit && oalTwoDigits
+        ? `IM-HX.${wattsFirstDigit}${voltsFirstDigit}${oalTwoDigits}${"-**"}`
+        : " ";
+
+
   return (
     <div className="absolute text-black font-bold">
       {/* these positions are from your working layout; tweak if needed */}
@@ -80,7 +102,8 @@ const Header: React.FC<headerProps> = ({
       </div>
 
       {/* Bottom-left electrical specs */}
-      <div className="absolute w-[18rem] mt-[230px] ml-[-420px]">
+      <div className="absolute w-[18rem] mt-[200px] ml-[-420px]">
+        <div>Part No: {partNumber}</div>
         <div>Voltage: {voltage}{" V"}</div>
         <div>Phase: {phase}{" PH"}</div>
         <div>Amps: {amps === null ? "" : amps.toFixed(1)}{" A"}</div>

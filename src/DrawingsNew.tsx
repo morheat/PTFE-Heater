@@ -73,8 +73,9 @@ interface drawingProps {
   //typeThermostat: string;
   thermoLength: number;
   material: string;
-  voltage: string;
-  wattage: string;
+  voltage: number;
+  wattage: number;
+  OAL: number;
   terminalBox: string;
   coldLength: number;
   elementCount: number;
@@ -104,6 +105,7 @@ const Drawings10: React.FC<drawingProps> = ({
   processRange,
   hlRange,
   hlLength,
+  OAL,
 }) => {
   const showHL = hlSensor !== "nHL";
   const showProcess = processTemp !== "nT";
@@ -1328,6 +1330,7 @@ const Drawings10: React.FC<drawingProps> = ({
         elementNum={elementCount}
         immersionLength={lengthElement}
         coldLength={coldLength}
+        OAL = {OAL}
       />
 
 
