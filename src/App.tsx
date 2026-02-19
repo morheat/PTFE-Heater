@@ -15,14 +15,13 @@ function App() {
   // --- State Hooks ---
   const [serialNum, setSerialNum] = useState<string>("");
   const [titleVar, setTitle] = useState<string>("");
-  const [voltsVar, setVoltage] = useState<number>(120);
+  const [voltsVar, setVoltage] = useState<number>(240);
   const [wattsVar, setWattage] = useState<number>(500);
   const [phaseVar, setPhase] = useState<number>(1);
   const [terminalBoxVar, setTerminalBox] = useState<string>("N1");
   const [materialVar, setMaterial] = useState<string>("304SS");
   const [seriesVar, setSeries] = useState<string>("9HX");
   const [protectorVar, setProtector] = useState<string>("P1");
-  const [wireLenVar, setWireLen] = useState<string>("");
 
   const [hotLengthText, setHotLengthText] = useState<string>("9");
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
@@ -54,7 +53,6 @@ function App() {
     }
   }, [dpstActive, terminalBoxVar]);
 
-  // AUTO-DEFAULT: Set hot length to minimum when Wattage changes
   useEffect(() => {
     const min = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
     setHotLengthText(String(min));
@@ -64,6 +62,16 @@ function App() {
     if (/^\d*\.?\d*$/.test(val)) setter(val);
   };
 
+  const formatRangeLabel = (range: string) => {
+    const m = range.match(/^([CF]):(-?\d+),(-?\d+)$/);
+    if (!m) return range;
+    const [_, unit, a, b] = m;
+    const valA = Number(a); const valB = Number(b);
+    if (unit === "C") return `${a}–${b}°C (${Math.round((valA * 9/5) + 32)}–${Math.round((valB * 9/5) + 32)}°F)`;
+    return `${a}–${b}°F (${Math.round((valA - 32) * 5/9)}–${Math.round((valB - 32) * 5/9)}°C)`;
+  };
+
+  // --- Export Functions ---
   const getDrawingBlob = async (): Promise<Blob> => {
     if (!drawingRef.current) throw new Error("Drawing ref not found");
     const blob = await htmlToImage.toBlob(drawingRef.current, {
@@ -86,70 +94,63 @@ function App() {
       const blob = await getDrawingBlob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url; a.download = `drawing-${Date.now()}.png`; a.click();
+      a.href = url; 
+      a.download = `drawing-${serialNum || Date.now()}.png`; 
+      a.click();
       URL.revokeObjectURL(url);
     } catch (err) { alert("Download failed."); }
   };
 
-  const formatRangeLabel = (range: string) => {
-    const m = range.match(/^([CF]):(-?\d+),(-?\d+)$/);
-    if (!m) return range;
-    const [_, unit, a, b] = m;
-    const valA = Number(a); const valB = Number(b);
-    if (unit === "C") return `${a}–${b}°C (${Math.round((valA * 9/5) + 32)}–${Math.round((valB * 9/5) + 32)}°F)`;
-    return `${a}–${b}°F (${Math.round((valA - 32) * 5/9)}–${Math.round((valB - 32) * 5/9)}°C)`;
-  };
-
   return (
     <div className="flex justify-center mt-5 w-screen gap-6">
-      <div className="w-96 bg-white p-4 border-2 border-slate-400 rounded-lg text-gray-700 overflow-y-auto max-h-[90vh]">
+      <div className="w-96 bg-white p-4 border-2 border-slate-400 rounded-lg text-gray-700 overflow-y-auto max-h-[95vh] shadow-xl">
         
         {/* Serial & Title */}
-        <div className="flex gap-3 mb-4">
-          <div className="flex-1">
-            <h1 className="text-xs font-bold">Serial Number</h1>
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Serial Number</h1>
             <input type="text" value={serialNum} onChange={(e) => setSerialNum(e.target.value)} className="input input-bordered border-cyan-500 input-xs w-full" />
           </div>
-          <div className="flex-1">
-            <h1 className="text-xs font-bold">Title</h1>
+          <div>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Title</h1>
             <input type="text" value={titleVar} onChange={(e) => setTitle(e.target.value)} className="input input-bordered border-cyan-500 input-xs w-full" />
           </div>
         </div>
 
-        {/* Electrical Specs */}
+        {/* Electrical */}
         <div className="grid grid-cols-3 gap-3 mb-4">
           <div>
-            <h1 className="text-xs font-bold">Voltage</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Volts</h1>
             <select className="select select-xs border-cyan-500 w-full" value={voltsVar} onChange={(e) => setVoltage(Number(e.target.value))}>
-              <option value={120}>120 V</option><option value={208}>208 V</option><option value={240}>240 V</option><option value={480}>480 V</option>
+              {[120, 208, 240, 480, 600].map(v => <option key={v} value={v}>{v}V</option>)}
             </select>
           </div>
           <div>
-            <h1 className="text-xs font-bold">Wattage</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Watts</h1>
             <select className="select select-xs border-cyan-500 w-full" value={wattsVar} onChange={(e) => setWattage(Number(e.target.value))}>
-              {Object.keys(MIN_HOT_BY_WATTS).map(w => <option key={w} value={w}>{w} W</option>)}
+              {Object.keys(MIN_HOT_BY_WATTS).map(w => <option key={w} value={w}>{w}W</option>)}
             </select>
           </div>
           <div>
-            <h1 className="text-xs font-bold">Phase</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Phase</h1>
             <select className="select select-xs border-cyan-500 w-full" value={phaseVar} onChange={(e) => setPhase(Number(e.target.value))}>
               <option value={1}>1Ø</option><option value={3}>3Ø</option>
             </select>
           </div>
         </div>
 
-        {/* Build Specs: Series & Material */}
+        {/* PTFE Build Specs */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
-            <h1 className="text-xs font-bold">Series (PTFE/HX)</h1>
-            <select className="select select-xs border-cyan-500 w-full font-bold" value={seriesVar} onChange={(e) => setSeries(e.target.value)}>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Series</h1>
+            <select className="select select-xs border-cyan-500 w-full" value={seriesVar} onChange={(e) => setSeries(e.target.value)}>
               <option value="9HX">9HX Series</option>
               <option value="PTFE">PTFE Series</option>
               <option value="6HX">6HX Series</option>
             </select>
           </div>
           <div>
-            <h1 className="text-xs font-bold">Sheath Material</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Material</h1>
             <select className="select select-xs border-cyan-500 w-full" value={materialVar} onChange={(e) => setMaterial(e.target.value)}>
               <option value="304SS">304 Stainless</option>
               <option value="316SS">316 Stainless</option>
@@ -159,18 +160,20 @@ function App() {
           </div>
         </div>
 
-        {/* Protection & Enclosure */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
-            <h1 className="text-xs font-bold">Protector</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Protector</h1>
             <select className="select select-xs border-cyan-500 w-full" value={protectorVar} onChange={(e) => setProtector(e.target.value)}>
-              <option value="P1">P1 (Standard)</option><option value="P2">P2</option><option value="P3">P3</option>
+              <option value="P1">P1 (Std)</option>
+              <option value="P2">P2 (Resettable)</option>
+              <option value="P3">P3 (Liquid)</option>
             </select>
           </div>
           <div>
-            <h1 className="text-xs font-bold">Terminal Box</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Terminal Box</h1>
             <select className="select select-xs border-cyan-500 w-full" value={terminalBoxVar} onChange={(e) => setTerminalBox(e.target.value)}>
-              <option value="N1">Nema 1</option><option value="N4">Nema 4</option>
+              <option value="N1" disabled={dpstActive}>NEMA 1</option>
+              <option value="N4">NEMA 4 (Washdown)</option>
             </select>
           </div>
         </div>
@@ -178,18 +181,18 @@ function App() {
         {/* Lengths */}
         <div className="grid grid-cols-3 gap-3 mb-4">
           <div className="relative">
-            <h1 className="text-xs font-bold">Hot Zone</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Hot Zone</h1>
             <input type="text" value={hotLengthText} onChange={(e) => handleNumericInput(e.target.value, setHotLengthText)} 
                    className={`input input-xs w-full border ${isHotLengthUnderMin ? "border-red-500" : "border-cyan-500"}`} />
-            {isHotLengthUnderMin && <p className="text-[10px] text-red-500 absolute -bottom-4">Min: {minHot}&quot;</p>}
+            {isHotLengthUnderMin && <p className="text-[10px] text-red-500 absolute -bottom-4">Min: {minHot}"</p>}
           </div>
           <div>
-            <h1 className="text-xs font-bold">Cold</h1>
+            <h1 className="text-xs font-bold uppercase text-slate-500">Cold</h1>
             <input type="text" value={coldLengthText} onChange={(e) => handleNumericInput(e.target.value, setColdLengthText)} className="input input-xs w-full border-cyan-500" />
           </div>
           <div>
-            <h1 className="text-xs font-bold">OAL</h1>
-            <div className="input input-xs w-full bg-slate-100 flex items-center px-2">{OALVar.toFixed(1)}&quot;</div>
+            <h1 className="text-xs font-bold uppercase text-slate-500">OAL</h1>
+            <div className="input input-xs w-full bg-slate-100 flex items-center px-2 font-bold">{OALVar.toFixed(1)}"</div>
           </div>
         </div>
 
@@ -199,36 +202,72 @@ function App() {
             <div className="flex-1">
               <h1 className="text-xs font-bold">Process TW</h1>
               <select className="select select-xs w-full border-cyan-500" value={processType === "nT" ? "NO" : "YES"} 
-                onChange={(e) => setProcessType(e.target.value === "NO" ? "nT" : "J")}>
+                onChange={(e) => {
+                  const val = e.target.value === "NO" ? "nT" : "J";
+                  setProcessType(val);
+                  if (val === "nT") setProcessRange("");
+                }}>
                 <option value="NO">No</option><option value="YES">Yes</option>
               </select>
             </div>
             <div className="flex-1">
               <h1 className="text-xs font-bold">High Limit TW</h1>
               <select className="select select-xs w-full border-cyan-500" value={hlType === "nHL" ? "NO" : "YES"} 
-                onChange={(e) => setHLType(e.target.value === "NO" ? "nHL" : "J")}>
+                onChange={(e) => {
+                  const val = e.target.value === "NO" ? "nHL" : "J";
+                  setHLType(val);
+                  if (val === "nHL") setHLRange("");
+                }}>
                 <option value="NO">No</option><option value="YES">Yes</option>
               </select>
             </div>
           </div>
 
-          {/* SIDE BY SIDE DETAIL BOXES */}
           <div className="flex gap-2 mt-2">
+            {/* Process Details */}
             {processType !== "nT" && (
               <div className="flex-1 p-2 bg-slate-50 border border-cyan-500 rounded">
-                <h1 className="text-[9px] uppercase font-bold text-slate-500 mb-1">Process</h1>
-                <select className="select select-xs w-full mb-1 border-cyan-500" value={processType} onChange={(e) => setProcessType(e.target.value)}>
-                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option><option value="SPST">SPST</option><option value="DPST">DPST</option>
+                <select className="select select-xs w-full mb-1 border-cyan-500" value={processType} 
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setProcessType(v);
+                    setProcessRange(v === "SPST" ? SPST_RANGES[1] : v === "DPST" ? DPST_RANGES[0] : "");
+                  }}>
+                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option>
+                  <option value="SPST">SPST</option><option value="DPST">DPST</option>
                 </select>
+
+                {(processType === "SPST" || processType === "DPST") && (
+                  <select className="select select-xs w-full mb-1 border-cyan-500" value={processRange} onChange={(e) => setProcessRange(e.target.value)}>
+                    {(processType === "SPST" ? SPST_RANGES : DPST_RANGES).map(r => (
+                      <option key={r} value={r}>{formatRangeLabel(r)}</option>
+                    ))}
+                  </select>
+                )}
                 <input type="text" placeholder="Length" value={processLenText} onChange={(e) => handleNumericInput(e.target.value, setProcessLenText)} className="input input-xs w-full border-cyan-500" />
               </div>
             )}
+
+            {/* HL Details */}
             {hlType !== "nHL" && (
               <div className="flex-1 p-2 bg-slate-50 border border-cyan-500 rounded">
-                <h1 className="text-[9px] uppercase font-bold text-slate-500 mb-1">High Limit</h1>
-                <select className="select select-xs w-full mb-1 border-cyan-500" value={hlType} onChange={(e) => setHLType(e.target.value)}>
-                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option><option value="SPST">SPST</option><option value="DPST">DPST</option>
+                <select className="select select-xs w-full mb-1 border-cyan-500" value={hlType} 
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setHLType(v);
+                    setHLRange(v === "SPST" ? SPST_RANGES[1] : v === "DPST" ? DPST_RANGES[0] : "");
+                  }}>
+                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option>
+                  <option value="SPST">SPST</option><option value="DPST">DPST</option>
                 </select>
+
+                {(hlType === "SPST" || hlType === "DPST") && (
+                  <select className="select select-xs w-full mb-1 border-cyan-500" value={hlRange} onChange={(e) => setHLRange(e.target.value)}>
+                    {(hlType === "SPST" ? SPST_RANGES : DPST_RANGES).map(r => (
+                      <option key={r} value={r}>{formatRangeLabel(r)}</option>
+                    ))}
+                  </select>
+                )}
                 <input type="text" placeholder="Length" value={hlLenText} onChange={(e) => handleNumericInput(e.target.value, setHLLenText)} className="input input-xs w-full border-cyan-500" />
               </div>
             )}
@@ -236,8 +275,8 @@ function App() {
         </div>
 
         <div className="mt-8 space-y-2">
-          <button className="btn btn-sm w-full btn-info" onClick={copyDrawingToClipboard}>Copy PNG</button>
-          <button className="btn btn-sm w-full btn-outline" onClick={downloadDrawingPng}>Download PNG</button>
+          <button className="btn btn-sm w-full btn-info" onClick={copyDrawingToClipboard}>Copy Drawing PNG</button>
+          <button className="btn btn-sm w-full btn-outline" onClick={downloadDrawingPng}>Download Drawing PNG</button>
         </div>
       </div>
 
@@ -245,8 +284,6 @@ function App() {
         drawingRef={drawingRef}
         serialNum={serialNum}
         title={titleVar}
-        lengthElement={OALVar}
-        foldLength={0}
         phase={phaseVar}
         material={materialVar}
         voltage={voltsVar}

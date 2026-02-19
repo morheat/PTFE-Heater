@@ -67,23 +67,30 @@ const Header: React.FC<headerProps> = ({
 
     // PART NUMBER FORMAT:
     // IM-HX.<first digit of watts><first digit of volts><first two digits of OAL>
+      // 1. Map Voltage to the specific single-digit codes from the chart
+      const VOLT_MAP: Record<number, string> = {
+        120: "1", 240: "2", 380: "3", 480: "4", 415: "5", 
+        600: "6", 400: "7", 208: "8", 220: "9", 200: "0"
+      };
 
-    const oalInt = OAL;
+      // 2. Format Wattage (e.g., 4500 -> 4.5, 12000 -> 12)
+      const wattCode = wattsNum >= 1000 ? (wattsNum / 1000).toString() : wattsNum.toString();
 
-    const wattsFirstDigit =
-      wattsNum > 0 ? String(wattsNum)[0] : "";
+      // 3. Voltage Code
+      const voltCode = VOLT_MAP[voltsNum] || "X"; // "X" as fallback
 
-    const voltsFirstDigit =
-      voltsNum > 0 ? String(voltsNum)[0] : "";
+      // 4. OAL (Uses the actual number, usually 2 digits)
+      const oalCode = Math.round(OAL).toString().padStart(2, "0");
 
-    const oalTwoDigits =
-      oalInt > 0 ? String(oalInt).padStart(2, "0").slice(0, 2) : "";
+      // 5. Phase (Blank for 3-Phase standard, "1" for Single Phase)
+      const phaseCode = phase === 1 ? "-1" : "";
 
-    const partNumber =
-      wattsFirstDigit && voltsFirstDigit && oalTwoDigits
-        ? `IM-9HX.${wattsFirstDigit}${voltsFirstDigit}${oalTwoDigits}${"-**"}`
-        : "";
+      // 6. Protector & Wire (Handles the P1/P2 and the optional X length)
+      const protCode = protector ? `-${protector}` : "";
+      const wireCode = wireLen ? `-${wireLen}` : "";
 
+      // FINAL ASSEMBLY: IM-9HX + Wattage + VoltCode + OAL + Phase + Protector + Wire
+      const partNumber = `IM-9HX${wattCode}.${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
 
   return (
     <div className="absolute text-black font-bold">
