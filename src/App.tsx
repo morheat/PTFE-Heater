@@ -22,6 +22,12 @@ function App() {
   const [materialVar, setMaterial] = useState<string>("304SS");
   const [seriesVar, setSeries] = useState<string>("9HX");
   const [protectorVar, setProtector] = useState<string>("P1");
+  const [immersionLengthText, setImmersionLengthText] = useState<string>("25");
+  const immersionLengthVar =
+    Number.isFinite(Number.parseFloat(immersionLengthText))
+      ? Number.parseFloat(immersionLengthText)
+      : 0;
+  const [foldLengthVar, setFoldLength] = useState<number>(0);
 
   const [hotLengthText, setHotLengthText] = useState<string>("9");
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
@@ -300,6 +306,8 @@ function App() {
         hlLength={hlLenNum}
         series={seriesVar}
         protector={protectorVar}
+        foldLength={foldLengthVar}
+        lengthElement={immersionLengthVar}
       />
     </div>
   );
