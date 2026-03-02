@@ -5,59 +5,13 @@ import Titlebox from "./assets/TITLE.svg?react";
 import LOGO from "./assets/LOGO.svg?react";
 
 // Your ONE static full drawing SVG (10-inch config)
-// 1 Inch
-import Layout1N1 from "./assets/1inNEMA1.svg?react";
-import Layout1N1Fold from "./assets/1inNEMA1Fold.svg?react";
-import Layout1N1T from "./assets/1inch NEMA 1 Built In Thermostat SPST.svg?react";
-import Layout1N1FoldT from "./assets/1inch NEMA 1 Built In Thermostat SPST with fold back design.svg?react";
+import Layout9HX from "./assets/9HX Metal Heater.svg?react";
 
-import Layout1N4 from "./assets/1inNema4.svg?react";
-import Layout1N4Fold from "./assets/1inNEMA4Fold.svg?react";
-import Layout1N4T from "./assets/1inch NEMA 4 Built In Thermostat SPST NEMA 4.svg?react";
-import Layout1N4FoldT from "./assets/1inch NEMA 4 Built In Thermostat SPST with fold back design.svg?react";
-import Layout1N4FoldDPST from "./assets/1 inch NEMA 4 built in Thermostat DPST with Foldback.svg?react";
-import Layout1N4DPST from "./assets/1 inch NEMA 4 Built in Thermostat DPST.svg?react";
-
-import Layout1N7 from "./assets/1inNEMA7.svg?react";
-import Layout1N7Fold from "./assets/1inNEMA7Fold.svg?react";
-import Layout1N7T from "./assets/1inch NEMA 7 Built In Thermostat SPST.svg?react";
-import Layout1N7FoldT from "./assets/1inch NEMA 7 Built In Thermostat SPST with Foldback Design.svg?react";
-
-// 1.25 Inch
-import Layout125N1_E1 from "./assets/125inNEMA1_E1.svg?react"
-import Layout125N1_E2 from "./assets/125NEMA1-E2.svg?react"
-import Layout125N1_E1T from "./assets/1.25inch NEMA 1 Built In Thermostat SPST one Element.svg?react"
-import Layout125N1_E2T from "./assets/1.25inch NEMA 1 Built In Thermostat SPST Two Element.svg?react"
-
-import Layout125N4_E1 from "./assets/125NEMA4_E1.svg?react"
-import Layout125N4_E2 from "./assets/125NEMA4_E2.svg?react"
-import Layout125N4_E1T from "./assets/1.25inch NEMA 4 Built In Thermostat SPST one Element.svg?react"
-import Layout125N4_E2T from "./assets/1.25inch NEMA 4 Built In Thermostat SPST two element.svg?react"
-import Layout125N4_E1DPST from "./assets/1.25 inch NEMA 4 built in Thermostat DPST with one element.svg?react"
-import Layout125N4_E2DPST from "./assets/1.25 inch NEMA 4 built in Thermostat DPST with two element.svg?react"
-
-import Layout125N7_E1 from "./assets/125inNEMA7_E1.svg?react"
-import Layout125N7_E2 from "./assets/125inNEMA7_E2.svg?react"
-import Layout125N7_E1T from "./assets/1.25inch NEMA 7 Built In Thermostat SPST one Element.svg?react"
-import Layout125N7_E2T from "./assets/1.25inch NEMA 7 Built In Thermostat SPST two element.svg?react"
-
-//2 inch
-import Layout2N1 from "./assets/2inNEMA1.svg?react"
-import Layout2N4 from "./assets/2inNEMA4.svg?react"
-import Layout2N7 from "./assets/2inNEMA7.svg?react"
-import Layout2N1T from "./assets/2inch NEMA 1 Built In Thermostat SPST & TPST.svg?react"
-import Layout2N4T from "./assets/2inch NEMA 4 Built In Thermostat SPST.svg?react"
-import Layout2N7T from "./assets/2inch NEMA 7 Built In Thermostat SPST.svg?react"
-import Layout2N4DPST from "./assets/2 inch NEMA 4 DPST.svg?react"
-
-//2.5 inch
-import Layout25N1 from "./assets/25inNEMA1.svg?react"
-import Layout25N4 from "./assets/25inNEMA4.svg?react"
-import Layout25N7 from "./assets/25inNEMA7.svg?react"
-import Layout25N1T from "./assets/2.5inch NEMA 1 Built In Thermostat SPST & TPST.svg?react"
-import Layout25N4T from "./assets/2.5inch NEMA 4 Built In Thermostat SPST.svg?react"
-import Layout25N7T from "./assets/2.5inch NEMA 7 Built In Thermostat SPST.svg?react"
-import Layout25N4DPST from "./assets/2.5 inch NEMA 4 DPST.svg?react"
+  const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }> = ({ value, style }) => (
+    <div style={{ position: "absolute", fontWeight: "bold", fontSize: "14px", pointerEvents: "none", ...style }}>
+      {value}"
+    </div>
+  );
 
 
 interface drawingProps {
@@ -115,6 +69,34 @@ const Drawings10: React.FC<drawingProps> = ({
   const isDPST = processTemp === "DPST" || hlSensor === "DPST";
   const terminalBoxEffective = isDPST ? "N4" : terminalBox;
 
+
+
+  // 1. UPDATED DRAWING SELECTION
+  const LayoutSVG = useMemo(() => {
+    // Priority 1: Check series
+    if (series === "9HX") return Layout9HX;
+
+    // Priority 2: Standard logic (existing)
+    const useT = showProcess;
+    const tb = terminalBoxEffective;
+    // ... (rest of your existing NPTSize/terminalBox logic here)
+    
+    return null; 
+  }, [series, NPTSize, terminalBoxEffective, isDPST, hasFold, elementCount, showProcess]);
+
+  // 2. 9HX SPECIFIC DIMENSION CALCULATIONS (Numbers only)
+  const hotZone = useMemo(() => {
+    return (lengthElement - coldLength).toFixed(2);
+  }, [lengthElement, coldLength]);
+
+  // 3. CONFIG FOR 9HX TEXT POSITIONS
+  // Adjust these percentages to line up with your specific SVG
+  const cfg9HX = {
+    coldZonePos: { left: "45%", bottom: "20%" },
+    hotZonePos: { left: "65%", bottom: "20%" },
+    oalPos: { left: "55%", bottom: "10%" },
+    materialPos: { left: "85%", bottom: "40%" }
+  };
 
   // °C/°F helpers (same as working)
   const cToF = (c: number) => (c * 9) / 5 + 32;
@@ -214,74 +196,74 @@ const Drawings10: React.FC<drawingProps> = ({
   // const is10in = NPTSize === 10;
 
   // pick correct drawing
-  const LayoutSVG = useMemo(() => {
-    const useT = showProcess; // "thermostat exists" drawings
-    const tb = terminalBoxEffective;
+  // const LayoutSVG = useMemo(() => {
+  //   const useT = showProcess; // "thermostat exists" drawings
+  //   const tb = terminalBoxEffective;
 
-    // ----- 1 inch -----
-    if (NPTSize === 1 && tb === "N1") {
-      if (useT) return hasFold ? Layout1N1FoldT : Layout1N1T;
-      return hasFold ? Layout1N1Fold : Layout1N1;
-    }
+  //   // ----- 1 inch -----
+  //   if (NPTSize === 1 && tb === "N1") {
+  //     if (useT) return hasFold ? Layout1N1FoldT : Layout1N1T;
+  //     return hasFold ? Layout1N1Fold : Layout1N1;
+  //   }
 
-    if (NPTSize === 1 && tb === "N4") {
-      // ✅ DPST special layouts
-      if (isDPST) return hasFold ? Layout1N4FoldDPST : Layout1N4DPST;
+  //   if (NPTSize === 1 && tb === "N4") {
+  //     // ✅ DPST special layouts
+  //     if (isDPST) return hasFold ? Layout1N4FoldDPST : Layout1N4DPST;
 
-      if (useT) return hasFold ? Layout1N4FoldT : Layout1N4T;
-      return hasFold ? Layout1N4Fold : Layout1N4;
-    }
+  //     if (useT) return hasFold ? Layout1N4FoldT : Layout1N4T;
+  //     return hasFold ? Layout1N4Fold : Layout1N4;
+  //   }
 
-    if (NPTSize === 1 && tb === "N7") {
-      if (useT) return hasFold ? Layout1N7FoldT : Layout1N7T;
-      return hasFold ? Layout1N7Fold : Layout1N7;
-    }
+  //   if (NPTSize === 1 && tb === "N7") {
+  //     if (useT) return hasFold ? Layout1N7FoldT : Layout1N7T;
+  //     return hasFold ? Layout1N7Fold : Layout1N7;
+  //   }
 
-    // ----- 1.25 inch -----
-    if (tb === "N1") {
-      if (useT) return elementCount === 2 ? Layout125N1_E2T : Layout125N1_E1T;
-      return elementCount === 2 ? Layout125N1_E2 : Layout125N1_E1;
-    }
+  //   // ----- 1.25 inch -----
+  //   if (tb === "N1") {
+  //     if (useT) return elementCount === 2 ? Layout125N1_E2T : Layout125N1_E1T;
+  //     return elementCount === 2 ? Layout125N1_E2 : Layout125N1_E1;
+  //   }
 
-    if (tb === "N4") {
-      // ✅ DPST special layouts (no foldback for 1.25 in your code, so just element count)
-      if (isDPST) return elementCount === 2 ? Layout125N4_E2DPST : Layout125N4_E1DPST;
+  //   if (tb === "N4") {
+  //     // ✅ DPST special layouts (no foldback for 1.25 in your code, so just element count)
+  //     if (isDPST) return elementCount === 2 ? Layout125N4_E2DPST : Layout125N4_E1DPST;
 
-      if (useT) return elementCount === 2 ? Layout125N4_E2T : Layout125N4_E1T;
-      return elementCount === 2 ? Layout125N4_E2 : Layout125N4_E1;
-    }
+  //     if (useT) return elementCount === 2 ? Layout125N4_E2T : Layout125N4_E1T;
+  //     return elementCount === 2 ? Layout125N4_E2 : Layout125N4_E1;
+  //   }
 
-    if (tb === "N7") {
-      if (useT) return elementCount === 2 ? Layout125N7_E2T : Layout125N7_E1T;
-      return elementCount === 2 ? Layout125N7_E2 : Layout125N7_E1;
-    }
+  //   if (tb === "N7") {
+  //     if (useT) return elementCount === 2 ? Layout125N7_E2T : Layout125N7_E1T;
+  //     return elementCount === 2 ? Layout125N7_E2 : Layout125N7_E1;
+  //   }
 
-    // ----- 2 inch -----
-    if (tb === "N1") return useT ? Layout2N1T : Layout2N1;
+  //   // ----- 2 inch -----
+  //   if (tb === "N1") return useT ? Layout2N1T : Layout2N1;
 
-    if (tb === "N4") {
-      // ✅ DPST special layout
-      if (isDPST) return Layout2N4DPST;
+  //   if (tb === "N4") {
+  //     // ✅ DPST special layout
+  //     if (isDPST) return Layout2N4DPST;
 
-      return useT ? Layout2N4T : Layout2N4;
-    }
+  //     return useT ? Layout2N4T : Layout2N4;
+  //   }
 
-    if (tb === "N7") return useT ? Layout2N7T : Layout2N7;
+  //   if (tb === "N7") return useT ? Layout2N7T : Layout2N7;
 
-    // ----- 2.5 inch -----
-    if (tb === "N1") return useT ? Layout25N1T : Layout25N1;
+  //   // ----- 2.5 inch -----
+  //   if (tb === "N1") return useT ? Layout25N1T : Layout25N1;
 
-    if (tb === "N4") {
-      // ✅ DPST special layout
-      if (isDPST) return Layout25N4DPST;
+  //   if (tb === "N4") {
+  //     // ✅ DPST special layout
+  //     if (isDPST) return Layout25N4DPST;
 
-      return useT ? Layout25N4T : Layout25N4;
-    }
+  //     return useT ? Layout25N4T : Layout25N4;
+  //   }
 
-    if (tb === "N7") return useT ? Layout25N7T : Layout25N7;
+  //   if (tb === "N7") return useT ? Layout25N7T : Layout25N7;
 
-    return null;
-  }, [NPTSize, terminalBoxEffective, isDPST, hasFold, elementCount, showProcess]);
+  //   return null;
+  // }, [NPTSize, terminalBoxEffective, isDPST, hasFold, elementCount, showProcess]);
 
 
 
@@ -1360,45 +1342,14 @@ const Drawings10: React.FC<drawingProps> = ({
             {/* ✅ Only render overlays when we actually have overlayCfg */}
             {overlayCfg && (
               <>
-                  {/* ===== HL Sensor (RED bar) ===== */}
-                  {showHL && overlayCfg?.hlBar && (
-                    <div
-                      className="absolute pointer-events-none"
-                      style={{
-                        left: overlayCfg.hlBar.left,
-                        bottom: overlayCfg.hlBar.bottom,
-                        width: overlayCfg.hlBar.width,
-                        height: overlayCfg.hlBar.height,
-                        backgroundColor: "#fa1515",
-                        border: "1px solid black",
-                        zIndex: 60,
-                      }}
-                    />
-                  )}
-
-
-
-                {/* Thermowell DIM (TEXT ONLY) */}
-                {showThermowellDim && overlayCfg?.thermoDim && (
-                  <div
-                    className="absolute pointer-events-none text-black"
-                    style={{
-                      left: overlayCfg.thermoDim.left,
-                      bottom: overlayCfg.thermoDim.bottom,
-                      transform: "translate(-50%, -50%)",
-                      fontSize: "16px",
-                      background: "white",
-                      padding: "2px 6px",
-                      zIndex: 95,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {thermoLength}&quot;
-                  </div>
-                )}
-
-
-
+                  {/* 9HX TEXT-ONLY DIMENSIONS */}
+                    {series === "9HX" && (
+                      <>
+                        <RawNumber value={coldLength} style={cfg9HX.coldZonePos} />
+                        <RawNumber value={hotZone} style={cfg9HX.hotZonePos} />
+                        <RawNumber value={OAL} style={cfg9HX.oalPos} />
+                      </>
+                    )}
 
                 {/* HL DIM (BOTTOM, lines go UP) */}
                 {showHL && overlayCfg?.HLDim && (
@@ -1621,10 +1572,6 @@ const Drawings10: React.FC<drawingProps> = ({
                 </div>
               )}
 
-
-
-
-
                 {/* ============================================
                    IMMERSION DIMENSION: remove arrows/line
                    We "erase" that area by covering it white,
@@ -1691,39 +1638,6 @@ const Drawings10: React.FC<drawingProps> = ({
                     </div>
                   </>
                 )}
-
-                {/* PROCESS LEADER (BLUE BOX) */}
-                {showProcess && overlayCfg?.processLeader && (
-                  <LeaderOverlay
-                    cfg={overlayCfg.processLeader}
-                    label={processThermowellLabel}
-                    color="#1d4ed8"
-                    triangleColor="#1d4ed8"
-                    zIndex={206}
-                    stem="bottom"   // ✅ THIS is the key
-                  />
-                )}
-
-
-
-                {/* ==============================
-                        TEMP SENSOR OPTION (HL)
-                        Yellow bar + leader text
-                    ============================== */}
-                    
-                    {/* HL LEADER (RED BOX) — arrow from TOP */}
-                    {showHL && overlayCfg?.hlLeader && (
-                      <LeaderOverlay
-                        cfg={overlayCfg.hlLeader}
-                        label={highLimitLabel}
-                        color="#dc2626"
-                        triangleColor="#dc2626"
-                        zIndex={207}
-                        stem="top"      // ✅ keep current HL behavior
-                      />
-                    )}
-
-
 
                     {/* ==============================
                         ✅ NEW LEADER: Elements + Material
