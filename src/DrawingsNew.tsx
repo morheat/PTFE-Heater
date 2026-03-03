@@ -192,16 +192,6 @@ const Drawings10: React.FC<drawingProps> = ({
   );
 };
 
-type LeaderCfg = {
-  left: string;
-  bottom: string;
-  rotate: number;
-  lineHeight: number;
-  textOffsetY: number;
-  textWidth?: number;
-  textRotate?: number;
-  baseBoxHeight?: number; // optional: helps keep arrow from drifting if label grows
-};
 
 export default Drawings10;
 

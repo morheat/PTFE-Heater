@@ -22,13 +22,6 @@ function App() {
   const [materialVar, setMaterial] = useState<string>("304SS");
   const [seriesVar, setSeries] = useState<string>("9HX");
   const [protectorVar, setProtector] = useState<string>("P1");
-  const [immersionLengthText, setImmersionLengthText] = useState<string>("25");
-  const immersionLengthVar =
-    Number.isFinite(Number.parseFloat(immersionLengthText))
-      ? Number.parseFloat(immersionLengthText)
-      : 0;
-  const [foldLengthVar, setFoldLength] = useState<number>(0);
-
   const [hotLengthText, setHotLengthText] = useState<string>("9");
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
   const [processLenText, setProcessLenText] = useState<string>("8");
@@ -44,8 +37,6 @@ function App() {
   // --- Calculations ---
   const hotLengthNum = useMemo(() => parseFloat(hotLengthText) || 0, [hotLengthText]);
   const coldLengthNum = useMemo(() => parseFloat(coldLengthText) || 0, [coldLengthText]);
-  const processLenNum = useMemo(() => parseFloat(processLenText) || 0, [processLenText]);
-  const hlLenNum = useMemo(() => parseFloat(hlLenText) || 0, [hlLenText]);
   
   const OALVar = hotLengthNum + coldLengthNum;
   const minHot = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
