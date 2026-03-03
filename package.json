@@ -1,9 +1,9 @@
 {
-  "name": "screwplug-heaters",
+  "name": "PTFEHEATER",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://morheat.github.io/FlangeHeater2",
+  "homepage": "https://github.com/morheat/PTFE-Heater.git",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
