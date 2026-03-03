@@ -4,5 +4,5 @@ import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: '/PTFE-Heater/', // This MUST match your repo name on GitHub
+  base: '/PTFE-Heater/', // This must match your repository name exactly
 })
