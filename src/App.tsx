@@ -8,9 +8,6 @@ const MIN_HOT_BY_WATTS: Record<number, number> = {
   600: 22, 8000: 36, 9000: 40, 12000: 38, 15000: 47, 18000: 55,
 };
 
-const SPST_RANGES = ["C:-30,30", "C:0,40", "C:0,50", "C:0,80", "C:0,90", "C:0,120", "C:0,150", "C:0,200", "C:0,250", "C:0,320"];
-const DPST_RANGES = ["F:0,100", "F:6,250", "F:50,550"];
-
 function App() {
   // --- State Hooks ---
   const [serialNum, setSerialNum] = useState<string>("");
@@ -18,37 +15,22 @@ function App() {
   const [voltsVar, setVoltage] = useState<number>(240);
   const [wattsVar, setWattage] = useState<number>(500);
   const [phaseVar, setPhase] = useState<number>(1);
-  const [terminalBoxVar, setTerminalBox] = useState<string>("N1");
   const [materialVar, setMaterial] = useState<string>("304SS");
   const [seriesVar, setSeries] = useState<string>("9HX");
   const [protectorVar, setProtector] = useState<string>("P1");
   const [hotLengthText, setHotLengthText] = useState<string>("9");
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
-  const [processLenText, setProcessLenText] = useState<string>("8");
-  const [hlLenText, setHLLenText] = useState<string>("8");
-
-  const [processType, setProcessType] = useState<string>("nT"); 
-  const [processRange, setProcessRange] = useState<string>(""); 
-  const [hlType, setHLType] = useState<string>("nHL");
-  const [hlRange, setHLRange] = useState<string>("");
 
   const drawingRef = useRef<HTMLDivElement>(null);
 
   // --- Calculations ---
   const hotLengthNum = useMemo(() => parseFloat(hotLengthText) || 0, [hotLengthText]);
   const coldLengthNum = useMemo(() => parseFloat(coldLengthText) || 0, [coldLengthText]);
-  
+
   const OALVar = hotLengthNum + coldLengthNum;
   const minHot = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
   const isHotLengthUnderMin = hotLengthText !== "" && hotLengthNum < minHot;
-  const dpstActive = processType === "DPST" || hlType === "DPST";
 
-  // --- Effects ---
-  useEffect(() => {
-    if (dpstActive && terminalBoxVar !== "N4") {
-      setTerminalBox("N4");
-    }
-  }, [dpstActive, terminalBoxVar]);
 
   useEffect(() => {
     const min = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
@@ -57,15 +39,6 @@ function App() {
 
   const handleNumericInput = (val: string, setter: (v: string) => void) => {
     if (/^\d*\.?\d*$/.test(val)) setter(val);
-  };
-
-  const formatRangeLabel = (range: string) => {
-    const m = range.match(/^([CF]):(-?\d+),(-?\d+)$/);
-    if (!m) return range;
-    const [_, unit, a, b] = m;
-    const valA = Number(a); const valB = Number(b);
-    if (unit === "C") return `${a}–${b}°C (${Math.round((valA * 9/5) + 32)}–${Math.round((valB * 9/5) + 32)}°F)`;
-    return `${a}–${b}°F (${Math.round((valA - 32) * 5/9)}–${Math.round((valB - 32) * 5/9)}°C)`;
   };
 
   // --- Export Functions ---
@@ -166,13 +139,6 @@ function App() {
               <option value="P3">P3 (Liquid)</option>
             </select>
           </div>
-          <div>
-            <h1 className="text-xs font-bold uppercase text-slate-500">Terminal Box</h1>
-            <select className="select select-xs border-cyan-500 w-full" value={terminalBoxVar} onChange={(e) => setTerminalBox(e.target.value)}>
-              <option value="N1" disabled={dpstActive}>NEMA 1</option>
-              <option value="N4">NEMA 4 (Washdown)</option>
-            </select>
-          </div>
         </div>
 
         {/* Lengths */}
@@ -190,84 +156,6 @@ function App() {
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">OAL</h1>
             <div className="input input-xs w-full bg-slate-100 flex items-center px-2 font-bold">{OALVar.toFixed(1)}"</div>
-          </div>
-        </div>
-
-        {/* Thermowells Section */}
-        <div className="border-t pt-2 mt-2">
-          <div className="flex gap-3 mb-2">
-            <div className="flex-1">
-              <h1 className="text-xs font-bold">Process TW</h1>
-              <select className="select select-xs w-full border-cyan-500" value={processType === "nT" ? "NO" : "YES"} 
-                onChange={(e) => {
-                  const val = e.target.value === "NO" ? "nT" : "J";
-                  setProcessType(val);
-                  if (val === "nT") setProcessRange("");
-                }}>
-                <option value="NO">No</option><option value="YES">Yes</option>
-              </select>
-            </div>
-            <div className="flex-1">
-              <h1 className="text-xs font-bold">High Limit TW</h1>
-              <select className="select select-xs w-full border-cyan-500" value={hlType === "nHL" ? "NO" : "YES"} 
-                onChange={(e) => {
-                  const val = e.target.value === "NO" ? "nHL" : "J";
-                  setHLType(val);
-                  if (val === "nHL") setHLRange("");
-                }}>
-                <option value="NO">No</option><option value="YES">Yes</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex gap-2 mt-2">
-            {/* Process Details */}
-            {processType !== "nT" && (
-              <div className="flex-1 p-2 bg-slate-50 border border-cyan-500 rounded">
-                <select className="select select-xs w-full mb-1 border-cyan-500" value={processType} 
-                  onChange={(e) => {
-                    const v = e.target.value;
-                    setProcessType(v);
-                    setProcessRange(v === "SPST" ? SPST_RANGES[1] : v === "DPST" ? DPST_RANGES[0] : "");
-                  }}>
-                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option>
-                  <option value="SPST">SPST</option><option value="DPST">DPST</option>
-                </select>
-
-                {(processType === "SPST" || processType === "DPST") && (
-                  <select className="select select-xs w-full mb-1 border-cyan-500" value={processRange} onChange={(e) => setProcessRange(e.target.value)}>
-                    {(processType === "SPST" ? SPST_RANGES : DPST_RANGES).map(r => (
-                      <option key={r} value={r}>{formatRangeLabel(r)}</option>
-                    ))}
-                  </select>
-                )}
-                <input type="text" placeholder="Length" value={processLenText} onChange={(e) => handleNumericInput(e.target.value, setProcessLenText)} className="input input-xs w-full border-cyan-500" />
-              </div>
-            )}
-
-            {/* HL Details */}
-            {hlType !== "nHL" && (
-              <div className="flex-1 p-2 bg-slate-50 border border-cyan-500 rounded">
-                <select className="select select-xs w-full mb-1 border-cyan-500" value={hlType} 
-                  onChange={(e) => {
-                    const v = e.target.value;
-                    setHLType(v);
-                    setHLRange(v === "SPST" ? SPST_RANGES[1] : v === "DPST" ? DPST_RANGES[0] : "");
-                  }}>
-                  <option value="J">Type J</option><option value="K">Type K</option><option value="RTD">RTD</option>
-                  <option value="SPST">SPST</option><option value="DPST">DPST</option>
-                </select>
-
-                {(hlType === "SPST" || hlType === "DPST") && (
-                  <select className="select select-xs w-full mb-1 border-cyan-500" value={hlRange} onChange={(e) => setHLRange(e.target.value)}>
-                    {(hlType === "SPST" ? SPST_RANGES : DPST_RANGES).map(r => (
-                      <option key={r} value={r}>{formatRangeLabel(r)}</option>
-                    ))}
-                  </select>
-                )}
-                <input type="text" placeholder="Length" value={hlLenText} onChange={(e) => handleNumericInput(e.target.value, setHLLenText)} className="input input-xs w-full border-cyan-500" />
-              </div>
-            )}
           </div>
         </div>
 
