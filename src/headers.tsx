@@ -27,6 +27,7 @@ const Header: React.FC<headerProps> = ({
   OAL,
   protector,
   wireLen,
+  series
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -79,14 +80,14 @@ const Header: React.FC<headerProps> = ({
       const oalCode = Math.round(OAL).toString().padStart(2, "0");
 
       // 5. Phase (Blank for 3-Phase standard, "1" for Single Phase)
-      const phaseCode = phase === 1 ? "-1" : "";
+      const phaseCode = phase === 1 ? "-1" : "-3";
 
       // 6. Protector & Wire (Handles the P1/P2 and the optional X length)
       const protCode = protector ? `-${protector}` : "";
       const wireCode = wireLen ? `-${wireLen}` : "";
 
       // FINAL ASSEMBLY: IM-9HX + Wattage + VoltCode + OAL + Phase + Protector + Wire
-      const partNumber = `IM-9HX${wattCode}.${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
+      const partNumber = `${series}${wattCode}.${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
 
   return (
     <div className="absolute text-black font-bold">

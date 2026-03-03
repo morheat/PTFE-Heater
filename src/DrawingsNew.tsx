@@ -6,25 +6,42 @@ import LOGO from "./assets/LOGO.svg?react";
 
 // Drawings
 import Layout9HX from "./assets/9HX Metal Heater.svg?react";
+import Layout9HS from "./assets/9HS Metal Heater.svg?react";
+import Layout6HX from "./assets/6HX Metal Heater.svg?react";
+import Layout6HS from "./assets/6HS Metal Heater.svg?react";
+import Layout3HX from "./assets/3HX Fluoropolymer Heater.svg?react";
+import Layout3HS from "./assets/3HS Series Tubular Metal Heater.svg?react";
+import Layout3HXO from "./assets/3HXO Fluoropolymer Heater.svg?react";
+import Layout5T from "./assets/5T & T5T Screwplug Heater.svg?react";
+import LayoutDTM from "./assets/Derated Triple Metal Over the Side Heaters.svg?react";
 
-  const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }> = ({ value, style }) => (
-    <div
-      style={{
-        position: "absolute",
-        fontWeight: "bold",
-        fontSize: "14px",
-        pointerEvents: "none",
-        backgroundColor: "white", // White box background
-        padding: "2px 4px",       // Space around text
-        lineHeight: "1",          // Tighter box
-        display: "flex",
-        alignItems: "center",
-        ...style,
-      }}
-    >
-      {value}"
-    </div>
-  );
+const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }> = ({ value, style }) => (
+  <div
+    style={{
+      position: "absolute",
+      fontWeight: "bold",
+      fontSize: "14px",
+      pointerEvents: "none",
+      backgroundColor: "white", // White box background
+      padding: "2px 4px",       // Space around text
+      lineHeight: "1",          // Tighter box
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",  // Centers text horizontally inside the div
+      whiteSpace: "nowrap",      // Prevents the number and " from splitting
+      
+      /* This is the magic line: 
+         -50% on X moves it left by half its own width.
+         50% on Y moves it up/down relative to the bottom anchor.
+      */
+      transform: "translate(-50%, 50%)", 
+      
+      ...style,
+    }}
+  >
+    {value}"
+  </div>
+);
 
 
 interface drawingProps {
@@ -63,6 +80,13 @@ const Drawings10: React.FC<drawingProps> = ({
   const LayoutSVG = useMemo(() => {
     // Priority 1: Check series
     if (series === "9HX") return Layout9HX;
+    if (series === "9HS") return Layout9HS;
+    if (series === "6HX") return Layout6HX;
+    if (series === "6HS") return Layout6HS;
+    if (series === "3HX") return Layout3HX;
+    if (series === "3HS") return Layout3HS;
+    if (series === "3HXO") return Layout3HXO;
+    if (series === "5T") return Layout5T;
     return null; 
   }, [series]);
 
@@ -72,15 +96,78 @@ const Drawings10: React.FC<drawingProps> = ({
   // =========================
  
   const cfg9HX = {
-    coldZonePos: { left: "60%", bottom: "65%" },
-    hotZonePos: { left: "80%", bottom: "65%" },
-    oalPos: { left: "68%", bottom: "76%" },
+    coldZonePos: { left: "61%", bottom: "69%" },
+    hotZonePos: { left: "83%", bottom: "69%" },
+    oalPos: { left: "70%", bottom: "80%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "60%", bottom: "-18%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-13%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg9HS = {
+    coldZonePos: { left: "62.5%", bottom: "66.5%" },
+    hotZonePos: { left: "85%", bottom: "66.5%" },
+    oalPos: { left: "72%", bottom: "76%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg6HX = {
+    coldZonePos: { left: "58%", bottom: "72%" },
+    hotZonePos: { left: "81%", bottom: "72%" },
+    oalPos: { left: "68%", bottom: "83.5%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-18%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg6HS = {
+    coldZonePos: { left: "60%", bottom: "68%" },
+    hotZonePos: { left: "84%", bottom: "68%" },
+    oalPos: { left: "70%", bottom: "80%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-18%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg3HX = {
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90.5%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-20%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg3HS = {
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90.5%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-20%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg3HXO = {
+    coldZonePos: { left: "50%", bottom: "83%" },
+    hotZonePos: { left: "78%", bottom: "83%" },
+    oalPos: { left: "68%", bottom: "93%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg5T = {
+    coldZonePos: { left: "27%", bottom: "76%" },
+    hotZonePos: { left: "48%", bottom: "76%" },
+    oalPos: { left: "42%", bottom: "88%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "58%", bottom: "12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const overlayCfg = useMemo(() => {
     if (series === "9HX") return cfg9HX;
+    if (series === "9HS") return cfg9HS;
+    if (series === "6HX") return cfg6HX;
+    if (series === "6HS") return cfg6HS;
+    if (series === "3HX") return cfg3HX;
+    if (series === "3HS") return cfg3HS;
+    if (series === "3HXO") return cfg3HXO;
+    if (series === "5T") return cfg5T;
 
     return null;
   }, [series]);
@@ -126,11 +213,11 @@ const Drawings10: React.FC<drawingProps> = ({
             {overlayCfg && (
               <>
                   {/* 9HX TEXT-ONLY DIMENSIONS */}
-                    {series === "9HX" && (
+                    {true&& (
                       <>
-                        <RawNumber value={coldLength} style={cfg9HX.coldZonePos} />
-                        <RawNumber value={hotLength} style={cfg9HX.hotZonePos} />
-                        <RawNumber value={OAL} style={cfg9HX.oalPos} />
+                        <RawNumber value={coldLength} style={overlayCfg.coldZonePos} />
+                        <RawNumber value={hotLength} style={overlayCfg.hotZonePos} />
+                        <RawNumber value={OAL} style={overlayCfg.oalPos} />
                       </>
                     )}
 

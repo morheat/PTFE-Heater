@@ -115,8 +115,13 @@ function App() {
             <h1 className="text-xs font-bold uppercase text-slate-500">Series</h1>
             <select className="select select-xs border-cyan-500 w-full" value={seriesVar} onChange={(e) => setSeries(e.target.value)}>
               <option value="9HX">9HX Series</option>
-              <option value="PTFE">PTFE Series</option>
+              <option value="9HS">9HS Series</option>
               <option value="6HX">6HX Series</option>
+              <option value="6HS">6HS Series</option>
+              <option value="3HX">3HX Series</option>
+              <option value="3HS">3HS Series</option>
+              <option value="3HXO">3HXO Series</option>
+              <option value="5T">5T Series</option>
             </select>
           </div>
           <div>
