@@ -295,20 +295,11 @@ function App() {
         voltage={voltsVar}
         wattage={wattsVar}
         OAL={OALVar}
-        terminalBox={terminalBoxVar}
         coldLength={coldLengthNum}
+        hotLength={hotLengthNum}
         elementCount={1}
-        processTemp={processType}
-        processRange={processRange}
-        thermoLength={processLenNum}
-        hlSensor={hlType}
-        hlRange={hlRange}
-        hlLength={hlLenNum}
         series={seriesVar}
         protector={protectorVar}
-        foldLength={foldLengthVar}
-        lengthElement={immersionLengthVar}
-        
       />
     </div>
   );

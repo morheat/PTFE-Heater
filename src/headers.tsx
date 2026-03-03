@@ -9,7 +9,6 @@ interface headerProps {
   wattage: number;
   elementNum: number;
   coldLength: number;
-  terminalBox: string;
   OAL: number;
   series: string;        // "9HX"
   protector: string;     // "P1"...
@@ -26,11 +25,8 @@ const Header: React.FC<headerProps> = ({
   elementNum,
   coldLength,
   OAL,
-  series,
   protector,
   wireLen,
-  //terminalBox,
-  //thermostat
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {
