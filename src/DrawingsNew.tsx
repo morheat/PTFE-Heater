@@ -14,6 +14,11 @@ import Layout3HS from "./assets/3HS Series Tubular Metal Heater.svg?react";
 import Layout3HXO from "./assets/3HXO Fluoropolymer Heater.svg?react";
 import Layout5T from "./assets/5T & T5T Screwplug Heater.svg?react";
 import LayoutDTM from "./assets/Derated Triple Metal Over the Side Heaters.svg?react";
+import LayoutFL from "./assets/FL Series Flanged Heater.svg?react";
+import LayoutHXT from "./assets/HXT Screwplug Heater.svg?react";
+import LayoutMOTS from "./assets/MOTS Single Derated.svg?react";
+import LayoutMOTS2 from "./assets/MOTS.svg?react";
+import LayoutT from "./assets/T Series Tubular Screwplug Heater.svg?react";
 
 const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }> = ({ value, style }) => (
   <div
@@ -87,6 +92,12 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "3HS") return Layout3HS;
     if (series === "3HXO") return Layout3HXO;
     if (series === "5T") return Layout5T;
+    if (series === "DTM") return LayoutDTM;
+    if (series === "FL") return LayoutFL;
+    if (series === "HXT") return LayoutHXT;
+    if (series === "MOTS Single") return LayoutMOTS;
+    if (series === "MOTS") return LayoutMOTS2;
+    if (series === "T") return LayoutT;
     return null; 
   }, [series]);
 
@@ -159,6 +170,54 @@ const Drawings10: React.FC<drawingProps> = ({
     elemMatLeader: { left: "58%", bottom: "12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
+  const cfgDTM = {
+    coldZonePos: { left: "63.5%", bottom: "68%" },
+    hotZonePos: { left: "81%", bottom: "68%" },
+    oalPos: { left: "73%", bottom: "76%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgFL = {
+    coldZonePos: { left: "63.5%", bottom: "68%" },
+    hotZonePos: { left: "81%", bottom: "68%" },
+    oalPos: { left: "73%", bottom: "76%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgHXT = {
+    coldZonePos: { left: "56%", bottom: "76%" },
+    hotZonePos: { left: "75%", bottom: "76%" },
+    oalPos: { left: "70%", bottom: "87%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgMOTS = {
+    coldZonePos: { left: "59%", bottom: "76.5%" },
+    hotZonePos: { left: "78%", bottom: "76.5%" },
+    oalPos: { left: "68%", bottom: "91%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgMOTS2 = {
+    coldZonePos: { left: "59%", bottom: "72%" },
+    hotZonePos: { left: "79%", bottom: "72%" },
+    oalPos: { left: "69%", bottom: "85%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgT = {
+    coldZonePos: { left: "59%", bottom: "59%" },
+    hotZonePos: { left: "79%", bottom: "59%" },
+    oalPos: { left: "75%", bottom: "70%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
   const overlayCfg = useMemo(() => {
     if (series === "9HX") return cfg9HX;
     if (series === "9HS") return cfg9HS;
@@ -168,6 +227,12 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "3HS") return cfg3HS;
     if (series === "3HXO") return cfg3HXO;
     if (series === "5T") return cfg5T;
+    if (series === "DTM") return cfgDTM;
+    if (series === "FL") return cfgFL;
+    if (series === "HXT") return cfgHXT;
+    if (series === "MOTS Single") return cfgMOTS;
+    if (series === "MOTS") return cfgMOTS2;
+    if (series === "T") return cfgT;
 
     return null;
   }, [series]);

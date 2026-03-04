@@ -122,6 +122,12 @@ function App() {
               <option value="3HS">3HS Series</option>
               <option value="3HXO">3HXO Series</option>
               <option value="5T">5T Series</option>
+              <option value="DTM">DTM Series</option>
+              <option value="FL">FL Series</option>
+              <option value="HXT">HXT Series</option>
+              <option value="MOTS Single">MOTS Single Series</option>
+              <option value="MOTS">MOTS Series</option>
+              <option value="T">T Series</option>
             </select>
           </div>
           <div>
