@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Force form inputs to stay light even in browser dark mode */
+input,
+textarea,
+select {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid #ccc;
+}
+
+/* Prevent Chrome auto dark styling */
+:root {
+  color-scheme: light;
+}

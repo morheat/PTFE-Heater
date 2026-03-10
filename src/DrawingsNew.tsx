@@ -34,6 +34,7 @@ const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }
       alignItems: "center",
       justifyContent: "center",  // Centers text horizontally inside the div
       whiteSpace: "nowrap",      // Prevents the number and " from splitting
+      color: "black",
       
       /* This is the magic line: 
          -50% on X moves it left by half its own width.
