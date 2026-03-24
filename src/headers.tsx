@@ -22,8 +22,6 @@ const Header: React.FC<headerProps> = ({
   voltage,
   phase,
   wattage,
-  elementNum,
-  coldLength,
   OAL,
   protector,
   wireLen,
@@ -56,12 +54,6 @@ const Header: React.FC<headerProps> = ({
       : "";
 
   // Watt density (W/in^2): Wattage / {0.475 * pi * elements * (heated length) * 2}
-  const heatedLength = OAL - coldLength;
-  const wattDensity =
-    wattsNum > 0 && elementNum > 0 && heatedLength > 0
-      ? wattsNum / (0.475 * Math.PI * elementNum * heatedLength * 2)
-      : null;
-
     // PART NUMBER FORMAT:
     // IM-HX.<first digit of watts><first digit of volts><first two digits of OAL>
       // 1. Map Voltage to the specific single-digit codes from the chart
@@ -71,7 +63,10 @@ const Header: React.FC<headerProps> = ({
       };
 
       // 2. Format Wattage (e.g., 4500 -> 4.5, 12000 -> 12)
-      const wattCode = wattsNum >= 1000 ? (wattsNum / 1000).toString() : wattsNum.toString();
+      const wattCode =
+        wattsNum < 1000
+          ? `.${wattsNum.toString().padStart(3, "0")}` // 500 -> .500
+          : (wattsNum / 1000).toString();             // 4500 -> 4.5, 12000 -> 12
 
       // 3. Voltage Code
       const voltCode = VOLT_MAP[voltsNum] || "X"; // "X" as fallback
@@ -87,7 +82,7 @@ const Header: React.FC<headerProps> = ({
       const wireCode = wireLen ? `-${wireLen}` : "";
 
       // FINAL ASSEMBLY: IM-9HX + Wattage + VoltCode + OAL + Phase + Protector + Wire
-      const partNumber = `${series}${wattCode}.${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
+      const partNumber = `${series}${wattCode}${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
 
   return (
     <div className="absolute text-black font-bold">
@@ -115,10 +110,6 @@ const Header: React.FC<headerProps> = ({
         <div>Phase: {phase}{" PH"}</div>
         <div>Amps: {amps === null ? "" : amps.toFixed(1)}{" A"}</div>
         <div>Wattage: {wattageDisplay}</div>
-        <div>
-          Watt Density: {wattDensity === null ? "" : wattDensity.toFixed(1)}{" "}
-          {" W/in\u00B2"}
-        </div>
       </div>
     </div>
   );

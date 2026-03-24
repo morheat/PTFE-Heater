@@ -8,6 +8,31 @@ const MIN_HOT_BY_WATTS: Record<number, number> = {
   600: 22, 8000: 36, 9000: 40, 12000: 38, 15000: 47, 18000: 55,
 };
 
+const MATERIAL_OPTIONS_BY_SERIES: Record<string, { value: string; label: string }[]> = {
+  "9HX": [
+    { value: "PTFE", label: "PTFE Covered" },
+  ],
+  "6HX": [
+    { value: "PTFE", label: "PTFE Covered" },
+  ],
+  "3HX": [
+    { value: "PTFE", label: "PTFE Covered" },
+  ],
+  "3HXO": [
+    { value: "PTFE", label: "PTFE Covered" },
+  ],
+  "HXT": [
+    { value: "PTFE", label: "PTFE Covered" },
+  ],
+  // fallback/default
+  "default": [
+    { value: "304SS", label: "304 Stainless" },
+    { value: "316SS", label: "316 Stainless" },
+    { value: "Titanium", label: "Titanium" },
+  ]
+};
+
+
 function App() {
   // --- State Hooks ---
   const [serialNum, setSerialNum] = useState<string>("");
@@ -71,6 +96,18 @@ function App() {
     } catch (err) { alert("Download failed."); }
   };
 
+const materialOptions = useMemo(() => {
+  return MATERIAL_OPTIONS_BY_SERIES[seriesVar] || MATERIAL_OPTIONS_BY_SERIES["default"];
+}, [seriesVar]);
+
+useEffect(() => {
+  const validValues = materialOptions.map(opt => opt.value);
+  if (!validValues.includes(materialVar)) {
+    setMaterial(validValues[0]); // default to first valid option
+  }
+}, [seriesVar, materialOptions]);
+
+
   return (
     <div className="flex justify-center mt-5 w-screen gap-6">
       <div className="w-96 bg-white p-4 border-2 border-slate-400 rounded-lg text-gray-700 overflow-y-auto max-h-[95vh] shadow-xl">
@@ -133,10 +170,11 @@ function App() {
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Material</h1>
             <select className="select select-xs border-cyan-500 w-full" value={materialVar} onChange={(e) => setMaterial(e.target.value)}>
-              <option value="304SS">304 Stainless</option>
-              <option value="316SS">316 Stainless</option>
-              <option value="Titanium">Titanium</option>
-              <option value="PTFE">PTFE Covered</option>
+              {materialOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
             </select>
           </div>
         </div>
@@ -145,9 +183,14 @@ function App() {
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Protector</h1>
             <select className="select select-xs border-cyan-500 w-full" value={protectorVar} onChange={(e) => setProtector(e.target.value)}>
-              <option value="P1">P1 (Std)</option>
-              <option value="P2">P2 (Resettable)</option>
-              <option value="P3">P3 (Liquid)</option>
+              <option value="P1">P1 - 180°F (82°C)</option>
+              <option value="P2">P2 - 190°F (88°C)</option>
+              <option value="P3">P3 - 250°F (121°C)</option>
+              <option value="P4">P4 - 230°F (110°C)</option>
+              <option value="P5">P5 - 300°F (150°C)</option>
+              <option value="P6">P6 - 230°F (110°C)</option>
+              <option value="P7">P7 - 300°F (150°C)</option>
+              <option value="P7">P8 - 210°F (99°C)</option>
             </select>
           </div>
         </div>

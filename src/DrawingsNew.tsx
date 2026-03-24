@@ -330,7 +330,7 @@ const Drawings10: React.FC<drawingProps> = ({
                           }}
                         >
                           <div style={{ lineHeight: "18px", width: "100%" }}>
-                            <div>{`${elementCount} x 0.475"D Elements`}</div>
+                            {/* <div>{`${elementCount} x 0.475"D Elements`}</div> */}
                             <div>{material}</div>
                           </div>
                         </div>
