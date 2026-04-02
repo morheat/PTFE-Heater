@@ -236,7 +236,7 @@ const Drawings10: React.FC<drawingProps> = ({
     materialPos: { left: "50%", bottom: "10%" },
     elemMatLeader: { left: "82%", bottom: "2%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
-
+  /**  L Heater */
   const cfg3HXOL = {
     coldZonePos: { left: "68%", bottom: "86%" },
     hotZonePos: { left: "79.75%", bottom: "30%" },
@@ -254,19 +254,19 @@ const Drawings10: React.FC<drawingProps> = ({
   };
 
   const cfgHXFL = {
-    coldZonePos: { left: "55%", bottom: "70%" },
-    hotZonePos: { left: "75%", bottom: "70%" },
-    oalPos: { left: "65%", bottom: "85%" },
+    coldZonePos: { left: "70%", bottom: "71.25%" },
+    hotZonePos: { left: "92.75%", bottom: "30%" },
+    oalPos: { left: "74%", bottom: "82%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-10%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "76%", bottom: "30%", rotate: -10, lineHeight: 60, textOffsetY: 0, textWidth: 170}
   };
 
   const cfgHXFLL = { 
-    coldZonePos: { left: "55%", bottom: "70%" },
-    hotZonePos: { left: "75%", bottom: "70%" },
-    oalPos: { left: "65%", bottom: "85%" },
+    coldZonePos: { left: "70%", bottom: "71.25%" },
+    hotZonePos: { left: "92.75%", bottom: "30%" },
+    oalPos: { left: "74%", bottom: "82%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-10%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215}
+    elemMatLeader: { left: "76%", bottom: "30%", rotate: -10, lineHeight: 60, textOffsetY: 0, textWidth: 170}
   }; 
 
   const cfgHXL = {
