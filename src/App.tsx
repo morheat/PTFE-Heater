@@ -2,6 +2,99 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import * as htmlToImage from "html-to-image";
 import Drawing from "./DrawingsNew";
 
+const SearchSelect = ({ label, value, onChange, options }: { 
+  label: string; 
+  value: string; 
+  onChange: (val: string) => void; 
+  options: { value: string; label: string }[] 
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+        setSearchTerm("");
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredOptions = useMemo(() => {
+    return options.filter(opt => 
+      opt.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      opt.value.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [options, searchTerm]);
+
+  const currentLabel = options.find(o => o.value === value)?.label || value;
+
+  return (
+    <div className="relative w-full" ref={wrapperRef}>
+      <h1 className="text-xs font-bold uppercase text-slate-500 mb-1">{label}</h1>
+      <input
+        type="text"
+        className="input input-xs border-cyan-500 w-full focus:outline-none"
+        placeholder={isOpen ? "Type to search..." : currentLabel}
+        value={isOpen ? searchTerm : currentLabel}
+        onFocus={() => setIsOpen(true)}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        readOnly={!isOpen}
+        onClick={() => !isOpen && setIsOpen(true)}
+      />
+      {isOpen && (
+        <div className="absolute z-[100] mt-1 w-full max-h-60 overflow-auto bg-white border border-slate-200 rounded-md shadow-xl">
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((opt) => (
+              <div
+                key={opt.value}
+                className={`px-3 py-2 text-xs cursor-pointer hover:bg-cyan-50 ${value === opt.value ? 'bg-cyan-100 font-bold' : ''}`}
+                onMouseDown={() => {
+                  onChange(opt.value);
+                  setIsOpen(false);
+                  setSearchTerm("");
+                }}
+              >
+                {opt.label}
+              </div>
+            ))
+          ) : (
+            <div className="px-3 py-2 text-xs text-slate-400 text-center">No results</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SERIES_OPTIONS = [
+  { value: "9HX", label: "9HX Series" },
+  { value: "9HS", label: "9HS Series" },
+  { value: "6HX", label: "6HX Series" },
+  { value: "6HS", label: "6HS Series" },
+  { value: "3HX", label: "3HX Series" },
+  { value: "3HS", label: "3HS Series" },
+  { value: "3HXO", label: "3HXO Series" },
+  { value: "5T", label: "5T Series" },
+  { value: "DTM", label: "DTM Series" },
+  { value: "FL", label: "FL Series" },
+  { value: "HXT", label: "HXT Series" },
+  { value: "MOTS Single", label: "MOTS Single Series" },
+  { value: "MOTS", label: "MOTS Series" },
+  { value: "T", label: "T Series" },
+  { value: "3HXOL", label: "3HXOL Series" },
+  { value: "DTL", label: "DTL Series" },
+  { value: "HXFL-L", label: "HXFL-L Series" },
+  { value: "HXFL", label: "HXFL Series" },
+  { value: "HXL", label: "HXL Series" },
+  { value: "HXOL", label: "HXOL Series" },
+  { value: "HXRL", label: "HXRL Series" },
+  { value: "HXSL", label: "HXSL Series" },
+  { value: "LVT", label: "LVT Series" },
+];
 // --- Constants ---
 const MIN_HOT_BY_WATTS: Record<number, number> = {
   500: 5, 1000: 6, 2000: 10, 3000: 12, 4000: 19, 5000: 20,
@@ -52,7 +145,20 @@ function App() {
   const hotLengthNum = useMemo(() => parseFloat(hotLengthText) || 0, [hotLengthText]);
   const coldLengthNum = useMemo(() => parseFloat(coldLengthText) || 0, [coldLengthText]);
 
-  const OALVar = hotLengthNum + coldLengthNum;
+
+  const CONSTANT_OAL_BY_SERIES: Record<string, number> = {
+    "3HXOL": 18, 
+  };
+  const OALVar = useMemo(() => {
+    // If the series has a defined constant OAL, use it
+    if (CONSTANT_OAL_BY_SERIES[seriesVar] !== undefined) {
+      return CONSTANT_OAL_BY_SERIES[seriesVar];
+    }
+    // Otherwise, use the standard math
+    return hotLengthNum + coldLengthNum;
+  }, [seriesVar, hotLengthNum, coldLengthNum]);
+
+
   const minHot = MIN_HOT_BY_WATTS[wattsVar] ?? 0;
   const isHotLengthUnderMin = hotLengthText !== "" && hotLengthNum < minHot;
 
@@ -148,35 +254,18 @@ useEffect(() => {
 
         {/* PTFE Build Specs */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div>
-            <h1 className="text-xs font-bold uppercase text-slate-500">Series</h1>
-            <select className="select select-xs border-cyan-500 w-full" value={seriesVar} onChange={(e) => setSeries(e.target.value)}>
-              <option value="9HX">9HX Series</option>
-              <option value="9HS">9HS Series</option>
-              <option value="6HX">6HX Series</option>
-              <option value="6HS">6HS Series</option>
-              <option value="3HX">3HX Series</option>
-              <option value="3HS">3HS Series</option>
-              <option value="3HXO">3HXO Series</option>
-              <option value="5T">5T Series</option>
-              <option value="DTM">DTM Series</option>
-              <option value="FL">FL Series</option>
-              <option value="HXT">HXT Series</option>
-              <option value="MOTS Single">MOTS Single Series</option>
-              <option value="MOTS">MOTS Series</option>
-              <option value="T">T Series</option>
-            </select>
-          </div>
-          <div>
-            <h1 className="text-xs font-bold uppercase text-slate-500">Material</h1>
-            <select className="select select-xs border-cyan-500 w-full" value={materialVar} onChange={(e) => setMaterial(e.target.value)}>
-              {materialOptions.map(opt => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-            </select>
-          </div>
+          <SearchSelect 
+            label="Series"
+            value={seriesVar}
+            onChange={setSeries}
+            options={SERIES_OPTIONS}
+          />
+          <SearchSelect 
+            label="Material"
+            value={materialVar}
+            onChange={setMaterial}
+            options={materialOptions} 
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-4">

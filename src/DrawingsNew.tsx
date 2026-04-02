@@ -19,6 +19,15 @@ import LayoutHXT from "./assets/HXT Screwplug Heater.svg?react";
 import LayoutMOTS from "./assets/MOTS Single Derated.svg?react";
 import LayoutMOTS2 from "./assets/MOTS.svg?react";
 import LayoutT from "./assets/T Series Tubular Screwplug Heater.svg?react";
+import Layout3HXOL from "./assets/3HXOL Fluoropolymer Heater.svg?react";
+import LayoutDTL from "./assets/Derated Triple L Shaped Metal Bottom Heater.svg?react";
+import LayoutHXFLL from "./assets/HXFL Fluoropolymer Heater L.svg?react";
+import LayoutHXFL from "./assets/HXFL Fluoropolymer Heater.svg?react";
+import LayoutHXL from "./assets/HXL Fluoropolymer Heater.svg?react";
+import LayoutHXOL from "./assets/HXOL Fluoropolymer Heater.svg?react";
+import LayoutHXRL from "./assets/HXRL Fluoropolymer Heater.svg?react";
+import LayoutHXSL from "./assets/HXSL Fluoropolymer Heater.svg?react";
+import LayoutLVT from "./assets/L-Shaped, Vertical Triple Metal Over the Side Heaters.svg?react";
 
 const RawNumber: React.FC<{ value: string | number; style: React.CSSProperties }> = ({ value, style }) => (
   <div
@@ -99,6 +108,15 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "MOTS Single") return LayoutMOTS;
     if (series === "MOTS") return LayoutMOTS2;
     if (series === "T") return LayoutT;
+    if (series === "3HXOL") return Layout3HXOL;
+    if (series === "DTL") return LayoutDTL;
+    if (series === "HXFL-L") return LayoutHXFLL;
+    if (series === "HXFL") return LayoutHXFL;
+    if (series === "HXL") return LayoutHXL;
+    if (series === "HXOL") return LayoutHXOL;
+    if (series === "HXRL") return LayoutHXRL;
+    if (series === "HXSL") return LayoutHXSL;
+    if (series === "LVT") return LayoutLVT;
     return null; 
   }, [series]);
 
@@ -112,7 +130,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "83%", bottom: "69%" },
     oalPos: { left: "70%", bottom: "80%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-13%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-6%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg9HS = {
@@ -120,7 +138,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "85%", bottom: "66.5%" },
     oalPos: { left: "72%", bottom: "76%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "0%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg6HX = {
@@ -128,7 +146,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "81%", bottom: "72%" },
     oalPos: { left: "68%", bottom: "83.5%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-18%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg6HS = {
@@ -136,7 +154,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "84%", bottom: "68%" },
     oalPos: { left: "70%", bottom: "80%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-18%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg3HX = {
@@ -144,7 +162,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "81%", bottom: "73%" },
     oalPos: { left: "68%", bottom: "90.5%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-20%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg3HS = {
@@ -152,7 +170,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "81%", bottom: "73%" },
     oalPos: { left: "68%", bottom: "90.5%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "85%", bottom: "-20%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg3HXO = {
@@ -160,7 +178,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "78%", bottom: "83%" },
     oalPos: { left: "68%", bottom: "93%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfg5T = {
@@ -168,7 +186,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "48%", bottom: "76%" },
     oalPos: { left: "42%", bottom: "88%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "58%", bottom: "12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "58%", bottom: "17%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfgDTM = {
@@ -176,7 +194,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "81%", bottom: "68%" },
     oalPos: { left: "73%", bottom: "76%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "82%", bottom: "-8%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfgFL = {
@@ -192,7 +210,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "75%", bottom: "76%" },
     oalPos: { left: "70%", bottom: "87%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "82%", bottom: "-1%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfgMOTS = {
@@ -208,7 +226,7 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "79%", bottom: "72%" },
     oalPos: { left: "69%", bottom: "85%" },
     materialPos: { left: "50%", bottom: "10%" },
-    elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+    elemMatLeader: { left: "82%", bottom: "-1%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const cfgT = {
@@ -216,7 +234,79 @@ const Drawings10: React.FC<drawingProps> = ({
     hotZonePos: { left: "79%", bottom: "59%" },
     oalPos: { left: "75%", bottom: "70%" },
     materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "2%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfg3HXOL = {
+    coldZonePos: { left: "68%", bottom: "86%" },
+    hotZonePos: { left: "79.75%", bottom: "30%" },
+    oalPos: { left: "76%", bottom: "91%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "60%", bottom: "42%", rotate: -10, lineHeight: 30, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgDTL = {
+    coldZonePos: { left: "60%", bottom: "65%" },
+    hotZonePos: { left: "80%", bottom: "65%" },
+    oalPos: { left: "70%", bottom: "75%" },
+    materialPos: { left: "50%", bottom: "10%" },
     elemMatLeader: { left: "82%", bottom: "-5%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgHXFL = {
+    coldZonePos: { left: "55%", bottom: "70%" },
+    hotZonePos: { left: "75%", bottom: "70%" },
+    oalPos: { left: "65%", bottom: "85%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-10%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgHXFLL = { 
+    coldZonePos: { left: "55%", bottom: "70%" },
+    hotZonePos: { left: "75%", bottom: "70%" },
+    oalPos: { left: "65%", bottom: "85%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "-10%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215}
+  }; 
+
+  const cfgHXL = {
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgHXOL = {
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+   };
+
+  const cfgHXRL = {
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+   };
+
+  const cfgHXSL = { 
+    coldZonePos: { left: "56%", bottom: "73%" },
+    hotZonePos: { left: "81%", bottom: "73%" },
+    oalPos: { left: "68%", bottom: "90%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
+  };
+
+  const cfgLVT = {
+    coldZonePos: { left: "60%", bottom: "60%" },
+    hotZonePos: { left: "80%", bottom: "60%" },
+    oalPos: { left: "70%", bottom: "72%" },
+    materialPos: { left: "50%", bottom: "10%" },
+    elemMatLeader: { left: "82%", bottom: "0%", rotate: -10, lineHeight: 40, textOffsetY: 6, textWidth: 215 },
   };
 
   const overlayCfg = useMemo(() => {
@@ -234,6 +324,15 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "MOTS Single") return cfgMOTS;
     if (series === "MOTS") return cfgMOTS2;
     if (series === "T") return cfgT;
+    if (series === "3HXOL") return cfg3HXOL;
+    if (series === "DTL") return cfgDTL;
+    if (series === "HXFL-L") return cfgHXFLL;
+    if (series === "HXFL") return cfgHXFL;
+    if (series === "HXL") return cfgHXL;
+    if (series === "HXOL") return cfgHXOL;
+    if (series === "HXRL") return cfgHXRL;
+    if (series === "HXSL") return cfgHXSL;
+    if (series === "LVT") return cfgLVT;
 
     return null;
   }, [series]);
@@ -252,6 +351,7 @@ const Drawings10: React.FC<drawingProps> = ({
         protector = {protector}
         coldLength={coldLength}
         OAL = {OAL}
+        
       />
 
 
