@@ -179,10 +179,10 @@ const Drawings10: React.FC<drawingProps> = ({
   };
 
   const cfgFL = {
-    coldZonePos: { left: "63.5%", bottom: "68%" },
-    hotZonePos: { left: "81%", bottom: "68%" },
-    oalPos: { left: "73%", bottom: "76%" },
-    elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
+    coldZonePos: { left: "63.5%", bottom: "82%" },
+    hotZonePos: { left: "80%", bottom: "82%" },
+    oalPos: { left: "75%", bottom: "92.5%" },
+    elemMatLeader: { left: "82%", bottom: "7%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
   };
 
   const cfgHXT = {
@@ -262,10 +262,10 @@ const Drawings10: React.FC<drawingProps> = ({
   const cfgHXSL = {
     coldZonePos: { left: "67%", bottom: "62.5%" },
     hotZonePos: { left: "85%", bottom: "62.5%" },
-    lengthPos: { left: "35%", bottom: "26%" },
-    widthPos: { left: "18%", bottom: "57%" },
+    lengthPos: { left: "10.5%", bottom: "36%" },
+    widthPos: { left: "27%", bottom: "7%" },
     oalPos: { left: "68%", bottom: "9000%" }, // not needed
-    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
+    elemMatLeader: { left: "88%", bottom: "0%", rotate: -10, lineHeight: 20, textOffsetY: 0, textWidth: 0 },
   };
 
   const cfgLVT = {

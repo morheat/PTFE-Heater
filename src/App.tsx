@@ -28,7 +28,6 @@ const SearchSelect = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  
   const filteredOptions = useMemo(() => {
     return options.filter(
       (opt) =>
@@ -104,20 +103,134 @@ const SERIES_OPTIONS = [
   { value: "LVT", label: "LVT Series" },
 ];
 
+/**
+ * ALL watt options your app can ever show
+ */
+const WATT_OPTIONS = [
+  500,
+  1000,
+  1500,
+  2000,
+  3000,
+  4000,
+  4500,
+  5000,
+  6000,
+  8000,
+  9000,
+  12000,
+  13500,
+  15000,
+  18000,
+  22500,
+  31500,
+];
+
+/**
+ * DEFAULT fallback min hot by watts
+ * Used for normal series unless overridden below
+ */
 const MIN_HOT_BY_WATTS: Record<number, number> = {
-  500: 5,
-  1000: 6,
-  2000: 10,
-  3000: 12,
-  4000: 19,
-  5000: 20,
-  6000: 22,
-  8000: 36,
-  9000: 40,
+  3000: 9,
+  4500: 15,
+  6000: 21,
+  9000: 28,
   12000: 38,
   15000: 47,
   18000: 55,
 };
+
+/**
+ * Series-specific min hot rules
+ * These override fallback values above
+ */
+const MIN_HOT_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
+  "9HX": {
+    3000: 9,
+    4500: 15,
+    6000: 21,
+    9000: 28,
+    12000: 38,
+    15000: 47,
+    18000: 55,
+  },
+  "9HS": {
+    9000: 10,
+    13500: 16,
+    22500: 20,
+    31500: 25,
+  },
+  "6HX": {
+    2000: 9,
+    3000: 15,
+    4000: 21,
+    6000: 28,
+    8000: 38,
+    10000: 47,
+    12000: 55,
+  },
+  "6HS": {
+    6000: 10,
+    9000: 16,
+    15000: 20,
+    21000: 25,
+  },
+  "3HX": {
+    1000: 10,
+    1500: 16,
+    2000: 22,
+    3000: 29,
+    4000: 39,
+    5000: 48,
+    6000: 56,
+  },
+  "3HS": {
+    3000: 11,
+    4500: 16,
+    7500: 21,
+    10500: 26,
+  },
+  "3HXO": {
+    1500: 6,
+    3000: 6,
+    4500: 9.5,
+    6000: 10.5,
+    9000: 16,
+    12000: 20.5,
+    15000: 25,
+    18000: 29,
+  },
+  "DTM": {
+    3000: 6,
+    6000: 10,
+    9000: 16,
+    12000: 20,
+    15000: 25,
+    18000: 30,
+    24000: 37,
+    27000: 44,
+    30000: 49,
+    36000: 58,
+  },
+  "MOTS": {
+    1000: 6,
+    2000: 10,
+    3000: 16,
+    4000: 20,
+    5000: 25,
+    6000: 30,
+    8000: 37,
+    9000: 44,
+    10000: 49,
+    12000: 58,
+  },
+};
+
+/**
+ * Only these series will have watt dropdown restricted
+ * to ONLY the values listed above
+ */
+const RESTRICT_WATTS_TO_SERIES_RULES = ["9HX", "9HS", "6HX", "6HS", "3HX", "3HS", "3HXO", "DTM", "MOTS"];
 
 const MATERIAL_OPTIONS_BY_SERIES: Record<string, { value: string; label: string }[]> = {
   "9HX": [{ value: "PTFE", label: "PTFE Covered" }],
@@ -133,6 +246,8 @@ const MATERIAL_OPTIONS_BY_SERIES: Record<string, { value: string; label: string 
 };
 
 const HXO_STYLE_SERIES = ["HXOL", "HXRL", "HXSL"];
+const MATCH_LENGTH_TO_HOT_SERIES = ["HXOL", "HXRL"];
+const MANUAL_OAL_SERIES = ["HXFL", "HXL", "HXFL-L"];
 
 type HeaterRule = {
   minHot: number;
@@ -142,7 +257,6 @@ type HeaterRule = {
 
 type SeriesRuleMap = Record<string, Record<number, HeaterRule>>;
 
-// key format = watts only
 const SERIES_SPEC_RULES: SeriesRuleMap = {
   HXFL: {
     500: { minHot: 5, minOAL: 12, partNumberCode: "05" },
@@ -192,8 +306,11 @@ const getWattCode = (watts: number) => {
     8000: "8",
     9000: "9",
     12000: "12",
+    13500: "13.5",
     15000: "15",
     18000: "18",
+    22500: "22.5",
+    31500: "31.5",
   };
   return map[watts] ?? String(watts);
 };
@@ -231,78 +348,61 @@ function App() {
   const [serialNum, setSerialNum] = useState<string>("");
   const [titleVar, setTitle] = useState<string>("");
   const [voltsVar, setVoltage] = useState<number>(240);
-  const [wattsVar, setWattage] = useState<number>(500);
+  const [wattsVar, setWattage] = useState<number>(3000);
   const [phaseVar, setPhase] = useState<number>(1);
   const [materialVar, setMaterial] = useState<string>("304SS");
   const [seriesVar, setSeries] = useState<string>("9HX");
   const [protectorVar, setProtector] = useState<string>("P1");
+
   const [hotLengthText, setHotLengthText] = useState<string>("9");
   const [coldLengthText, setColdLengthText] = useState<string>("2.5");
   const [oalText, setOalText] = useState<string>("11.5");
 
-  const MANUAL_OAL_SERIES = ["HXFL", "HXL", "HXFL-L"];
-  const isManualOALSeries = MANUAL_OAL_SERIES.includes(seriesVar);
+  const [lengthText, setLengthText] = useState<string>("9");
+  const [widthText, setWidthText] = useState<string>("9");
 
   const drawingRef = useRef<HTMLDivElement>(null);
 
   const hotLengthNum = useMemo(() => parseFloat(hotLengthText) || 0, [hotLengthText]);
   const coldLengthNum = useMemo(() => parseFloat(coldLengthText) || 0, [coldLengthText]);
-  const oalNum = useMemo(() => parseFloat(oalText) || 0, [oalText]);
-
-  const [lengthText, setLengthText] = useState<string>("9");
-  const [widthText, setWidthText] = useState<string>("9");
-
-  const isHXOStyleSeries = HXO_STYLE_SERIES.includes(seriesVar);
-
+  const enteredOALNum = useMemo(() => parseFloat(oalText) || 0, [oalText]);
   const lengthNum = useMemo(() => parseFloat(lengthText) || 0, [lengthText]);
   const widthNum = useMemo(() => parseFloat(widthText) || 0, [widthText]);
 
-  useEffect(() => {
-    if (isHXOStyleSeries) {
-      setLengthText(hotLengthText);
-    }
-  }, [hotLengthText, isHXOStyleSeries]);
+  const isHXOStyleSeries = HXO_STYLE_SERIES.includes(seriesVar);
+  const shouldMatchLengthToHot = MATCH_LENGTH_TO_HOT_SERIES.includes(seriesVar);
+  const isManualOALSeries = MANUAL_OAL_SERIES.includes(seriesVar);
 
   const selectedSeriesRule = SERIES_SPEC_RULES[seriesVar]?.[wattsVar];
 
-  useEffect(() => {
-    if (isHXOStyleSeries) {
-      setColdLengthText("4");
-    }
-  }, [seriesVar]);
+  const minHot =
+    MIN_HOT_BY_SERIES_AND_WATTS[seriesVar]?.[wattsVar] ??
+    selectedSeriesRule?.minHot ??
+    MIN_HOT_BY_WATTS[wattsVar] ??
+    0;
 
-  const CONSTANT_OAL_BY_SERIES: Record<string, number> = {
-    "3HXOL": 18,
-  };
-
-  const minHot = selectedSeriesRule?.minHot ?? (MIN_HOT_BY_WATTS[wattsVar] ?? 0);
+  const minOAL = selectedSeriesRule?.minOAL ?? 0;
 
   const OALVar = useMemo(() => {
-    const baseOAL = hotLengthNum + coldLengthNum;
-
-    // Normal heaters: always automatic
-    if (!isManualOALSeries) {
-      return baseOAL;
+    if (isManualOALSeries) {
+      return Math.max(enteredOALNum, minOAL);
     }
-
-    // Manual OAL heaters: user can type OAL, but must respect minimum
-    const enteredOAL = parseFloat(oalText) || 0;
-    const minOAL = selectedSeriesRule?.minOAL ?? 0;
-
-    return Math.max(enteredOAL, minOAL);
-  }, [
-    hotLengthNum,
-    coldLengthNum,
-    oalText,
-    selectedSeriesRule,
-    isManualOALSeries,
-  ]);
-
+    return hotLengthNum + coldLengthNum;
+  }, [isManualOALSeries, enteredOALNum, minOAL, hotLengthNum, coldLengthNum]);
 
   const isHotLengthUnderMin = hotLengthText !== "" && hotLengthNum < minHot;
-  //const isOALUnderMin = oalText !== "" && oalNum < OALVar;
 
-  const enteredOALNum = parseFloat(oalText) || 0;
+  const wattOptions = useMemo(() => {
+    const isRestricted = RESTRICT_WATTS_TO_SERIES_RULES.includes(seriesVar);
+
+    if (isRestricted) {
+      return Object.keys(MIN_HOT_BY_SERIES_AND_WATTS[seriesVar] || {})
+        .map(Number)
+        .sort((a, b) => a - b);
+    }
+
+    return WATT_OPTIONS;
+  }, [seriesVar]);
 
   const isOALUnderMin =
     isManualOALSeries &&
@@ -310,7 +410,7 @@ function App() {
     enteredOALNum < selectedSeriesRule.minOAL;
 
   const isDTL = seriesVar === "DTL";
-  const isLVT = seriesVar ==="LVT";
+  const isLVT = seriesVar === "LVT";
   const isDTLorLVT = isDTL || isLVT;
 
   const isRestrictedSeries = seriesVar === "HXFL" || seriesVar === "HXL";
@@ -319,32 +419,61 @@ function App() {
   const hotZoneLabel = isDTLorLVT ? "Horizontal Length" : "Hot";
   const coldLabel = isDTLorLVT ? "Riser Height" : "Cold";
 
+  /**
+   * If current watt is invalid for selected series,
+   * automatically switch to first valid one
+   */
   useEffect(() => {
-    const newMin = selectedSeriesRule?.minHot ?? (MIN_HOT_BY_WATTS[wattsVar] ?? 0);
+    if (!wattOptions.includes(wattsVar)) {
+      setWattage(wattOptions[0] ?? 500);
+    }
+  }, [seriesVar, wattOptions, wattsVar]);
+
+  /**
+   * When series/watts changes:
+   * - reset hot to the correct minimum
+   * - keep special HXO behavior
+   * - DO NOT force manual OAL to hot+cold
+   */
+  useEffect(() => {
+    const newMin =
+      MIN_HOT_BY_SERIES_AND_WATTS[seriesVar]?.[wattsVar] ??
+      selectedSeriesRule?.minHot ??
+      MIN_HOT_BY_WATTS[wattsVar] ??
+      0;
+
     const newMinText = String(newMin);
 
     setHotLengthText(newMinText);
 
-    if (isHXOStyleSeries) {
+    if (shouldMatchLengthToHot) {
       setLengthText(newMinText);
+    }
+
+    if (isHXOStyleSeries) {
       setWidthText(newMinText);
     }
-  }, [wattsVar, voltsVar, seriesVar, selectedSeriesRule, isHXOStyleSeries]);
+  }, [wattsVar, voltsVar, seriesVar, selectedSeriesRule, shouldMatchLengthToHot, isHXOStyleSeries]);
 
+  /**
+   * Keep LENGTH matched to HOT only for HXOL / HXRL
+   */
   useEffect(() => {
-    setOalText(String(OALVar));
-  }, [wattsVar, voltsVar, seriesVar]);
-
-  useEffect(() => {
-    const baseOAL = hotLengthNum + coldLengthNum;
-    const minOAL = selectedSeriesRule?.minOAL ?? baseOAL;
-
-    if (isManualOALSeries) {
-      setOalText(String(Math.max(baseOAL, minOAL)));
-    } else {
-      setOalText(String(baseOAL));
+    if (shouldMatchLengthToHot) {
+      setLengthText(hotLengthText);
     }
-  }, [seriesVar, wattsVar, voltsVar]);
+  }, [hotLengthText, shouldMatchLengthToHot]);
+
+  const materialOptions = useMemo(() => {
+    return MATERIAL_OPTIONS_BY_SERIES[seriesVar] || MATERIAL_OPTIONS_BY_SERIES["default"];
+  }, [seriesVar]);
+
+  useEffect(() => {
+    const validValues = materialOptions.map((opt) => opt.value);
+    if (!validValues.includes(materialVar)) {
+      setMaterial(validValues[0]);
+    }
+  }, [seriesVar, materialOptions, materialVar]);
 
   const handleNumericInput = (val: string, setter: (v: string) => void) => {
     if (/^\d*\.?\d*$/.test(val)) setter(val);
@@ -385,17 +514,6 @@ function App() {
     }
   };
 
-  const materialOptions = useMemo(() => {
-    return MATERIAL_OPTIONS_BY_SERIES[seriesVar] || MATERIAL_OPTIONS_BY_SERIES["default"];
-  }, [seriesVar]);
-
-  useEffect(() => {
-    const validValues = materialOptions.map((opt) => opt.value);
-    if (!validValues.includes(materialVar)) {
-      setMaterial(validValues[0]);
-    }
-  }, [seriesVar, materialOptions, materialVar]);
-
   const partNumber = useMemo(() => {
     return buildPartNumber({
       series: seriesVar,
@@ -403,14 +521,13 @@ function App() {
       voltage: voltsVar,
       protector: protectorVar,
       hotLength: hotLengthNum,
-      OAL: oalNum,
+      OAL: OALVar,
     });
-  }, [seriesVar, wattsVar, voltsVar, protectorVar, hotLengthNum, oalNum]);
+  }, [seriesVar, wattsVar, voltsVar, protectorVar, hotLengthNum, OALVar]);
 
   return (
     <div className="flex justify-center mt-5 w-screen gap-6">
       <div className="w-96 bg-white p-4 border-2 border-slate-400 rounded-lg text-gray-700 overflow-y-auto max-h-[95vh] shadow-xl">
-        {/* Serial & Title */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Serial Number</h1>
@@ -432,7 +549,6 @@ function App() {
           </div>
         </div>
 
-        {/* Electrical */}
         <div className="grid grid-cols-3 gap-3 mb-2">
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Volts</h1>
@@ -448,6 +564,7 @@ function App() {
               ))}
             </select>
           </div>
+
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Watts</h1>
             <select
@@ -455,13 +572,14 @@ function App() {
               value={wattsVar}
               onChange={(e) => setWattage(Number(e.target.value))}
             >
-              {Object.keys(MIN_HOT_BY_WATTS).map((w) => (
+              {wattOptions.map((w) => (
                 <option key={w} value={w}>
                   {w}W
                 </option>
               ))}
             </select>
           </div>
+
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Phase</h1>
             <select
@@ -481,13 +599,11 @@ function App() {
           </p>
         )}
 
-        {/* Series + Material */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <SearchSelect label="Series" value={seriesVar} onChange={setSeries} options={SERIES_OPTIONS} />
           <SearchSelect label="Material" value={materialVar} onChange={setMaterial} options={materialOptions} />
         </div>
 
-        {/* Protector */}
         <div className="grid grid-cols-1 gap-3 mb-4">
           <div>
             <h1 className="text-xs font-bold uppercase text-slate-500">Protector</h1>
@@ -508,57 +624,66 @@ function App() {
           </div>
         </div>
 
- {/* Lengths */}
-<div
-  className={`grid ${
-    isHXOStyleSeries ? "grid-cols-5" : isDTLorLVT ? "grid-cols-2" : "grid-cols-3"
-  } gap-3 mb-4`}
->
-  <div className="relative">
-    <h1 className="text-xs font-bold uppercase text-slate-500">{hotZoneLabel}</h1>
-    <input
-      type="text"
-      value={hotLengthText}
-      onChange={(e) => handleNumericInput(e.target.value, setHotLengthText)}
-      className={`input input-xs w-full border ${
-        isHotLengthUnderMin ? "border-red-500" : "border-cyan-500"
-      }`}
-    />
-    {isHotLengthUnderMin && (
-      <p className="text-[10px] text-red-500 absolute -bottom-4">Min: {minHot}"</p>
-    )}
-  </div>
+        <div
+          className={`grid ${
+            isHXOStyleSeries ? "grid-cols-5" : isDTLorLVT ? "grid-cols-2" : "grid-cols-3"
+          } gap-3 mb-4`}
+        >
+          <div className="relative">
+            <h1 className="text-xs font-bold uppercase text-slate-500">{hotZoneLabel}</h1>
+            <input
+              type="text"
+              value={hotLengthText}
+              onChange={(e) => handleNumericInput(e.target.value, setHotLengthText)}
+              className={`input input-xs w-full border ${
+                isHotLengthUnderMin ? "border-red-500" : "border-cyan-500"
+              }`}
+            />
+            {isHotLengthUnderMin && (
+              <p className="text-[10px] text-red-500 absolute -bottom-4">Min: {minHot}"</p>
+            )}
+          </div>
 
-  <div>
-    <h1 className="text-xs font-bold uppercase text-slate-500">{coldLabel}</h1>
-    <input
-      type="text"
-      value={coldLengthText}
-      onChange={(e) => handleNumericInput(e.target.value, setColdLengthText)}
-      className="input input-xs w-full border-cyan-500"
-    />
-  </div>
+          <div>
+            <h1 className="text-xs font-bold uppercase text-slate-500">{coldLabel}</h1>
+            <input
+              type="text"
+              value={coldLengthText}
+              onChange={(e) => handleNumericInput(e.target.value, setColdLengthText)}
+              className="input input-xs w-full border-cyan-500"
+            />
+          </div>
 
-  {isHXOStyleSeries && (
-    <>
-      <div>
-        <h1 className="text-xs font-bold uppercase text-slate-500">Length</h1>
-        <div className="input input-xs w-full bg-slate-100 flex items-center px-2 font-bold">
-          {lengthText}
-        </div>
-      </div>
+          {isHXOStyleSeries && (
+            <>
+              <div>
+                <h1 className="text-xs font-bold uppercase text-slate-500">Length</h1>
 
-      <div>
-        <h1 className="text-xs font-bold uppercase text-slate-500">Width</h1>
-        <input
-          type="text"
-          value={widthText}
-          onChange={(e) => handleNumericInput(e.target.value, setWidthText)}
-          className="input input-xs w-full border-cyan-500"
-        />
-      </div>
-    </>
-  )}
+                {shouldMatchLengthToHot ? (
+                  <div className="input input-xs w-full bg-slate-100 flex items-center px-2 font-bold">
+                    {lengthText}
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    value={lengthText}
+                    onChange={(e) => handleNumericInput(e.target.value, setLengthText)}
+                    className="input input-xs w-full border-cyan-500"
+                  />
+                )}
+              </div>
+
+              <div>
+                <h1 className="text-xs font-bold uppercase text-slate-500">Width</h1>
+                <input
+                  type="text"
+                  value={widthText}
+                  onChange={(e) => handleNumericInput(e.target.value, setWidthText)}
+                  className="input input-xs w-full border-cyan-500"
+                />
+              </div>
+            </>
+          )}
 
           {!isDTLorLVT && !isHXOStyleSeries && (
             <div className="relative">
@@ -589,7 +714,6 @@ function App() {
           )}
         </div>
 
-        {/* Part Number */}
         <div className="mb-4">
           <h1 className="text-xs font-bold uppercase text-slate-500">Part Number</h1>
           <div className="input input-xs w-full bg-slate-100 flex items-center px-2 font-bold break-all">
@@ -615,7 +739,7 @@ function App() {
         material={materialVar}
         voltage={voltsVar}
         wattage={wattsVar}
-        OAL={oalNum}
+        OAL={OALVar}
         coldLength={coldLengthNum}
         hotLength={hotLengthNum}
         length={lengthNum}
