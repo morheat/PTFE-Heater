@@ -86,10 +86,10 @@ const SERIES_OPTIONS = [
   { value: "3HX", label: "3HX Series" },
   { value: "3HS", label: "3HS Series" },
   { value: "3HXO", label: "3HXO Series" },
-  { value: "5T", label: "5T Series" },
+  //{ value: "5T", label: "5T Series" },
   { value: "DTM", label: "DTM Series" },
-  { value: "FL", label: "FL Series" },
-  { value: "HXT", label: "HXT Series" },
+  //{ value: "FL", label: "FL Series" },
+  //{ value: "HXT", label: "HXT Series" },
   { value: "MOTS Single", label: "MOTS Single Series" },
   { value: "MOTS", label: "MOTS Series" },
   { value: "T", label: "T Series" },
@@ -111,19 +111,28 @@ const WATT_OPTIONS = [
   1000,
   1500,
   2000,
+  2500,
   3000,
   4000,
   4500,
   5000,
   6000,
+  7500,
   8000,
   9000,
+  10000,
+  10500,
   12000,
   13500,
   15000,
   18000,
+  21000,
   22500,
+  24000,
+  27000,
+  30000,
   31500,
+  36000,
 ];
 
 /**
@@ -224,13 +233,68 @@ const MIN_HOT_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
     10000: 49,
     12000: 58,
   },
+  "MOTS Single": {
+    500: 6,
+    1000: 10,
+    1500: 16,
+    2000: 20,
+    2500: 25,
+    3000: 30,
+    4000: 37,
+    4500: 44,
+    5000: 49,
+    6000: 58,
+  },
+  "T": {
+    1000: 7.5,
+    2000: 11.5,
+    3000: 16.5,
+    4000: 20.5,
+    6000: 30.5,
+    8000: 37.5,
+    9000: 44.5,
+    12000: 58.5,
+  },
+  "DTL": {
+    500: 13,
+    1000: 17,
+    1500: 22,
+    2000: 26,
+    2500: 31,
+    3000: 36,
+    4000: 44,
+    4500: 50,
+    5000: 55,
+    6000: 64,
+  },
+  "LVT": {
+    3000: 13,
+    6000: 17,
+    9000: 22,
+    12000: 26,
+    15000: 31,
+    18000: 36,
+    24000: 44,
+    27000: 50,
+    30000: 55,
+    36000: 64,
+  },
 };
 
 /**
- * Only these series will have watt dropdown restricted
- * to ONLY the values listed above
+ * Any series that has either:
+ * - MIN_HOT_BY_SERIES_AND_WATTS rules
+ * - SERIES_SPEC_RULES rules
+ * should only show the wattages defined for that series
  */
-const RESTRICT_WATTS_TO_SERIES_RULES = ["9HX", "9HS", "6HX", "6HS", "3HX", "3HS", "3HXO", "DTM", "MOTS"];
+const getRestrictedWattOptionsForSeries = (series: string): number[] => {
+  const minHotWatts = Object.keys(MIN_HOT_BY_SERIES_AND_WATTS[series] || {}).map(Number);
+  const specRuleWatts = Object.keys(SERIES_SPEC_RULES[series] || {}).map(Number);
+
+  const combined = [...new Set([...minHotWatts, ...specRuleWatts])].sort((a, b) => a - b);
+
+  return combined;
+};
 
 const MATERIAL_OPTIONS_BY_SERIES: Record<string, { value: string; label: string }[]> = {
   "9HX": [{ value: "PTFE", label: "PTFE Covered" }],
@@ -247,7 +311,7 @@ const MATERIAL_OPTIONS_BY_SERIES: Record<string, { value: string; label: string 
 
 const HXO_STYLE_SERIES = ["HXOL", "HXRL", "HXSL"];
 const MATCH_LENGTH_TO_HOT_SERIES = ["HXOL", "HXRL"];
-const MANUAL_OAL_SERIES = ["HXFL", "HXL", "HXFL-L"];
+const MANUAL_OAL_SERIES = ["HXFL", "HXL", "HXFL-L", "3HXOL"];
 
 type HeaterRule = {
   minHot: number;
@@ -258,6 +322,16 @@ type HeaterRule = {
 type SeriesRuleMap = Record<string, Record<number, HeaterRule>>;
 
 const SERIES_SPEC_RULES: SeriesRuleMap = {
+  "3HXOL": {
+    3000: { minHot: 13, minOAL: 18, partNumberCode: "05" },
+    4500: { minHot: 11, minOAL: 18, partNumberCode: "06" },
+    6000: { minHot: 19, minOAL: 18, partNumberCode: "08" },
+    9000: { minHot: 23, minOAL: 18, partNumberCode: "09" },
+    12000: { minHot: 30, minOAL: 18, partNumberCode: "11" },
+    15000: { minHot: 36, minOAL: 18, partNumberCode: "12" },
+    18000: { minHot: 42, minOAL: 18, partNumberCode: "13" },
+  },
+
   HXFL: {
     500: { minHot: 5, minOAL: 12, partNumberCode: "05" },
     1000: { minHot: 6, minOAL: 12, partNumberCode: "06" },
@@ -392,17 +466,15 @@ function App() {
 
   const isHotLengthUnderMin = hotLengthText !== "" && hotLengthNum < minHot;
 
-  const wattOptions = useMemo(() => {
-    const isRestricted = RESTRICT_WATTS_TO_SERIES_RULES.includes(seriesVar);
+const wattOptions = useMemo(() => {
+  const restrictedWatts = getRestrictedWattOptionsForSeries(seriesVar);
 
-    if (isRestricted) {
-      return Object.keys(MIN_HOT_BY_SERIES_AND_WATTS[seriesVar] || {})
-        .map(Number)
-        .sort((a, b) => a - b);
-    }
+  if (restrictedWatts.length > 0) {
+    return restrictedWatts;
+  }
 
-    return WATT_OPTIONS;
-  }, [seriesVar]);
+  return WATT_OPTIONS;
+}, [seriesVar]);
 
   const isOALUnderMin =
     isManualOALSeries &&
@@ -433,27 +505,39 @@ function App() {
    * When series/watts changes:
    * - reset hot to the correct minimum
    * - keep special HXO behavior
-   * - DO NOT force manual OAL to hot+cold
+   * - for manual OAL series, also reset OAL to minOAL
    */
   useEffect(() => {
-    const newMin =
+    const newMinHot =
       MIN_HOT_BY_SERIES_AND_WATTS[seriesVar]?.[wattsVar] ??
       selectedSeriesRule?.minHot ??
       MIN_HOT_BY_WATTS[wattsVar] ??
       0;
 
-    const newMinText = String(newMin);
+    const newMinHotText = String(newMinHot);
 
-    setHotLengthText(newMinText);
+    setHotLengthText(newMinHotText);
 
     if (shouldMatchLengthToHot) {
-      setLengthText(newMinText);
+      setLengthText(newMinHotText);
     }
 
     if (isHXOStyleSeries) {
-      setWidthText(newMinText);
+      setWidthText(newMinHotText);
     }
-  }, [wattsVar, voltsVar, seriesVar, selectedSeriesRule, shouldMatchLengthToHot, isHXOStyleSeries]);
+
+    if (isManualOALSeries && selectedSeriesRule?.minOAL !== undefined) {
+      setOalText(String(selectedSeriesRule.minOAL));
+    }
+  }, [
+    wattsVar,
+    voltsVar,
+    seriesVar,
+    selectedSeriesRule,
+    shouldMatchLengthToHot,
+    isHXOStyleSeries,
+    isManualOALSeries,
+  ]);
 
   /**
    * Keep LENGTH matched to HOT only for HXOL / HXRL

@@ -12,10 +12,10 @@ import Layout6HS from "./assets/6HS Metal Heater.svg?react";
 import Layout3HX from "./assets/3HX Fluoropolymer Heater.svg?react";
 import Layout3HS from "./assets/3HS Series Tubular Metal Heater.svg?react";
 import Layout3HXO from "./assets/3HXO Fluoropolymer Heater.svg?react";
-import Layout5T from "./assets/5T & T5T Screwplug Heater.svg?react";
+//import Layout5T from "./assets/5T & T5T Screwplug Heater.svg?react";
 import LayoutDTM from "./assets/Derated Triple Metal Over the Side Heaters.svg?react";
-import LayoutFL from "./assets/FL Series Flanged Heater.svg?react";
-import LayoutHXT from "./assets/HXT Screwplug Heater.svg?react";
+//import LayoutFL from "./assets/FL Series Flanged Heater.svg?react";
+//import LayoutHXT from "./assets/HXT Screwplug Heater.svg?react";
 import LayoutMOTS from "./assets/MOTS Single Derated.svg?react";
 import LayoutMOTS2 from "./assets/MOTS.svg?react";
 import LayoutT from "./assets/T Series Tubular Screwplug Heater.svg?react";
@@ -97,10 +97,10 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "3HX") return Layout3HX;
     if (series === "3HS") return Layout3HS;
     if (series === "3HXO") return Layout3HXO;
-    if (series === "5T") return Layout5T;
+    //if (series === "5T") return Layout5T;
     if (series === "DTM") return LayoutDTM;
-    if (series === "FL") return LayoutFL;
-    if (series === "HXT") return LayoutHXT;
+    //if (series === "FL") return LayoutFL;
+    //if (series === "HXT") return LayoutHXT;
     if (series === "MOTS Single") return LayoutMOTS;
     if (series === "MOTS") return LayoutMOTS2;
     if (series === "T") return LayoutT;
@@ -243,9 +243,9 @@ const Drawings10: React.FC<drawingProps> = ({
 
   const cfgHXOL = {
     coldZonePos: { left: "59.5%", bottom: "55%" },
-    hotZonePos: { left: "92.5%", bottom: "40%" },
-    lengthPos: { left: "34.5%", bottom: "36%" },
-    widthPos: { left: "17.5%", bottom: "8.5%" },
+    hotZonePos: { left: "92.5%", bottom: "38%" },
+    lengthPos: { left: "34.5%", bottom: "38%" },
+    widthPos: { left: "16.5%", bottom: "8.5%" },
     oalPos: { left: "68%", bottom: "10000%" }, // not needed
     elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
   };
