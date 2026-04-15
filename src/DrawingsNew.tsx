@@ -70,6 +70,8 @@ interface drawingProps {
   elementCount: number;
   series: string;
   protector: string;
+  partNumber: string;
+  wireLen?: string;
 }
 
 const Drawings10: React.FC<drawingProps> = ({
@@ -88,6 +90,8 @@ const Drawings10: React.FC<drawingProps> = ({
   OAL,
   series,
   protector,
+  partNumber,
+  wireLen
 }) => {
   const LayoutSVG = useMemo(() => {
     if (series === "9HX") return Layout9HX;
@@ -161,6 +165,7 @@ const Drawings10: React.FC<drawingProps> = ({
     coldZonePos: { left: "50%", bottom: "83%" },
     hotZonePos: { left: "78%", bottom: "83%" },
     oalPos: { left: "68%", bottom: "93%" },
+    widthPos: { left: "25%", bottom: "42.5%" },
     elemMatLeader: { left: "82%", bottom: "-12%", rotate: -10, lineHeight: 30, textOffsetY: 0, textWidth: 0 },
   };
 
@@ -217,6 +222,7 @@ const Drawings10: React.FC<drawingProps> = ({
     coldZonePos: { left: "68%", bottom: "86%" },
     hotZonePos: { left: "79.75%", bottom: "30%" },
     oalPos: { left: "76%", bottom: "91%" },
+    widthPos:{left:"21.5%", bottom:"0%"},
     elemMatLeader: { left: "60%", bottom: "42%", rotate: -10, lineHeight: 30, textOffsetY: 0, textWidth: 0 },
   };
 
@@ -304,17 +310,13 @@ const Drawings10: React.FC<drawingProps> = ({
   const isHXOStyleSeries = ["HXOL", "HXRL", "HXSL"].includes(series);
   const showOALOnDrawing = series !== "DTL" && !isHXOStyleSeries;
 
-  const lengthPos =
-    overlayCfg && "lengthPos" in overlayCfg ? overlayCfg.lengthPos : undefined;
 
-  const widthPos =
-    overlayCfg && "widthPos" in overlayCfg ? overlayCfg.widthPos : undefined;
-
-  return (
+return (
     <div
       ref={drawingRef}
       className="relative w-[1000px] h-[772.73px] flex items-center justify-center bg-white border-2 border-slate-400 rounded-lg"
     >
+      {/* 1. THE HEADER BOX */}
       <Header
         serialNum={serialNum}
         title={title}
@@ -327,13 +329,17 @@ const Drawings10: React.FC<drawingProps> = ({
         protector={protector}
         coldLength={coldLength}
         OAL={OAL}
+        partNumber={partNumber}
+        wireLen={wireLen}
       />
 
+      {/* 2. BACKGROUND LOGOS AND TITLE BOX */}
       <div className="absolute w-[950px] flex items-center justify-center">
         <Titlebox className="absolute" />
         <LOGO className="absolute w-[16rem] ml-[650px] mt-[460px]" />
       </div>
 
+      {/* 3. THE DRAWING AND OVERLAYS */}
       <div className="h-full w-full flex items-center justify-center">
         {!LayoutSVG ? (
           <div className="text-slate-600 text-sm">No drawing available for this configuration.</div>
@@ -342,23 +348,31 @@ const Drawings10: React.FC<drawingProps> = ({
             className="relative w-[950px] flex items-center justify-center"
             style={{ transform: "translateY(-60px)" }}
           >
+            {/* The actual SVG Drawing */}
             <LayoutSVG style={{ width: "95%", height: "100%", objectFit: "contain" }} />
 
             {overlayCfg && (
               <>
+                {/* ALWAYS SHOW: Cold and Hot Zones */}
                 <RawNumber value={coldLength} style={overlayCfg.coldZonePos} />
                 <RawNumber value={hotLength} style={overlayCfg.hotZonePos} />
 
-                {lengthPos && isHXOStyleSeries && (
-                  <RawNumber value={length} style={lengthPos} />
+        {/* CONDITIONALLY SHOW: Width */}
+        {"widthPos" in overlayCfg && overlayCfg.widthPos && (
+          <RawNumber value={width} style={overlayCfg.widthPos} />
+        )}
+
+        {/* CONDITIONALLY SHOW: Length */}
+        {"lengthPos" in overlayCfg && overlayCfg.lengthPos && (
+          <RawNumber value={length} style={overlayCfg.lengthPos} />
+        )}
+
+                {/* CONDITIONALLY SHOW: OAL (if it's a series that uses OAL labels) */}
+                {showOALOnDrawing && overlayCfg.oalPos && (
+                  <RawNumber value={OAL} style={overlayCfg.oalPos} />
                 )}
 
-                {widthPos && isHXOStyleSeries && (
-                  <RawNumber value={width} style={widthPos} />
-                )}
-
-                {showOALOnDrawing && <RawNumber value={OAL} style={overlayCfg.oalPos} />}
-
+                {/* MATERIAL LEADER ARROW */}
                 {overlayCfg?.elemMatLeader && (
                   <div
                     className="absolute pointer-events-none"
@@ -370,7 +384,6 @@ const Drawings10: React.FC<drawingProps> = ({
                     }}
                   >
                     <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[18px] border-l-transparent border-r-transparent border-b-black" />
-
                     <div
                       style={{
                         height: overlayCfg.elemMatLeader.lineHeight,
@@ -378,9 +391,7 @@ const Drawings10: React.FC<drawingProps> = ({
                         marginLeft: "9px",
                       }}
                     />
-
                     <div
-                      key={`${elementCount}-${material}`}
                       className="text-black"
                       style={{
                         marginLeft: "-10px",
@@ -389,7 +400,6 @@ const Drawings10: React.FC<drawingProps> = ({
                         transform: "rotate(10deg)",
                         fontSize: "16px",
                         background: "white",
-                        padding: "0px 0px",
                         textAlign: "center",
                       }}
                     >

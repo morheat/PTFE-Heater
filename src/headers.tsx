@@ -5,14 +5,15 @@ interface headerProps {
   title: string;
   material: string;
   voltage: number;
-  phase: number;              // 1 or 3
+  phase: number;
   wattage: number;
   elementNum: number;
   coldLength: number;
   OAL: number;
-  series: string;        // "9HX"
-  protector: string;     // "P1"...
-  wireLen?: string;      // "X60" optional
+  series: string;
+  protector: string;
+  wireLen?: string;
+  partNumber: string;
 }
 
 const Header: React.FC<headerProps> = ({
@@ -25,7 +26,8 @@ const Header: React.FC<headerProps> = ({
   OAL,
   protector,
   wireLen,
-  series
+  series,
+  partNumber
 }) => {
   const today = new Date();
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -53,37 +55,6 @@ const Header: React.FC<headerProps> = ({
         : `${wattsNum.toFixed(0)} W`
       : "";
 
-  // Watt density (W/in^2): Wattage / {0.475 * pi * elements * (heated length) * 2}
-    // PART NUMBER FORMAT:
-    // IM-HX.<first digit of watts><first digit of volts><first two digits of OAL>
-      // 1. Map Voltage to the specific single-digit codes from the chart
-      const VOLT_MAP: Record<number, string> = {
-        120: "1", 240: "2", 380: "3", 480: "4", 415: "5", 
-        600: "6", 400: "7", 208: "8", 220: "9", 200: "0"
-      };
-
-      // 2. Format Wattage (e.g., 4500 -> 4.5, 12000 -> 12)
-      const wattCode =
-        wattsNum < 1000
-          ? `.${wattsNum.toString().padStart(3, "0")}` // 500 -> .500
-          : (wattsNum / 1000).toString();             // 4500 -> 4.5, 12000 -> 12
-
-      // 3. Voltage Code
-      const voltCode = VOLT_MAP[voltsNum] || "X"; // "X" as fallback
-
-      // 4. OAL (Uses the actual number, usually 2 digits)
-      const oalCode = Math.round(OAL).toString().padStart(2, "0");
-
-      // 5. Phase (Blank for 3-Phase standard, "1" for Single Phase)
-      const phaseCode = phase === 1 ? "-1" : "-3";
-
-      // 6. Protector & Wire (Handles the P1/P2 and the optional X length)
-      const protCode = protector ? `-${protector}` : "";
-      const wireCode = wireLen ? `-${wireLen}` : "";
-
-      // FINAL ASSEMBLY: IM-9HX + Wattage + VoltCode + OAL + Phase + Protector + Wire
-      const partNumber = `${series}${wattCode}${voltCode}${oalCode}${phaseCode}${protCode}${wireCode}`;
-
   return (
     <div className="absolute text-black font-bold">
       {/* these positions are from your working layout; tweak if needed */}
@@ -110,6 +81,7 @@ const Header: React.FC<headerProps> = ({
         <div>Phase: {phase}{" PH"}</div>
         <div>Amps: {amps === null ? "" : amps.toFixed(1)}{" A"}</div>
         <div>Wattage: {wattageDisplay}</div>
+        <div>Wire Length: {wireLen || "36"}</div>
       </div>
     </div>
   );
