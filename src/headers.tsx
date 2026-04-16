@@ -23,10 +23,7 @@ const Header: React.FC<headerProps> = ({
   voltage,
   phase,
   wattage,
-  OAL,
-  protector,
   wireLen,
-  series,
   partNumber
 }) => {
   const today = new Date();
