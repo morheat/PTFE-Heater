@@ -134,9 +134,12 @@ const MIN_WIDTH_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
 
 const getRestrictedWattOptionsForSeries = (series: string): number[] => {
   const minHotWatts = Object.keys(MIN_HOT_BY_SERIES_AND_WATTS[series] || {}).map(Number);
-  const minWidth = MIN_WIDTH_BY_SERIES_AND_WATTS[series] ?? 0;
+  const minWidthWatts = Object.keys(MIN_WIDTH_BY_SERIES_AND_WATTS[series] || {}).map(Number);
   const specRuleWatts = Object.keys(SERIES_SPEC_RULES[series] || {}).map(Number);
-  const combined = [...new Set([...minHotWatts, ...specRuleWatts])].sort((a, b) => a - b);
+
+  const combined = [...new Set([...minHotWatts, ...minWidthWatts, ...specRuleWatts])]
+    .sort((a, b) => a - b);
+
   return combined;
 };
 
@@ -494,7 +497,7 @@ function App() {
   const [lengthText, setLengthText] = useState<string>("9");
   const [widthText, setWidthText] = useState<string>("9");
 
-  const [riserLocation, setRiserLocation] = useState<string>("R"); 
+  const [riserLocation] = useState<string>("R"); 
   const [riserType, setRiserType] = useState<string>("R"); // R or FR
   const [riserLength, setRiserLength] = useState<string>("48"); // always used
 
@@ -986,7 +989,7 @@ return (
         hotLength={hotLengthNum}
         length={lengthNum}
         width={widthNum}
-        elementCount={1}
+        elementCount={elementCountVar}
         series={seriesVar}
         protector={protectorVar}
         partNumber={partNumber}
