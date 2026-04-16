@@ -497,7 +497,7 @@ function App() {
   const [lengthText, setLengthText] = useState<string>("9");
   const [widthText, setWidthText] = useState<string>("9");
 
-  const [riserLocation] = useState<string>("R"); 
+  const [riserLocation, setRiserLocation] = useState<string>("R"); 
   const [riserType, setRiserType] = useState<string>("R"); // R or FR
   const [riserLength, setRiserLength] = useState<string>("48"); // always used
 
@@ -842,6 +842,21 @@ return (
                 className="input input-xs w-full border-cyan-500"
                 placeholder="e.g. 48"
               />
+            </div>
+
+            {/* LOCATION */}
+            <div>
+              <h1 className="text-xs font-bold uppercase text-slate-500">
+                Riser Location
+              </h1>
+              <select
+                className="select select-xs border-cyan-500 w-full"
+                value={riserLocation}
+                onChange={(e) => setRiserLocation(e.target.value)}
+              >
+                <option value="R">Right (R)</option>
+                <option value="L">Left (L)</option>
+              </select>
             </div>
 
           </div>
