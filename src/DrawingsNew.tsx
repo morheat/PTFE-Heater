@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import Header from "./headers";
 
 import Titlebox from "./assets/TITLE.svg?react";
-import LOGO from "./assets/LOGO.svg?react";
+import LOGO from "./assets/NewLOGO.png";
 
 // Drawings
 import Layout9HX from "./assets/9HX Metal Heater.svg?react";
@@ -253,7 +253,7 @@ const Drawings10: React.FC<drawingProps> = ({
     lengthPos: { left: "34.5%", bottom: "38%" },
     widthPos: { left: "16.5%", bottom: "8.5%" },
     oalPos: { left: "68%", bottom: "10000%" }, // not needed
-    elemMatLeader: { left: "85%", bottom: "-14%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
+    elemMatLeader: { left: "85%", bottom: "0%", rotate: -10, lineHeight: 40, textOffsetY: 0, textWidth: 0 },
   };
 
   const cfgHXRL = {
@@ -278,7 +278,7 @@ const Drawings10: React.FC<drawingProps> = ({
     coldZonePos: { left: "44.5%", bottom: "43%" },
     hotZonePos: { left: "70%", bottom: "3.5%" },
     oalPos: { left: "70%", bottom: "72000%" },//not needed
-    elemMatLeader: { left: "82%", bottom: "15%", rotate: -10, lineHeight: 20, textOffsetY: 0, textWidth: 0 },
+    elemMatLeader: { left: "80%", bottom: "15%", rotate: -10, lineHeight: 20, textOffsetY: 0, textWidth: 0 },
   };
 
   const overlayCfg = useMemo(() => {
@@ -336,7 +336,11 @@ return (
       {/* 2. BACKGROUND LOGOS AND TITLE BOX */}
       <div className="absolute w-[950px] flex items-center justify-center">
         <Titlebox className="absolute" />
-        <LOGO className="absolute w-[16rem] ml-[650px] mt-[460px]" />
+        <img
+            src={LOGO}
+            alt="Logo"
+            className="absolute w-[13rem] ml-[650px] mt-[460px]"
+          />
       </div>
 
       {/* 3. THE DRAWING AND OVERLAYS */}

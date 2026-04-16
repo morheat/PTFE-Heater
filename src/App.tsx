@@ -121,9 +121,11 @@ const MIN_HOT_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
   "MOTS": { 1000: 6, 2000: 10, 3000: 16, 4000: 20, 5000: 25, 6000: 30, 8000: 37, 9000: 44, 10000: 49, 12000: 58 },
   "MOTS Single": { 500: 6, 1000: 10, 1500: 16, 2000: 20, 2500: 25, 3000: 30, 4000: 37, 4500: 44, 5000: 49, 6000: 58 },
   "T": { 1000: 7.5, 2000: 11.5, 3000: 16.5, 4000: 20.5, 6000: 30.5, 8000: 37.5, 9000: 44.5, 12000: 58.5 },
-  "DTL": { 500: 13, 1000: 17, 1500: 22, 2000: 26, 2500: 31, 3000: 36, 4000: 44, 4500: 50, 5000: 55, 6000: 64 },
+  "DTL": { 1500: 13, 3000: 17, 4500: 22, 6000: 26, 7500: 31, 9000: 36, 12000: 44, 13500: 50, 15000: 55, 18000: 64 },
   "LVT": { 3000: 13, 6000: 17, 9000: 22, 12000: 26, 15000: 31, 18000: 36, 24000: 44, 27000: 50, 30000: 55, 36000: 64 },
   "HXOL": { 1000: 0, 2000: 0, 3000: 0, 4000: 0, 5000: 0, 6000: 0 },
+  "HXRL": { 1000: 0, 2000: 0, 3000: 0, 4000: 0, 5000: 0, 6000: 0 },
+  "HXSL": { 1000: 0, 2000: 0, 3000: 0, 4000: 0, 5000: 0, 6000: 0 },
 };
 
 const MIN_WIDTH_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
@@ -206,6 +208,9 @@ export type PartNumberParams = {
   material:string;
   wireLength?: string;
   elementCount?: number;
+  riserLocation?: string;
+  riserType?: string;
+  riserLength?: string;
 };
 
 const getVoltageCode = (voltage: number) => {
@@ -352,9 +357,100 @@ const PART_NUMBER_RULES: Record<string, (p: PartNumberParams) => string> = {
     const wireCode = p.wireLength ? `-X${p.wireLength}` : "";
     const widthcode = p.width
     const hotLength = p.hotLength
-    // Add custom logic/constants for specific series below by copying this structure, 
-    return `IM-${p.series}${wattCode}${voltCode}${widthcode}-${hotLength}-- ${protCode}${wireCode}`;
+    const Riser = p.riserLocation
+    const riserCode = `-${p.riserType || "R"}${p.riserLength || ""}`; 
+    return `IM-${p.series}${wattCode}${voltCode}${widthcode}-${hotLength}${Riser}${riserCode}${protCode}${wireCode}`;
   },
+
+  "HXRL": (p) => {
+    const wattCode = getWattCode(p.watts);
+    const voltCode = getVoltageCode(p.voltage);
+    //const phaseCode = p.phase === 1 ? "-1" : "-3";
+    const protCode = p.protector ? `-${p.protector}` : "";
+    const wireCode = p.wireLength ? `-X${p.wireLength}` : "";
+    const widthcode = p.width
+    const hotLength = p.hotLength
+    const Riser = p.riserLocation
+    const riserCode = `-${p.riserType || "R"}${p.riserLength || ""}`;
+    return `IM-${p.series}${wattCode}${voltCode}${widthcode}-${hotLength}${Riser}${riserCode}${protCode}${wireCode}`;
+  },
+
+  "HXSL": (p) => {
+    const wattCode = getWattCode(p.watts);
+    const voltCode = getVoltageCode(p.voltage);
+    //const phaseCode = p.phase === 1 ? "-1" : "-3";
+    const protCode = p.protector ? `-${p.protector}` : "";
+    const wireCode = p.wireLength ? `-X${p.wireLength}` : "";
+    const widthcode = p.width
+    const hotLength = p.hotLength
+    const Riser = p.riserLocation
+    const riserCode = `-${p.riserType || "R"}${p.riserLength || ""}`;
+    return `IM-${p.series}${wattCode}${voltCode}${widthcode}-${hotLength}${Riser}${riserCode}${protCode}${wireCode}`;
+  },
+
+
+  "LVT": (p) => {
+    const wattCode = getWattCode(p.watts);
+    const voltCode = getVoltageCode(p.voltage);
+    const hotLength = p.hotLength;
+    const coldLength = p.coldLength;
+
+    const protCode = p.protector ? `-${p.protector}` : "";
+    const wireCode = p.wireLength ? `-X${p.wireLength}` : "";
+    const phaseCode = p.phase === 1 ? "-1" : "";
+
+    const materialMap: Record<string, string> = {
+      "Steel": "3LVP",
+      "304SS": "3LVF",
+      "316SS": "3LVS",
+      "Titanium": "3LVT",
+    };
+    const materialCode = materialMap[p.material] || "";
+
+    // ✅ Riser logic
+    let riserCode = "";
+
+    if (p.riserType === "S") {
+      riserCode = "S";
+    } else {
+      // blank = standard 90 bend → no code
+      riserCode = "";
+    }
+
+    return `IM-${materialCode}${wattCode}${voltCode}${hotLength}-R${coldLength}${riserCode}${phaseCode}${protCode}${wireCode}`;
+  },
+
+  "DTL": (p) => {
+    const wattCode = getWattCode(p.watts);
+    const voltCode = getVoltageCode(p.voltage);
+    const hotLength = p.hotLength;
+    const coldLength = p.coldLength;
+
+    const protCode = p.protector ? `-${p.protector}` : "";
+    const wireCode = p.wireLength ? `-X${p.wireLength}` : "";
+    const phaseCode = p.phase === 1 ? "-1" : "";
+
+    const materialMap: Record<string, string> = {
+      "Steel": "D3LP",
+      "304SS": "D3LF",
+      "316SS": "D3LS",
+      "Titanium": "D3LT",
+    };
+    const materialCode = materialMap[p.material] || "";
+
+    // ✅ Riser logic
+    let riserCode = "";
+
+    if (p.riserType === "S") {
+      riserCode = "S";
+    } else {
+      // blank = standard 90 bend → no code
+      riserCode = "";
+    }
+
+    return `IM-${materialCode}${wattCode}${voltCode}${hotLength}-R${coldLength}${riserCode}${phaseCode}${protCode}${wireCode}`;
+  },
+
 
   // General format used by old headers.tsx (e.g., 9HX, 6HX, etc.)
   "default": (p) => {
@@ -397,6 +493,10 @@ function App() {
 
   const [lengthText, setLengthText] = useState<string>("9");
   const [widthText, setWidthText] = useState<string>("9");
+
+  const [riserLocation, setRiserLocation] = useState<string>("R"); 
+  const [riserType, setRiserType] = useState<string>("R"); // R or FR
+  const [riserLength, setRiserLength] = useState<string>("48"); // always used
 
   const drawingRef = useRef<HTMLDivElement>(null);
 
@@ -576,9 +676,12 @@ function App() {
       length: lengthNum,
       material: materialVar,
       wireLength: wireLenVar,
-      elementCount: elementCountVar
+      elementCount: elementCountVar,
+      riserLocation: riserLocation,
+      riserType: riserType,
+      riserLength: riserLength,
     });
-  }, [seriesVar, wattsVar, voltsVar, phaseVar, protectorVar, hotLengthNum, coldLengthNum, OALVar, widthNum, lengthNum, wireLenVar, materialVar, elementCountVar]);
+  }, [seriesVar, wattsVar, voltsVar, phaseVar, protectorVar, hotLengthNum, coldLengthNum, OALVar, widthNum, lengthNum, wireLenVar, materialVar, elementCountVar, riserLocation, riserType, riserLength]);
 
 return (
     <div className="flex justify-center mt-5 w-screen gap-6">
@@ -695,6 +798,52 @@ return (
             </select>
           </div>
         </div>
+
+
+        {(seriesVar === "HXOL" || seriesVar === "HXRL" || seriesVar === "LVT" || seriesVar === "DTL") && (
+          <div className="grid grid-cols-1 gap-3 mb-4">
+
+            {/* TYPE */}
+            <div>
+              <h1 className="text-xs font-bold uppercase text-slate-500">
+                Riser Type
+              </h1>
+              <select
+                className="select select-xs border-cyan-500 w-full"
+                value={riserType}
+                onChange={(e) => setRiserType(e.target.value)}
+                >
+                {(seriesVar === "LVT" || seriesVar === "DTL") ? (
+                  <>
+                    <option value="">90° Bend (Std)</option>
+                    <option value="S">Straight (S)</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="R">Rigid (R)</option>
+                    <option value="FR">Flex (FR)</option>
+                  </>
+                )}
+              </select>
+            </div>
+
+            {/* LENGTH (ALWAYS) */}
+            <div>
+              <h1 className="text-xs font-bold uppercase text-slate-500">
+                Riser Length (inches)
+              </h1>
+              <input
+                type="text"
+                value={riserLength}
+                onChange={(e) => handleNumericInput(e.target.value, setRiserLength)}
+                className="input input-xs w-full border-cyan-500"
+                placeholder="e.g. 48"
+              />
+            </div>
+
+          </div>
+        )}
+
 
         {/* DIMENSIONS GRID - This is the part that usually breaks */}
         <div
