@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/morheat/PTFE-Heater",
+  "homepage": "https://morheat.github.io/PTFE-Heater",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
