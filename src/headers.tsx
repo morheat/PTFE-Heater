@@ -72,7 +72,7 @@ const Header: React.FC<headerProps> = ({
       </div>
 
       {/* Bottom-left electrical specs */}
-      <div className="absolute w-[18rem] mt-[200px] ml-[-420px]">
+      <div className="absolute w-[25rem] mt-[200px] ml-[-420px]">
         <div>Part No: {partNumber}</div>
         <div>Voltage: {voltage}{" V"}</div>
         <div>Phase: {phase}{" PH"}</div>

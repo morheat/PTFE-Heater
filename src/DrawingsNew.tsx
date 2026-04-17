@@ -102,7 +102,7 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "3HS") return Layout3HS;
     if (series === "3HXO") return Layout3HXO;
     //if (series === "5T") return Layout5T;
-    if (series === "DTM") return LayoutDTM;
+    if (series === "D3") return LayoutDTM;
     //if (series === "FL") return LayoutFL;
     //if (series === "HXT") return LayoutHXT;
     if (series === "MOTS Single") return LayoutMOTS;
@@ -290,7 +290,7 @@ const Drawings10: React.FC<drawingProps> = ({
     if (series === "3HS") return cfg3HS;
     if (series === "3HXO") return cfg3HXO;
     if (series === "5T") return cfg5T;
-    if (series === "DTM") return cfgDTM;
+    if (series === "D3") return cfgDTM;
     if (series === "FL") return cfgFL;
     if (series === "HXT") return cfgHXT;
     if (series === "MOTS Single") return cfgMOTS;

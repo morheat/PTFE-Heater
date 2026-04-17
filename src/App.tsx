@@ -86,12 +86,12 @@ const SERIES_OPTIONS = [
   { value: "3HX", label: "3HX Series" },
   { value: "3HS", label: "3HS Series" },
   { value: "3HXO", label: "3HXO Series" },
-  { value: "DTM", label: "DTM Series" },
-  { value: "MOTS Single", label: "MOTS Single Series" },
+  { value: "D3", label: "D3 Series" },
+  { value: "MOTS Single", label: "Derated MOTS Series" },
   { value: "MOTS", label: "MOTS Series" },
   { value: "T", label: "T Series" },
   { value: "3HXOL", label: "3HXOL Series" },
-  { value: "DTL", label: "DTL Series" },
+  { value: "DTL", label: "D3L Series" },
   { value: "HXFL", label: "HXFL Series" },
   { value: "HXL", label: "HXL Series" },
   { value: "HXOL", label: "HXOL Series" },
@@ -117,7 +117,7 @@ const MIN_HOT_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
   "3HX": { 1000: 10, 1500: 16, 2000: 22, 3000: 29, 4000: 39, 5000: 48, 6000: 56 },
   "3HS": { 3000: 11, 4500: 16, 7500: 21, 10500: 26 },
   "3HXO": { 1500: 6, 3000: 6, 4500: 9.5, 6000: 10.5, 9000: 16, 12000: 20.5, 15000: 25, 18000: 29 },
-  "DTM": { 3000: 6, 6000: 10, 9000: 16, 12000: 20, 15000: 25, 18000: 30, 24000: 37, 27000: 44, 30000: 49, 36000: 58 },
+  "D3": { 3000: 6, 6000: 10, 9000: 16, 12000: 20, 15000: 25, 18000: 30, 24000: 37, 27000: 44, 30000: 49, 36000: 58 },
   "MOTS": { 1000: 6, 2000: 10, 3000: 16, 4000: 20, 5000: 25, 6000: 30, 8000: 37, 9000: 44, 10000: 49, 12000: 58 },
   "MOTS Single": { 500: 6, 1000: 10, 1500: 16, 2000: 20, 2500: 25, 3000: 30, 4000: 37, 4500: 44, 5000: 49, 6000: 58 },
   "T": { 1000: 7.5, 2000: 11.5, 3000: 16.5, 4000: 20.5, 6000: 30.5, 8000: 37.5, 9000: 44.5, 12000: 58.5 },
@@ -236,7 +236,7 @@ const getWattCode = (watts: number) => {
 const PART_NUMBER_RULES: Record<string, (p: PartNumberParams) => string> = {
   
   // Restricted Series Logic
-  "DTM": (p) => {
+  "D3": (p) => {
     const wattCode = getWattCode(p.watts);
     const voltCode = getVoltageCode(p.voltage);
     const oalCode = p.OAL
@@ -245,10 +245,10 @@ const PART_NUMBER_RULES: Record<string, (p: PartNumberParams) => string> = {
     const phaseCode = p.phase === 1 ? "-1" : "-3";
 
     const materialMap: Record<string, string> = {
-      "Steel": "3P",
-      "304SS": "3F",
-      "316SS": "3S",
-      "Titanium": "3T",
+      "Steel": "D3P",
+      "304SS": "D3F",
+      "316SS": "D3S",
+      "Titanium": "D3T",
     };
     const materialCode = materialMap[p.material] || "";
     // Add custom logic/constants for specific series below by copying this structure, 
