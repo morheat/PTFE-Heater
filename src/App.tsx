@@ -97,7 +97,7 @@ const SERIES_OPTIONS = [
   { value: "HXOL", label: "HXOL Series" },
   { value: "HXRL", label: "HXRL Series" },
   { value: "HXSL", label: "HXSL Series" },
-  { value: "LVT", label: "LVT Series" },
+  { value: "LVT", label: "3LV Series" },
 ];
 
 const WATT_OPTIONS = [
@@ -117,7 +117,7 @@ const MIN_HOT_BY_SERIES_AND_WATTS: Record<string, Record<number, number>> = {
   "3HX": { 1000: 10, 1500: 16, 2000: 22, 3000: 29, 4000: 39, 5000: 48, 6000: 56 },
   "3HS": { 3000: 11, 4500: 16, 7500: 21, 10500: 26 },
   "3HXO": { 1500: 6, 3000: 6, 4500: 9.5, 6000: 10.5, 9000: 16, 12000: 20.5, 15000: 25, 18000: 29 },
-  "D3": { 3000: 6, 6000: 10, 9000: 16, 12000: 20, 15000: 25, 18000: 30, 24000: 37, 27000: 44, 30000: 49, 36000: 58 },
+  "D3": { 1500: 6, 3000: 10, 4500: 16, 6000: 20, 7500: 25, 9000: 30, 12000: 37, 13500: 44, 15000: 49, 18000: 58 },
   "MOTS": { 1000: 6, 2000: 10, 3000: 16, 4000: 20, 5000: 25, 6000: 30, 8000: 37, 9000: 44, 10000: 49, 12000: 58 },
   "MOTS Single": { 500: 6, 1000: 10, 1500: 16, 2000: 20, 2500: 25, 3000: 30, 4000: 37, 4500: 44, 5000: 49, 6000: 58 },
   "T": { 1000: 7.5, 2000: 11.5, 3000: 16.5, 4000: 20.5, 6000: 30.5, 8000: 37.5, 9000: 44.5, 12000: 58.5 },
@@ -263,10 +263,10 @@ const PART_NUMBER_RULES: Record<string, (p: PartNumberParams) => string> = {
     const phaseCode = p.phase === 1 ? "" : "-3";
 
     const materialMap: Record<string, string> = {
-      "Steel": "P",
-      "304SS": "F",
-      "316SS": "S",
-      "Titanium": "T",
+      "Steel": "DP",
+      "304SS": "DF",
+      "316SS": "DS",
+      "Titanium": "DT",
     };
     const materialCode = materialMap[p.material] || "";
     // Add custom logic/constants for specific series below by copying this structure, 
