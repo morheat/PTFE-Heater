@@ -482,6 +482,7 @@ const SERIES_WITH_WIDTH = ["3HXO", "3HXOL"]; // Add your series here
 function App() {
   const [serialNum, setSerialNum] = useState<string>("");
   const [titleVar, setTitle] = useState<string>("");
+  const [isTitleDirty, setIsTitleDirty] = useState(false);
   const [voltsVar, setVoltage] = useState<number>(240);
   const [wattsVar, setWattage] = useState<number>(3000);
   const [phaseVar, setPhase] = useState<number>(1);
@@ -685,6 +686,29 @@ function App() {
       riserLength: riserLength,
     });
   }, [seriesVar, wattsVar, voltsVar, phaseVar, protectorVar, hotLengthNum, coldLengthNum, OALVar, widthNum, lengthNum, wireLenVar, materialVar, elementCountVar, riserLocation, riserType, riserLength]);
+
+  useEffect(() => {
+    if (!isTitleDirty) {
+      setTitle(partNumber);
+    }
+  }, [partNumber, isTitleDirty]);
+
+  // ... inside the return block ...
+
+  <div>
+    <h1 className="text-xs font-bold uppercase text-slate-500">Title</h1>
+    <input
+      type="text"
+      value={titleVar}
+      onChange={(e) => {
+        setTitle(e.target.value);
+        setIsTitleDirty(true); // Mark as dirty so auto-sync stops
+      }}
+      className="input input-bordered border-cyan-500 input-xs w-full"
+    />
+  </div>
+
+
 
 return (
     <div className="flex justify-center mt-5 w-screen gap-6">
